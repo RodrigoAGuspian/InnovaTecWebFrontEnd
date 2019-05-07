@@ -1,0 +1,12 @@
+<h1>Potabilización de agua</h1>
+<div class="slider">
+  <ul class="slides">
+    <li *ngFor="let img of imgs">
+      <img src="{{ img.src }}">
+      <div class="caption left-align">
+        <h3>{{ img.title }}</h3>
+        <h5 class="light grey-text text-lighten-3">{{ img.subtitle }}</h5>
+      </div>
+    </li>
+  </ul>
+</div>

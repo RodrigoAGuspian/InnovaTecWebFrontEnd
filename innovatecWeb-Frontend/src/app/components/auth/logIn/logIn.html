@@ -1,0 +1,29 @@
+<div class="row">
+    <form class="col s12 m6 offset-m3" [formGroup]="logInFormGroup" (ngSubmit)="logIn()" autocomplete="off">
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input class="{{ submitted && getErrors.correo.errors ? 'invalid' : '' }}" id="correo" type="email" name="correo" formControlName="correo">
+                <label for="correo">Correo electrónico</label>
+                <div *ngIf="submitted && getErrors.correo.errors" class="red-text">
+                    <div *ngIf="getErrors.correo.errors.required">Correo electrónico requerido</div>
+                    <div *ngIf="getErrors.correo.errors.email">Ingresa un correo valido</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input class="{{ submitted && getErrors.documento.errors ? 'invalid' : '' }}" id="documento" name="documento" type="password" formControlName="documento">
+                <label for="documento">Contraseña</label>
+                <div *ngIf="submitted && getErrors.documento.errors" class="red-text">
+                    <div *ngIf="getErrors.documento.errors.required">Contraseña requerido</div>
+                </div>
+            </div>
+        </div>
+        <button class="btn teal waves-effect waves-light col s6 m6 offset-m3 offset-s3" type="submit">Iniciar sesión</button>
+    </form>
+    <div class="col s12 m6 offset-m3">
+        <div class="card-panel teal lighten-5">
+            <span class="black-text">¿No estás registrado? Házlo ahora <a routerLink="/signUp">Registrarse</a> </span>
+        </div>
+    </div>
+</div>
