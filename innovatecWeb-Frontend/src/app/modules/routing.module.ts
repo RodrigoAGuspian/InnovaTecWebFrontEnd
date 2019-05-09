@@ -3,16 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { indexComponent } from '../components/index/index.component';
 
-// --- --- admin --- --- //
-// --- usuarios --- //
-import { UsuariosComponent } from '../components/admin/usuarios/read/usuarios.component';
+// Import all the components for which navigation service has to be activated
+import { SignInComponent } from '../components/sign-in/sign-in.component';
+import { SignUpComponent } from '../components/sign-up/sign-up.component';
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { ForgotPasswordComponent } from '../components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from '../components/verify-email/verify-email.component';
 
-// --- roles --- //
-import { RolFormComponent } from '../components/admin/roles/forms/rol.component';
-
-// --- auth --- //
-import { logIn } from '../components/auth/logIn/logIn';
-import { signUp } from '../components/auth/signUp/signUp';
+// Import canActivate guard services
+import { SecureInnerPagesGuard } from '../shared/guard/secure-inner-pages.guard.ts.guard';
+// --- guard --- //
+import { AuthGuard } from '../guard/auth.guard';
 
 // --- proyectos de investigación --- //
 import { PotabilizacionComponent } from '../components/proyectos-investigacion/potabilizacion/potabilizacion.component';
@@ -27,26 +28,12 @@ import { AgriculturaComponent } from '../components/proyectos-investigacion/agri
 // --- conocenos --- //
 import { ConocenosComponent } from '../components/conocenos/conocenos.component';
 
-// --- guard --- //
-import { AuthGuard } from '../guard/auth.guard';
+
+
 
 const routes: Routes = [
   { path: '', component: indexComponent },
 
-  // --- --- admin --- --- //
-  // --- usuarios --- //
-  { path: 'admin', component: UsuariosComponent, canActivate: [AuthGuard] },
-  { path: 'admin/:usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
-  { path: 'admin/usuarios/create', component: signUp, canActivate: [AuthGuard] },
-  { path: 'admin/usuario/update/:id', component: signUp, canActivate: [AuthGuard] },
-  // --- rols --- //
-  { path: 'admin/:roles', component: UsuariosComponent },
-  { path: 'admin/rol/create', component: RolFormComponent },
-
-  // --- auth --- //
-  { path: 'logIn', component: logIn },
-  { path: 'signUp', component: signUp },
-  { path: 'update/:id', component: signUp, canActivate: [AuthGuard] },
 
   // --- proyectos de investigación --- //
   { path: 'proyectos_investigacion/potabilizacion', component: PotabilizacionComponent },
@@ -57,6 +44,14 @@ const routes: Routes = [
   { path: 'proyectos_investigacion/gestionar', component: GestionarComponent },
   { path: 'proyectos_investigacion/solares', component: SolarComponent },
   { path: 'proyectos_investigacion/agricultura', component: AgriculturaComponent },
+
+  // --- Login and Register --- //
+  { path: '', redirectTo: '/sign-in', pathMatch: 'full'},
+  { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard]},
+  { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
 
   // --- contáctanos --- //
   { path: 'conocenos', component: ConocenosComponent },

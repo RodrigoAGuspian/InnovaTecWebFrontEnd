@@ -13,19 +13,8 @@ import { indexComponent } from './components/index/index.component';
 import { header } from './components/public/header/header';
 import { footer } from './components/public/footer/footer';
 
-// --- --- admin --- --- //
-// --- users --- //
-import { UsuariosComponent } from './components/admin/usuarios/read/usuarios.component';
-
-// --- rols --- //
-import { RolFormComponent } from './components/admin/roles/forms/rol.component';
-
-// --- auth --- //
-import { logIn } from './components/auth/logIn/logIn';
-import { signUp } from './components/auth/signUp/signUp';
-
 // --- proyectos de investigación --- //
-import { PotabilizacionComponent }  from './components/proyectos-investigacion/potabilizacion/potabilizacion.component';
+import { PotabilizacionComponent } from './components/proyectos-investigacion/potabilizacion/potabilizacion.component';
 import { AlumbradoComponent } from './components/proyectos-investigacion/alumbrado/alumbrado.component';
 import { IntegracionComponent } from './components/proyectos-investigacion/integracion/integracion.component';
 import { ReguladoresComponent } from './components/proyectos-investigacion/reguladores/reguladores.component';
@@ -37,10 +26,19 @@ import { AgriculturaComponent, } from './components/proyectos-investigacion/agri
 // --- connocenos --- //
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
+// --- Firebase --- //
+import { AuthService } from './shared/services/auth.service';
+
 // --- services --- //
 import { CuentaService } from './services/cuenta.service';
 import { ToastService } from './services/elements/toasts.service';
 import { TipoDocumentoService } from './services/tipoDocumento.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+
 
 @NgModule({
   declarations: [
@@ -60,14 +58,11 @@ import { TipoDocumentoService } from './services/tipoDocumento.service';
     AgriculturaComponent,
     // --- conocenos --- //
     ConocenosComponent,
-    // --- --- admin --- --- //
-    // --- users --- //
-    UsuariosComponent,
-    // --- rols --- //
-    RolFormComponent,
-    // --- auth --- //
-    logIn,
-    signUp
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +76,8 @@ import { TipoDocumentoService } from './services/tipoDocumento.service';
     CuentaService,
     ToastService,
     TipoDocumentoService,
-    Title
+    Title,
+    AuthService
   ],
   bootstrap: [
     AppComponent
