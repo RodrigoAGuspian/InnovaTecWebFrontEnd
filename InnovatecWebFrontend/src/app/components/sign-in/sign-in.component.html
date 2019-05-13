@@ -1,0 +1,22 @@
+
+<div class="row">
+  <form class="col s12 m6 offset-m3" autocomplete="off">
+      <div class="row">
+          <div class="input-field col s12 m12">
+              <input id="correo" type="email" #userName required>
+              <label for="correo">Correo electrónico</label>
+          </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s12 m12">
+              <input type="password" #userPassword required>
+              <label for="documento">Contraseña</label>
+          </div>
+      </div>
+      <button class="btn teal waves-effect waves-light col s6 m6 offset-m3 offset-s3" type="submit" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">Iniciar sesión</button>
+  </form>
+  <div class="col s12 m6 offset-m3">
+      <div class="card-panel teal lighten-5">
+          <span class="black-text">¿No estás registrado? Házlo ahora <a routerLink="/register-user">Registrarse</a> </span>
+      </div>
+  </div>
