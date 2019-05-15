@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -8,11 +8,20 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class SignInComponent implements OnInit {
 
-  constructor(
-    public authService: AuthService
-  ) { }
+  formSignIn: FormGroup;
+  constructor(public fb: FormBuilder, public authService: AuthService
+  ) {
+      this.formSignIn = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]],
+      });
+   }
 
   ngOnInit() {
+  }
+
+  validateData() {
+    console.log(this.formSignIn.value);
   }
 
 }

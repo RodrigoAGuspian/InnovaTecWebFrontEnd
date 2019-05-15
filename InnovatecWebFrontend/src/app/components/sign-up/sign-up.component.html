@@ -1,3 +1,36 @@
 <div class="row">
+  <form method="POST" [formGroup]="formSignUp" class="col s12 m6 offset-m3" autocomplete="off" >
+    <div class="row">
+        <div class="input-field col s12 m12">
+            <input formControlName="email" id="correo" type="email" #userName required>
+            <label for="correo">Correo electrónico(*)</label>
+            <div *ngIf="formSignUp.get('email').errors && formSignUp.get('email').dirty">
+              <p *ngIf="formSignUp.get('email').hasError('required')">Campo obligatorio</p>
+              <p *ngIf="formSignUp.get('email').hasError('email')">Siga la estructura de un correo electrónico, ejemplo: example@example.com</p>
+            </div>
+        </div>
+        <div class="input-field col s12 m12">
+            <input formControlName="password" id="password" type="password" #userPassword required>
+              <label for="password">Contraseña(*)</label>
+            <div *ngIf="formSignUp.get('password').errors && formSignUp.get('cpassword').dirty">
+                <p *ngIf="formSignUp.get('password').hasError('required')">Campo obligatorio</p>
+            </div>
+        </div>
+        <div class="input-field col s12 m12">
+            <input formControlName="cpassword" id="cpassword" type="password">
+              <label for="cpassword">Confirmar contraseña(*)</label>
+            <div *ngIf="formSignUp.get('cpassword').errors && formSignUp.get('cpassword').dirty">
+                <p *ngIf="formSignUp.get('cpassword').hasError('required')">campo obligatorio</p>
+            </div>
+        </div>
+        <div class="input-field col s12 m12">
+            <input formControlName="primerN" id="primerN" type="email" #userName required>
+            <label for="primerN">Primer Nombre(*)</label>
+            <div *ngIf="formSignUp.get('primerN').errors && formSignUp.get('primerN').dirty">
+              <p *ngIf="formSignUp.get('primerN').hasError('required')">Campo obligatorio</p>
+            </div>
+        </div>
 
+    </div>
+  </form>
 </div>

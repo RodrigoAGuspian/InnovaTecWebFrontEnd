@@ -9,4 +9,5 @@ export class UserInfo {
   pais: string;
   departamento: string;
   ciudad: string;
+  rol: string;
 }

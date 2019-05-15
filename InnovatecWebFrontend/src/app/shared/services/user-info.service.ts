@@ -7,10 +7,10 @@ import { UserInfo } from '../models/user-info';
 export class UserInfoService {
   userslist: AngularFireList<any>;
   constructor(private firebase: AngularFireDatabase) { }
-  getProducts() {
+  getUsers() {
     return this.userslist = this.firebase.list('users');
   }
-  insertProduct(userInfo: UserInfo) {
+  insertUser(userInfo: UserInfo) {
     this.userslist.push({
       email: userInfo.email,
       primerN: userInfo.primerN,
@@ -23,7 +23,7 @@ export class UserInfoService {
       ciudad: userInfo.ciudad,
     });
   }
-  updateProduct(userInfo: UserInfo) {
+  updateUser(userInfo: UserInfo) {
     this.userslist.update(userInfo.skey, {
       email: userInfo.email,
       primerN: userInfo.primerN,

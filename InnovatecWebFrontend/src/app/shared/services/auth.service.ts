@@ -48,36 +48,7 @@ export class AuthService {
 
   // Sign up with email/password
   SignUp(userInfo: UserInfo, password) {
-    let bool = true;
-    if (userInfo.email.length <= 0) {
-      bool = false;
-    }
-
-    if (userInfo.primerA.length <= 0) {
-      bool = false;
-    }
-
-    if (userInfo.primerN.length <= 0) {
-      bool = false;
-    }
-
-    if (userInfo.pais.length <= 0) {
-      bool = false;
-    }
-
-    if (userInfo.departamento.length <= 0) {
-      bool = false;
-    }
-
-    if (userInfo.ciudad.length <= 0) {
-      bool = false;
-    }
-
-    if (password.length <= 0 ) {
-      bool = false;
-    }
-
-
+    // llamar a la función de inputUser
     return this.afAuth.auth.createUserWithEmailAndPassword(userInfo.email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign

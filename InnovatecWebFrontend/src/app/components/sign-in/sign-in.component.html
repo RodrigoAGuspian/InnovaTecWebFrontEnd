@@ -1,19 +1,28 @@
 
 <div class="row">
-  <form class="col s12 m6 offset-m3" autocomplete="off">
+  <form method="POST" [formGroup]="formSignIn" class="col s12 m6 offset-m3" autocomplete="off" >
       <div class="row">
           <div class="input-field col s12 m12">
-              <input id="correo" type="email" #userName required>
+              <input formControlName="email" id="correo" type="email" #userName required>
               <label for="correo">Correo electrónico</label>
+              <div *ngIf="formSignIn.get('email').errors && formSignIn.get('email').dirty">
+                <p *ngIf="formSignIn.get('email').hasError('required')">Por favor ingrese su correo electrónico</p>
+                <p *ngIf="formSignIn.get('email').hasError('email')">Siga la estructura de un correo electrónico, ejemplo: example@example.com</p>
+              </div>
           </div>
+
       </div>
+
       <div class="row">
           <div class="input-field col s12 m12">
-              <input type="password" #userPassword required>
-              <label for="documento">Contraseña</label>
+              <input formControlName="password" type="password" #userPassword required>
+              <label for="password">Contraseña</label>
+              <div *ngIf="formSignIn.get('password').errors && formSignIn.get('password').dirty">
+                  <p *ngIf="formSignIn.get('password').hasError('required')">Por favor ingrese su contraseña</p>
+                </div>
           </div>
       </div>
-      <button class="btn teal waves-effect waves-light col s6 m6 offset-m3 offset-s3" type="submit" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">Iniciar sesión</button>
+      <button [disabled]="formSignIn.invalid" class="btn teal waves-effect waves-light col s6 m6 offset-m3 offset-s3" type="submit" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">Iniciar sesión</button>
   </form>
   <div class="col s12 m6 offset-m3">
       <div class="card-panel teal lighten-5">

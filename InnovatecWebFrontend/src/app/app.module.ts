@@ -22,7 +22,9 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { MaterializeModule } from 'angular2-materialize';
-import { UserComponent } from './shared/models/user/user.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,6 @@ import { UserComponent } from './shared/models/user/user.component';
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +44,8 @@ import { UserComponent } from './shared/models/user/user.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
