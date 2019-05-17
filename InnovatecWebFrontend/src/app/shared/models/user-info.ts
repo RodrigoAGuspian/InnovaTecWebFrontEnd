@@ -6,6 +6,7 @@ export class UserInfo {
   primerA: string;
   segundoA: string;
   tipoDeUso: string;
+  institucion: string;
   pais: string;
   departamento: string;
   ciudad: string;

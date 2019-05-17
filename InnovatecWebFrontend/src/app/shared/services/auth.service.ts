@@ -4,7 +4,9 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { UserInfo } from '../models/user-info';
+import { FormGroup } from '@angular/forms';
+import { UserInfoService } from './user-info.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,13 @@ import { UserInfo } from '../models/user-info';
 
 export class AuthService {
   userData: any; // Save logged in user data
-
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public userInfoService: UserInfoService,
+    private toastr: ToastrService,
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -35,28 +38,33 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(email, password) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
+          this.toastr.success('Inicio de sesión correcto.', 'Bienvenido.');
         });
         this.SetUserData(result.user);
       }).catch((error) => {
-        window.alert('Por favor revise que su correo y su contraseña esten bien escritos.');
+        this.toastr.error('Por favor revise que su correo y su contraseña esten bien escritos.', 'Algo anda mal :(');
       });
   }
 
   // Sign up with email/password
-  SignUp(userInfo: UserInfo, password) {
-    // llamar a la función de inputUser
-    return this.afAuth.auth.createUserWithEmailAndPassword(userInfo.email, password)
+  SignUp(formSignUp: FormGroup) {
+    this.afAuth.auth.createUserWithEmailAndPassword(formSignUp.value.email, formSignUp.value.password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
-        this.SendVerificationMail();
+        // this.SendVerificationMail();
+        this.router.navigate(['/']);
         this.SetUserData(result.user);
+        this.userInfoService.insertUser(formSignUp.value);
+        this.toastr.warning('Espere que un administrador apruebe su cuenta para ingresar a la plataforma.', 'Registro completado.');
+
       }).catch((error) => {
-        window.alert('Por favor revise que sus datos esten correctos.');
+        this.toastr.error('El usuario ya está registrado.', 'Algo anda mal :(');
+
       });
   }
 

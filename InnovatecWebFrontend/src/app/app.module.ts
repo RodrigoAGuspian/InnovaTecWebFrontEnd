@@ -20,10 +20,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
-import { MaterializeModule } from 'angular2-materialize';
+
+import { CommonModule } from '@angular/common';
+
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+
+import {MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
 
 
 @NgModule({
@@ -33,19 +38,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
-    MaterializeModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    ToastrModule.forRoot(),
+    MatButtonModule,
+    MatCheckboxModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

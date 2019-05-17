@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { UserInfo } from 'src/app/shared/models/user-info';
+import { MustMatch } from 'src/app/shared/models/must-match.validator';
+import { AuthService } from 'src/app/shared/services/auth.service';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -11,23 +13,34 @@ export class SignUpComponent implements OnInit {
 
   formSignUp: FormGroup;
   userInfo: UserInfo;
+
+  countries: string[] = ['Académico', 'Empresarial', 'Comercial', 'Otro'];
+  default = 'Académico';
+
   constructor(public fb: FormBuilder, public authService: AuthService ) {
     this.formSignUp = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       cpassword: ['', [Validators.required]],
-      primerN: ['', [Validators.required, Validators.name]],
-      primerA: ['', [Validators.required, Validators.email]],
-      pais: ['', [Validators.required, Validators.name]],
-      departamento: ['', [Validators.required, Validators.name]],
-      ciudad: ['', [Validators.required, Validators.name]],
-    });
+      primerN: ['', [Validators.required]],
+      segundoN: [''],
+      primerA: ['', [Validators.required]],
+      segundoA: [''],
+      tipoDeUso: [''],
+      institucion: [''],
+      pais: ['', [Validators.required]],
+      departamento: ['', [Validators.required]],
+      ciudad: ['', [Validators.required]],
+    }, { validator: MustMatch('password', 'cpassword') });
+
+    this.formSignUp.controls.tipoDeUso.setValue(this.default, {onlySelf: true});
    }
 
-  validData() {
-    console.log(this.formSignUp.value);
-  }
   ngOnInit() {
+  }
+
+  onSubmit() {
+    this.authService.SignUp(this.formSignUp);
   }
 
 }
