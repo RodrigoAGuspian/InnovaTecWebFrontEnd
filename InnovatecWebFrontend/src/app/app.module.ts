@@ -28,7 +28,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
-import {MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
+
+
+import {MatCardModule} from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -54,6 +60,14 @@ import {MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/mater
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatSelectModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

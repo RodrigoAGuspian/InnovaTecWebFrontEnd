@@ -1,93 +1,107 @@
-<div class="row">
-  <form method="POST" [formGroup]="formSignUp" (ngSubmit)="onSubmit()" class="col s12 m6 offset-m3" autocomplete="off" >
-    <div class="row">
-        <div class="input-field col s12 m12">
-            <input formControlName="email" id="correo" type="email" #userName required>
-            <label for="correo">Correo electrónico(*)</label>
-            <div *ngIf="formSignUp.get('email').errors && formSignUp.get('email').dirty">
-              <p class="red-text"  *ngIf="formSignUp.get('email').hasError('required')">Campo obligatorio</p>
-              <p class="red-text"  *ngIf="formSignUp.get('email').hasError('email')">Siga la estructura de un correo electrónico, ejemplo: example@example.com</p>
-            </div>
-        </div>
-        <div class="input-field col s12 m12">
-            <input formControlName="password" id="password" type="password" #userPassword required>
-              <label for="password">Contraseña(*)</label>
-            <div *ngIf="formSignUp.get('password').errors && formSignUp.get('password').dirty">
-                <p class="red-text"  *ngIf="formSignUp.get('password').hasError('required')">Campo obligatorio</p>
-            </div>
-        </div>
-        <div class="input-field col s12 m12">
-            <input formControlName="cpassword" id="cpassword" type="password">
-              <label for="cpassword">Confirmar contraseña(*)</label>
-            <div *ngIf="formSignUp.get('cpassword').errors && formSignUp.get('cpassword').dirty">
-                <p class="red-text"  *ngIf="formSignUp.get('cpassword').hasError('required')">Campo obligatorio</p>
-                <p class="red-text"  *ngIf="formSignUp.get('cpassword').hasError('mustMatch')">Las contraseñas no coinciden</p>
-            </div>
-        </div>
-        <div class="input-field col s12 m12">
-            <input formControlName="primerN" id="primerN" type="text">
-            <label for="primerN">Primer Nombre(*)</label>
-            <div *ngIf="formSignUp.get('primerN').errors && formSignUp.get('primerN').dirty">
-              <p class="red-text"  *ngIf="formSignUp.get('primerN').hasError('required')">Campo obligatorio</p>
-            </div>
-        </div>
-
-        <div class="input-field col s12 m12">
-          <input formControlName="segundoN"  id="segundoN" type="text" >
-          <label for="segundoN">Segundo Nombre(Opcional)</label>
-        </div>
-
-
-      <div class="input-field col s12 m12">
-        <input formControlName="primerA" id="primerA" type="text">
-        <label for="primerA">Primer Apellido(*)</label>
-        <div *ngIf="formSignUp.get('primerA').errors && formSignUp.get('primerA').dirty">
-          <p class="red-text"  *ngIf="formSignUp.get('primerA').hasError('required')">Campo obligatorio</p>
-        </div>
+<form method="POST" [formGroup]="formSignUp" (ngSubmit)="onSubmit()" class="col s12 m6 offset-m3" autocomplete="off" >
+    <div [ngStyle]="{margin:'0 38%'}"
+    [ngStyle.xs]="{margin:'0 10%'}"
+    [ngStyle.sm]="{margin:'0 24%'}"
+    [ngStyle.md]="{margin:'0 30%'}"
+    [ngStyle.lg]="{margin:'0 34%'}"
+    [ngStyle.xl]="{margin:'0 36%'}" fxLayout="column" fxLayoutAlign="space-around" >
+      <div class="input">
+          <mat-form-field>
+            <input matInput placeholder="Correo electrónico" formControlName="email" type="email" #userName required>
+          </mat-form-field>
+          <div *ngIf="formSignUp.get('email').errors && formSignUp.get('email').dirty">
+            <p class="red-text"  *ngIf="formSignUp.get('email').hasError('required')">Campo obligatorio</p>
+            <p class="red-text"  *ngIf="formSignUp.get('email').hasError('email')">Siga la estructura de un correo electrónico, ejemplo: example@example.com</p>
+          </div>
+      </div>
+      <div class="input">
+          <mat-form-field>
+            <input matInput placeholder="Contraseña" formControlName="password" id="password" type="password" #userPassword required>
+          </mat-form-field>
+          <div *ngIf="formSignUp.get('password').errors && formSignUp.get('password').dirty">
+              <p class="red-text"  *ngIf="formSignUp.get('password').hasError('required')">Campo obligatorio</p>
+          </div>
+      </div>
+      <div class="input">
+          <mat-form-field>
+            <input matInput placeholder="Confirmar contraseña" formControlName="cpassword" id="cpassword" type="password" required>
+          </mat-form-field>
+          <div *ngIf="formSignUp.get('cpassword').errors && formSignUp.get('cpassword').dirty">
+              <p class="red-text"  *ngIf="formSignUp.get('cpassword').hasError('required')">Campo obligatorio</p>
+              <p class="red-text"  *ngIf="formSignUp.get('cpassword').hasError('mustMatch')">Las contraseñas no coinciden</p>
+          </div>
+      </div>
+      <div class="input">
+          <mat-form-field>
+            <input matInput placeholder="Primer Nombre" formControlName="primerN" id="primerN" type="text" required>
+            </mat-form-field>
+          <div *ngIf="formSignUp.get('primerN').errors && formSignUp.get('primerN').dirty">
+            <p class="red-text"  *ngIf="formSignUp.get('primerN').hasError('required')">Campo obligatorio</p>
+          </div>
       </div>
 
-      <div class="input-field col s12 m12">
-        <input formControlName="segundoA"  id="segundoA" type="text" >
-        <label class="red-text"  for="segundoA">Segundo Nombre(Opcional)</label>
+      <div class="input">
+        <mat-form-field>
+          <input matInput placeholder="Segundo Nombre(Opcional)" formControlName="segundoN"  id="segundoN" type="text" >
+        </mat-form-field>
       </div>
 
-      <div class="input-field col s12 m12">
-        <select formControlName="tipoDeUso" materialize="material_select">
-          <option class="red-text"  *ngFor="let c of countries" [ngValue]="c">{{ c }}</option>
-        </select>
-        <label>Tipo de uso</label>
-      </div>
 
-      <div class="input-field col s12 m12">
-        <input formControlName="institucion" id="institucion" type="text">
-        <label for="institucion">Institución</label>
-
+    <div class="input">
+      <mat-form-field>
+        <input matInput placeholder="Primer Apellido" formControlName="primerA" type="text" required>
+      </mat-form-field>
+      <div *ngIf="formSignUp.get('primerA').errors && formSignUp.get('primerA').dirty">
+        <p class="red-text"  *ngIf="formSignUp.get('primerA').hasError('required')">Campo obligatorio</p>
       </div>
-
-      <div class="input-field col s12 m12">
-        <input formControlName="pais" id="pais" type="text">
-        <label for="pais">País(*)</label>
-        <div *ngIf="formSignUp.get('pais').errors && formSignUp.get('pais').dirty">
-          <p class="red-text"  *ngIf="formSignUp.get('pais').hasError('required')">Campo obligatorio</p>
-        </div>
-      </div>
-
-      <div class="input-field col s12 m12">
-        <input formControlName="departamento" id="departamento" type="text">
-        <label for="departamento">Departamento(*)</label>
-        <div *ngIf="formSignUp.get('departamento').errors && formSignUp.get('departamento').dirty">
-          <p class="red-text" *ngIf="formSignUp.get('departamento').hasError('required')">Campo obligatorio</p>
-        </div>
-      </div>
-
-      <div class="input-field col s12 m12">
-        <input formControlName="ciudad" id="ciudad" type="text">
-        <label for="ciudad">Ciudad(*)</label>
-        <div *ngIf="formSignUp.get('ciudad').errors && formSignUp.get('ciudad').dirty">
-          <p class="red-text"  *ngIf="formSignUp.get('ciudad').hasError('required')">Campo obligatorio</p>
-        </div>
-      </div>
-      <button [disabled]="formSignUp.invalid" class="btn teal waves-effect waves-light col s6 m6 offset-m3 offset-s3" type="submit" value="Log in">Registrar</button>
     </div>
-  </form>
-</div>
+
+    <div class="input">
+      <mat-form-field>
+        <input matInput placeholder="Segundo Nombre(Opcional)" formControlName="segundoA"  id="segundoA" type="text" >
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="input-select">
+        <mat-label>Tipo de uso</mat-label>
+      <mat-select  color="primary"formControlName="tipoDeUso">
+        <mat-option *ngFor="let c of countries" [value]="c">{{ c }}</mat-option>
+      </mat-select >
+    </mat-form-field>
+
+    <div class="input">
+      <mat-form-field>
+        <input matInput placeholder="Institución" formControlName="institucion" id="institucion" type="text">
+      </mat-form-field>
+    </div>
+
+    <div class="input">
+      <mat-form-field>
+        <input matInput placeholder="País" formControlName="pais" id="pais" type="text" required>
+      </mat-form-field>
+      <div *ngIf="formSignUp.get('pais').errors && formSignUp.get('pais').dirty">
+        <p class="red-text"  *ngIf="formSignUp.get('pais').hasError('required')">Campo obligatorio</p>
+      </div>
+    </div>
+
+    <div class="input">
+      <mat-form-field>
+        <input matInput placeholder="Departamento" formControlName="departamento" id="departamento" type="text" required>
+      </mat-form-field>
+      <div *ngIf="formSignUp.get('departamento').errors && formSignUp.get('departamento').dirty">
+        <p class="red-text" *ngIf="formSignUp.get('departamento').hasError('required')">Campo obligatorio</p>
+      </div>
+    </div>
+
+    <div class="input">
+      <mat-form-field>
+        <input matInput placeholder="Ciudad(*)" formControlName="ciudad" id="ciudad" type="text" required>
+      </mat-form-field>
+      <div *ngIf="formSignUp.get('ciudad').errors && formSignUp.get('ciudad').dirty">
+        <p class="red-text"  *ngIf="formSignUp.get('ciudad').hasError('required')">Campo obligatorio</p>
+      </div>
+    </div>
+    <button id="boton"  mat-raised-button color="primary" [disabled]="formSignUp.invalid" class="btn teal waves-effect waves-light col s6 m6 offset-m3 offset-s3" type="submit" value="Log in">Registrar</button>
+  </div>
+</form>
+

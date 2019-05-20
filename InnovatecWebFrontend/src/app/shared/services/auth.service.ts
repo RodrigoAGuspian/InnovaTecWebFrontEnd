@@ -7,13 +7,18 @@ import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { UserInfoService } from './user-info.service';
 import { ToastrService } from 'ngx-toastr';
+import { AngularFireList } from '@angular/fire/database';
+import { UserInfo } from '../models/user-info';
 
 @Injectable({
   providedIn: 'root'
+
 })
+
 
 export class AuthService {
   userData: any; // Save logged in user data
+  userList: UserInfo[];
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -22,6 +27,15 @@ export class AuthService {
     public userInfoService: UserInfoService,
     private toastr: ToastrService,
   ) {
+    this.userInfoService.getUsers().snapshotChanges()
+    .subscribe(item => {
+      this.userList = []; item.forEach(element => {
+        const x = element.payload.toJSON();
+        // tslint:disable-next-line: no-string-literal
+        x['$key'] = element.key;
+        this.userList.push(x as UserInfo);
+      });
+    });
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
@@ -38,16 +52,28 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(email, password) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-          this.toastr.success('Inicio de sesión correcto.', 'Bienvenido.');
+
+
+    for (const element of this.userList) {
+      if (element.email === email) {
+        if (element.rol !== 'No Verificado') {
+          this.afAuth.auth.signInWithEmailAndPassword(email, password)
+        .then((result) => {
+          this.ngZone.run(() => {
+            this.router.navigate(['dashboard']);
+            this.toastr.success('Inicio de sesión correcto.', 'Bienvenido.');
+          });
+          this.SetUserData(result.user);
+        }).catch((error) => {
+          this.toastr.error('Por favor revise que su correo electrónico y su contraseña esten bien escritos.', 'Algo anda mal :(');
         });
-        this.SetUserData(result.user);
-      }).catch((error) => {
-        this.toastr.error('Por favor revise que su correo y su contraseña esten bien escritos.', 'Algo anda mal :(');
-      });
+        } else {
+          this.toastr.warning('Por favor espera que uno de nuestros administradores te de acceso', 'No puedes acceder a la plataforma');
+        }
+      } else if (this.userList[this.userList.length - 1] === element) {
+        this.toastr.error('Su correo electrónico no se encuentra en nuestra base de datos', 'Algo anda mal :(');
+      }
+    }
   }
 
   // Sign up with email/password
