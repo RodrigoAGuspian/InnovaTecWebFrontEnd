@@ -52,8 +52,6 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(email, password) {
-
-
     for (const element of this.userList) {
       if (element.email === email) {
         if (element.rol !== 'No Verificado') {
