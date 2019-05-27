@@ -1,20 +1,15 @@
-<div fxLayout="row" fxLayoutAlign="space-around"  >
-  <mat-form-field class="input-select" id="selector">
+<div >
+  <mat-form-field class="input-select">
     <mat-label>Gráficas</mat-label>
     <mat-select  color="primary">
       <mat-option  *ngFor="let c of modos" [value]="c" (click)="mostrarCharts(c)">{{ c }}</mat-option>
     </mat-select >
   </mat-form-field>
-  <div fxLayout="row" fxLayoutAlign="space-around">
-    <div *ngIf="chartsEnables[0]" fxFlex.gt-sm="100%">
+  <div class="row">
+    <div *ngIf="chartsEnables[0];" [ngClass]="{'offset-m3': !chartsEnables[1]}" class="col m6 s12">
       <div style="display: block;"  >
         <canvas baseChart
-          [ngStyle]="{margin:'0', width:'600px', height:'600px'}"
-          [ngStyle.xs]="{width:'200px', height:'200px'}"
-          [ngStyle.sm]="{width:'360px', height:'360px'}"
-          [ngStyle.md]="{width:'400px', height:'400px'}"
-          [ngStyle.lg]="{width:'600px', height:'600px'}"
-          [ngStyle.xl]="{width:'600px', height:'600px'}"
+          height="300"
           [datasets]="lineChartData"
           [labels]="lineChartLabels"
           [options]="lineChartOptions"
@@ -24,7 +19,7 @@
           [plugins]="lineChartPlugins">
         </canvas>
       </div>
-      <div>
+      <div >
         <button mat-raised-button id="btn-humedad" (click)="cambioDeChart(0)">
           Humedad
         </button>
@@ -45,15 +40,10 @@
       </div>
     </div>
 
-    <div *ngIf="chartsEnables[1]" fxFlex.gt-sm="100%">
+    <div *ngIf="chartsEnables[1]" class="col m6 s12">
       <div style="display: block;">
         <canvas baseChart
-          [ngStyle]="{margin:'0', width:'600px', height:'600px'}"
-          [ngStyle.xs]="{width:'200px', height:'200px'}"
-          [ngStyle.sm]="{width:'360px', height:'360px'}"
-          [ngStyle.md]="{width:'400px', height:'400px'}"
-          [ngStyle.lg]="{width:'600px', height:'600px'}"
-          [ngStyle.xl]="{width:'600px', height:'600px'}"
+          height="300"
           [datasets]="lineChartData1"
           [labels]="lineChartLabels1"
           [options]="lineChartOptions"

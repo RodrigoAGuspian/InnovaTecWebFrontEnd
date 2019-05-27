@@ -33,7 +33,6 @@ import {MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '
 
 
 import {MatCardModule} from '@angular/material/card';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { ChartsModule } from 'ng2-charts';
@@ -65,7 +64,6 @@ import { RealTimeChartComponent } from './charts/real-time-chart/real-time-chart
     MatCheckboxModule,
     MatInputModule,
     MatCardModule,
-    FlexLayoutModule,
     MatSelectModule,
     LayoutModule,
     MatToolbarModule,

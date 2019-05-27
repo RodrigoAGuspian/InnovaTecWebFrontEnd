@@ -78,7 +78,7 @@ export class RealTimeChartComponent implements OnInit {
         this.realTimeList.push(x as RealTimeProSolar);
       });
       this.InputValuesChart();
-      this.lineChartData = this.lineChartData.slice();
+
 
     });
 
@@ -371,5 +371,8 @@ export class RealTimeChartComponent implements OnInit {
         this.chartsEnables = [true, false, false, false];
         break;
     }
+    this.InizialiteValues();
+    this.InputValuesChart();
+
   }
 }
