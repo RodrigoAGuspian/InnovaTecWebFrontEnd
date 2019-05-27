@@ -21,7 +21,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +36,8 @@ import {MatCardModule} from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
 
+import { ChartsModule } from 'ng2-charts';
+import { RealTimeChartComponent } from './charts/real-time-chart/real-time-chart.component';
 
 @NgModule({
   declarations: [
@@ -44,11 +46,13 @@ import { LayoutModule } from '@angular/cdk/layout';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
+    RealTimeChartComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -68,8 +72,11 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

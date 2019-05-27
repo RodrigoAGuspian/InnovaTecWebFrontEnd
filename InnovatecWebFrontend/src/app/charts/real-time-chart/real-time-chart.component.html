@@ -1,0 +1,87 @@
+<div fxLayout="row" fxLayoutAlign="space-around"  >
+  <mat-form-field class="input-select" id="selector">
+    <mat-label>Gráficas</mat-label>
+    <mat-select  color="primary">
+      <mat-option  *ngFor="let c of modos" [value]="c" (click)="mostrarCharts(c)">{{ c }}</mat-option>
+    </mat-select >
+  </mat-form-field>
+  <div fxLayout="row" fxLayoutAlign="space-around">
+    <div *ngIf="chartsEnables[0]" fxFlex.gt-sm="100%">
+      <div style="display: block;"  >
+        <canvas baseChart
+          [ngStyle]="{margin:'0', width:'600px', height:'600px'}"
+          [ngStyle.xs]="{width:'200px', height:'200px'}"
+          [ngStyle.sm]="{width:'360px', height:'360px'}"
+          [ngStyle.md]="{width:'400px', height:'400px'}"
+          [ngStyle.lg]="{width:'600px', height:'600px'}"
+          [ngStyle.xl]="{width:'600px', height:'600px'}"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
+      <div>
+        <button mat-raised-button id="btn-humedad" (click)="cambioDeChart(0)">
+          Humedad
+        </button>
+        <button mat-raised-button id="btn-temperatura" (click)="cambioDeChart(1)">
+          Temperatura
+        </button>
+        <button mat-raised-button id="btn-irradiancia" (click)="cambioDeChart(2)">
+          Irradiancia
+        </button>
+
+        <button mat-raised-button id="btn-corriente" (click)="cambioDeChart(3)">
+          Corriente
+        </button>
+
+        <button mat-raised-button id="btn-voltaje" (click)="cambioDeChart(4)">
+          Voltaje
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="chartsEnables[1]" fxFlex.gt-sm="100%">
+      <div style="display: block;">
+        <canvas baseChart
+          [ngStyle]="{margin:'0', width:'600px', height:'600px'}"
+          [ngStyle.xs]="{width:'200px', height:'200px'}"
+          [ngStyle.sm]="{width:'360px', height:'360px'}"
+          [ngStyle.md]="{width:'400px', height:'400px'}"
+          [ngStyle.lg]="{width:'600px', height:'600px'}"
+          [ngStyle.xl]="{width:'600px', height:'600px'}"
+          [datasets]="lineChartData1"
+          [labels]="lineChartLabels1"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors1"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
+      <div>
+        <button mat-raised-button id="btn-humedad" (click)="cambioDeChart1(0)">
+          Humedad
+        </button>
+        <button mat-raised-button id="btn-temperatura" (click)="cambioDeChart1(1)">
+          Temperatura
+        </button>
+        <button mat-raised-button id="btn-irradiancia" (click)="cambioDeChart1(2)">
+          Irradiancia
+        </button>
+
+        <button mat-raised-button id="btn-corriente" (click)="cambioDeChart1(3)">
+          Corriente
+        </button>
+
+        <button mat-raised-button id="btn-voltaje" (click)="cambioDeChart1(4)">
+          Voltaje
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit {
   formSignUp: FormGroup;
   userInfo: UserInfo;
 
-  countries: string[] = ['Académico', 'Empresarial', 'Comercial', 'Otro'];
+  tipos: string[] = ['Académico', 'Empresarial', 'Comercial', 'Otro'];
   default = 'Académico';
 
   constructor(public fb: FormBuilder, public authService: AuthService ) {

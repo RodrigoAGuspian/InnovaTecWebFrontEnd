@@ -6,11 +6,13 @@ import { SignInComponent } from '../app/components/sign-in/sign-in.component';
 import { SignUpComponent } from '../app/components/sign-up/sign-up.component';
 import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from '../app/components/forgot-password/forgot-password.component';
+import { RealTimeChartComponent } from './charts/real-time-chart/real-time-chart.component';
 const routes: Routes = [
 { path: 'sign-in', component: SignInComponent },
 { path: 'register-user', component: SignUpComponent },
 { path: 'dashboard', component: DashboardComponent },
 { path: 'forgot-password', component: ForgotPasswordComponent },
+{ path: 'real-time', component: RealTimeChartComponent },
 ];
 
 @NgModule({
