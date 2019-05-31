@@ -1,0 +1,102 @@
+<div class="row" id="consulta">
+    <mat-form-field class="col m2 s12 offset-m2">
+        <input matInput #datePicker [matDatepicker]="picker" ng-readonly="false" placeholder="Seleccione la fecha a graficar">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div class="col m2 s2 offset-s1 offset-m1">
+      <button class="center" mat-raised-button color="primary" (click)="graficar()" >Graficar</button>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="!deteccionE" (click)="exportar()">Exportar</button>
+</div>
+<div class="row">
+  <div class="col m4 s12">
+    <div style="display: block;"  >
+      <canvas baseChart
+        height="360"
+        [datasets]="lineChartData1"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors1"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+
+  <div class="col m4 s12">
+    <div style="display: block;"  >
+      <canvas baseChart
+        height="360"
+        [datasets]="lineChartData2"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors2"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+
+  <div class="col m4 s12">
+    <div style="display: block;"  >
+      <canvas baseChart
+        height="360"
+        [datasets]="lineChartData3"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors3"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+
+  <div class="col m4 s12">
+    <div style="display: block;"  >
+      <canvas baseChart
+        height="360"
+        [datasets]="lineChartData4"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors4"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+
+  <div class="col m4 s12">
+    <div style="display: block;"  >
+      <canvas baseChart
+        height="360"
+        [datasets]="lineChartData5"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors5"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+
+  <div class="col m4 s12">
+    <div style="display: block;"  >
+      <canvas baseChart
+        height="360"
+        [datasets]="lineChartData6"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors6"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+</div>
