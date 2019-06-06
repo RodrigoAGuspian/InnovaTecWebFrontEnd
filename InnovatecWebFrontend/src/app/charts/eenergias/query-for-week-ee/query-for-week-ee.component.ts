@@ -204,12 +204,6 @@ export class QueryForWeekEeComponent implements OnInit {
     let contador = 0;
     this.fullDataList.forEach(element => {
       const acumulador: FilterDataEEnergias = new FilterDataEEnergias();
-      acumulador.potencia1 = 0;
-      acumulador.potencia2 = 0;
-      acumulador.potencia3 = 0;
-      acumulador.corriente1 = 0;
-      acumulador.corriente2 = 0;
-      acumulador.corriente3 = 0;
       contador = 0;
       element.forEach(el1 => {
 

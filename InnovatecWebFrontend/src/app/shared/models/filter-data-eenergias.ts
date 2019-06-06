@@ -1,9 +1,9 @@
 export class FilterDataEEnergias {
-  corriente1: number;
-  corriente2: number;
-  corriente3: number;
+  corriente1 = 0;
+  corriente2 = 0;
+  corriente3 = 0;
   hora: number;
-  potencia1: number;
-  potencia2: number;
-  potencia3: number;
+  potencia1 = 0;
+  potencia2 = 0;
+  potencia3 = 0;
 }

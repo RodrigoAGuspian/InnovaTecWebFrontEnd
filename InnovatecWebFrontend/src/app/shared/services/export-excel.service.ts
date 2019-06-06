@@ -12,11 +12,21 @@ export class ExportExcelService {
 
   constructor() { }
 
-  public exportAsExcelFile(json: any[], excelFileName: string): void {
+  public exportAsExcelFile(json: any[], excelFileName: string, otherData1?: any[], otherData2?: any[], desdeCelda1?: string, desdeCelda2?: string): void {
+    const wu = XLSX.utils;
+    const worksheet: XLSX.WorkSheet = wu.json_to_sheet(json);
+    try {
+      XLSX.utils.sheet_add_json(worksheet, otherData1, {skipHeader: false, origin: desdeCelda1});
+    } catch (error) {
 
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-    console.log('worksheet', worksheet);
+    }
+    try {
+      XLSX.utils.sheet_add_json(worksheet, otherData2, {skipHeader: false, origin: desdeCelda2});
+    } catch (error) {
+
+    }
     const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, excelFileName);
   }

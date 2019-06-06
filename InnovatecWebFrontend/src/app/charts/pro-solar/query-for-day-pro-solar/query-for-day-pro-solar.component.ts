@@ -6,6 +6,9 @@ import { MatSnackBar } from '@angular/material';
 import { DatosProSolarService } from 'src/app/shared/services/datos-pro-solar.service';
 import { ExportExcelService } from 'src/app/shared/services/export-excel.service';
 import { DatosExportarProsolar } from 'src/app/shared/models/datos-exportar-prosolar';
+import { FilterDataProSolar } from 'src/app/shared/models/filter-data-pro-solar';
+import { DatosPromedioProSolar } from 'src/app/shared/models/datos-promedio-pro-solar';
+import { ConvertHours } from 'src/app/shared/utilities/convert-hours';
 
 @Component({
   selector: 'app-query-for-day-pro-solar',
@@ -19,11 +22,16 @@ export class QueryForDayProSolarComponent implements OnInit {
 
   public realTimeList: DatosProSolar[] = [];
   public dataValues: number[] = [];
+  public realData: FilterDataProSolar[];
+  public averageData: DatosPromedioProSolar[];
+  public irradianciaGlobal: number;
+  public potenciaGlobal: number;
+  public horasSol: number;
 
   colorLine: string;
   colorBorder: string;
   valueLabel: string;
-
+  public estadisticas: string[] = [];
   public exportList: DatosExportarProsolar[] = [];
   public charDataSets: ChartDataSets = { data: this.dataValues, label: this.valueLabel };
   public lineChartData = [this.charDataSets] ;
@@ -60,6 +68,7 @@ export class QueryForDayProSolarComponent implements OnInit {
   public lineChartLabels3: Label[] = [];
 
   public deteccion = false;
+  public solo1 = true;
   public modoGraficar = 2;
   public modoGraficar1 = 0;
   public modoGraficar2 = 3;
@@ -120,11 +129,13 @@ export class QueryForDayProSolarComponent implements OnInit {
 
 
   graficar() {
+    this.solo1 = true;
     const dateValue = this.datePicker.nativeElement.value;
     if ( dateValue.length > 0) {
       const infoDate = dateValue.split('/');
       this.infoList.getDataForDay(infoDate[1], infoDate[0], infoDate[2]).snapshotChanges().subscribe(item => {
         this.realTimeList = [];
+        this.exportList = [];
         // tslint:disable-next-line: no-shadowed-variable
         item.forEach(element => {
           const x = element.payload.toJSON();
@@ -144,13 +155,21 @@ export class QueryForDayProSolarComponent implements OnInit {
           tmpExportData.voltajePanel = x['voltajePanel'];
           // tslint:disable-next-line: no-string-literal
           tmpExportData.temperatura = x['temperatura'];
-          this.exportList.push(tmpExportData);
 
+          this.exportList.push(tmpExportData);
           this.realTimeList.push(x as DatosProSolar);
+
         });
-        this.cleanValues();
-        this.InizialiteValues();
-        this.InputValuesChart();
+
+        if (this.solo1) {
+          this.cleanValues();
+          this.InizialiteValues();
+          this.InputValuesChart();
+          this.totalAverage();
+          console.log('asd');
+          this.solo1 = false;
+        }
+
       });
     } else {
       this.snackBar.open('Por favor seleccione una fecha para poder graficar', 'Advertencia', {
@@ -521,6 +540,87 @@ export class QueryForDayProSolarComponent implements OnInit {
     this.InputValuesChart();
   }
 
+  public totalAverage() {
+    this.realData = [];
+    let contador = 0;
+    this.averageData = [];
+
+    let acumulador: DatosPromedioProSolar = new DatosPromedioProSolar();
+
+    contador = 0;
+    let acmH = 0;
+
+    this.realTimeList.forEach(el1 => {
+      if (!isNaN(Number(el1.irradiancia)) &&
+          !isNaN(Number(el1.humedad)) &&
+          !isNaN(Number(el1.corrientePanel)) &&
+          !isNaN(Number(el1.voltajePanel)) &&
+          !isNaN(Number(el1.temperatura))) {
+          try {
+            contador++;
+            // Injerto que no debe hacerce
+
+            acumulador.irradianciaPromedio += Number(el1.irradiancia);
+            acumulador.humedadPromedio += Number(el1.humedad);
+            acumulador.corrientePromedio += Number(el1.corrientePanel);
+            acumulador.voltajePromedio += Number(el1.voltajePanel);
+            acumulador.temperaturaPromedio += Number(el1.temperatura);
+          } catch (error) {
+          }
+          const horaDato = ConvertHours.toConver24(el1.hora);
+          if (acmH === 0) {
+            acmH = horaDato.getHours();
+          }
+          if (horaDato.getHours() === acmH) {
+            let tmpAcmH = acmH + 1;
+            acumulador.irradianciaPromedio = Math.round (acumulador.irradianciaPromedio / contador * 1000) / 1000;
+            acumulador.humedadPromedio = Math.round (acumulador.humedadPromedio / contador * 1000) / 1000;
+            acumulador.corrientePromedio = Math.round (acumulador.corrientePromedio / contador * 1000) / 1000;
+            acumulador.voltajePromedio = Math.round (acumulador.voltajePromedio / contador * 1000) / 1000;
+            acumulador.temperaturaPromedio = Math.round (acumulador.temperaturaPromedio / contador * 1000) / 1000;
+            acumulador.potenciaPromedio = Math.round( (acumulador.voltajePromedio) * (acumulador.corrientePromedio)  * 1000 ) / 1000 ;
+            if (tmpAcmH === 24) {
+              tmpAcmH = 0;
+
+            }
+            acumulador.hora = acmH + ' a ' + tmpAcmH;
+            this.averageData.push(acumulador);
+
+            acumulador = new DatosPromedioProSolar();
+            acmH++;
+            contador = 0;
+          } else {
+            if (horaDato.getHours() - 1 > acmH || acmH === 0) {
+              acmH = horaDato.getHours() + 1;
+            }
+          }
+      }
+    });
+
+    this.getGlobal();
+
+
+  }
+
+
+
+
+  getGlobal() {
+    this.irradianciaGlobal = 0;
+    this.potenciaGlobal = 0;
+    this.averageData.forEach(element => {
+      this.irradianciaGlobal += element.irradianciaPromedio;
+      this.potenciaGlobal += element.potenciaPromedio;
+    });
+    this.irradianciaGlobal = Math.round(this.irradianciaGlobal * 1000 ) / 1000;
+    this.horasSol = Math.round(this.irradianciaGlobal / 1000 * 1000 ) / 1000;
+
+  }
+
+
+
+
+
   public mostrarCharts(cuantos: number) {
     this.cleanValues();
     switch (cuantos) {
@@ -547,11 +647,34 @@ export class QueryForDayProSolarComponent implements OnInit {
 
   exportar() {
     if (this.deteccion) {
-    const dateSplit = this.datePicker.nativeElement.value.split('/');
-    const day = dateSplit[1];
-    const month = dateSplit[0];
-    const year = dateSplit[2];
-    this.excelService.exportAsExcelFile(this.exportList, day + '-' + month + '-' + year + ' ' + 'datos-prosolar' );
+      const dateSplit = this.datePicker.nativeElement.value.split('/');
+      const day = dateSplit[1];
+      const month = dateSplit[0];
+      const year = dateSplit[2];
+      const jsonExport1: any[] = [];
+      this.averageData.forEach(element => {
+        const expData: any = {
+          hora: element.hora,
+          irradianciaPromedio: element.irradianciaPromedio,
+          humedadPromedio: element.humedadPromedio,
+          corrientePromedio: element.corrientePromedio,
+          voltajePromedio: element.voltajePromedio,
+          potenciaPromedio: element.potenciaPromedio,
+          temperaturaPromedio: element.temperaturaPromedio,
+        };
+        jsonExport1.push(expData);
+
+      });
+
+      const jsonExport2: any[] = [];
+      const tmpAny1: any = {
+        IrradianciaGlobal: this.irradianciaGlobal,
+        PotenciaGlobal: this.potenciaGlobal,
+        HorasDeSol: this.horasSol
+      };
+      jsonExport2.push(tmpAny1);
+      this.excelService.exportAsExcelFile(this.exportList, day + '-' + month + '-' + year + ' ' + 'datos-prosolar', jsonExport1,
+                                          jsonExport2, 'G1', 'P1' );
     } else {
       this.snackBar.open('Por favor espere', 'Advertencia', {
         duration: 2000,
