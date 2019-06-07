@@ -1,6 +1,4 @@
 .input {
-  display: flex;
-  flex-direction: column;
   width: 100%;
 }
 
@@ -8,6 +6,9 @@
   width: 100%;
 }
 
+#form1{
+  margin-top: 2px;
+}
 #boton {
   width: 100%;
   margin-bottom: 10%;
@@ -20,4 +21,8 @@
 .input-select{
   width: 100%;
   margin-bottom: 10px;
+}
+
+.limpiar > *{
+  border: none;
 }

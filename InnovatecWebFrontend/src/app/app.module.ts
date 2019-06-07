@@ -21,21 +21,33 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatSelectModule, MatNativeDateModule} from '@angular/material';
 import {MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 import {MatCardModule} from '@angular/material/card';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
 
+import { ChartsModule } from 'ng2-charts';
+// Componentes.
+import { RealTimeChartComponent } from './charts/pro-solar/real-time-chart/real-time-chart.component';
+import { RealTimeEenergiasComponent } from './charts/eenergias/real-time-eenergias/real-time-eenergias.component';
+import { QueryForDayProSolarComponent } from './charts/pro-solar/query-for-day-pro-solar/query-for-day-pro-solar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { QueryForWeekComponent } from './charts/pro-solar/query-for-week/query-for-week.component';
+import { QueryForMonthComponent } from './charts/pro-solar/query-for-month/query-for-month.component';
+import { MultiDatepickerModule } from './utilities/multidatepicker/multidatepicker.module';
+import { QueryForWeekEeComponent } from './charts/eenergias/query-for-week-ee/query-for-week-ee.component';
+import { QueryForMonthEeComponent } from './charts/eenergias/query-for-month-ee/query-for-month-ee.component';
+import { QueryForDayEeComponent } from './charts/eenergias/query-for-day-ee/query-for-day-ee.component';
 
 @NgModule({
   declarations: [
@@ -44,11 +56,20 @@ import { LayoutModule } from '@angular/cdk/layout';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
+    RealTimeChartComponent,
+    RealTimeEenergiasComponent,
+    QueryForDayProSolarComponent,
+    QueryForWeekComponent,
+    QueryForMonthComponent,
+    QueryForWeekEeComponent,
+    QueryForMonthEeComponent,
+    QueryForDayEeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -61,15 +82,21 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatCheckboxModule,
     MatInputModule,
     MatCardModule,
-    FlexLayoutModule,
     MatSelectModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSnackBarModule,
+    MultiDatepickerModule,
+
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
