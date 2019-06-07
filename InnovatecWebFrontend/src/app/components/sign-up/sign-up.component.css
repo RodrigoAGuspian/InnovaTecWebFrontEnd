@@ -1,0 +1,23 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input > * {
+  width: 100%;
+}
+
+#boton {
+  width: 100%;
+  margin-bottom: 10%;
+
+}
+
+#container{
+  margin: 0 24%;
+}
+.input-select{
+  width: 100%;
+  margin-bottom: 10px;
+}

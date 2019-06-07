@@ -1,0 +1,39 @@
+
+<form method="POST" [formGroup]="formSignIn" autocomplete="off" >
+    <div [ngStyle]="{margin:'0 38%'}"
+        [ngStyle.xs]="{margin:'0 10%'}"
+        [ngStyle.sm]="{margin:'0 24%'}"
+        [ngStyle.md]="{margin:'0 30%'}"
+        [ngStyle.lg]="{margin:'0 34%'}"
+        [ngStyle.xl]="{margin:'0 36%'}" fxLayout="column" fxLayoutAlign="space-around" >
+      <div class="input">
+            <mat-form-field>
+              <input  matInput formControlName="email" placeholder="Correo electrónico" type="email" #userName required>
+            </mat-form-field>
+            <div *ngIf="formSignIn.get('email').errors && formSignIn.get('email').dirty">
+              <p class="red-text"  *ngIf="formSignIn.get('email').hasError('required')">Por favor ingrese su correo electrónico</p>
+              <p class="red-text"  *ngIf="formSignIn.get('email').hasError('email')">Siga la estructura de un correo electrónico, ejemplo: example@example.com</p>
+            </div>
+
+      </div>
+
+      <div class="input">
+            <mat-form-field>
+              <input matInput formControlName="password" placeholder="Contraseña" type="password" #userPassword required>
+            </mat-form-field>
+            <div *ngIf="formSignIn.get('password').errors && formSignIn.get('password').dirty">
+                <p class="red-text" *ngIf="formSignIn.get('password').hasError('required')">Por favor ingrese su contraseña</p>
+            </div>
+      </div>
+      <button id="boton"  mat-raised-button color="primary" [disabled]="formSignIn.invalid" type="submit" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">
+        Iniciar sesión
+      </button>
+      <div>
+        <mat-card>
+            <span class="black-text">¿No estás registrado? Házlo ahora <a routerLink="/register-user">Registrarse</a> </span>
+        </mat-card>
+      </div>
+  </div>
+</form>
+
+
