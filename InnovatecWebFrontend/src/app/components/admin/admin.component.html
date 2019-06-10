@@ -1,29 +1,56 @@
+<nav>
+  <div class="nav-wrapper teal lighten-2">
+    <a data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <ul class="left hide-on-med-and-down">
+        <li data-target="slide-out" class="sidenav-trigger"><a><i class="material-icons">menu</i></a></li>
+    </ul>
+    <a class="brand-logo center">Innovatec</a>
+  </div>
+</nav>
+
 <ul id="slide-out" class="sidenav">
-  <li><div class="user-view">
-    <div class="background">
-      <img src="images/office.jpg">
+  <li>
+      <div class="user-view">
+      <div class="background">
+          <a><i class="material-icons circle">home</i></a>
+      </div>
+      <a><i class="material-icons circle">person</i></a>
+      <a><span class="black-text name">Innovatec</span></a>
+      <a><span class="black-text email"></span></a>
     </div>
-    <a><img class="circle" src="images/yuna.jpg"></a>
-    <a><span class="white-text name"></span></a>
-    <a><span class="white-text email"></span></a>
-  </div></li>
-  <li><a><i class="material-icons">cloud</i>First Link With Icon</a></li>
-  <li><a>Second Link</a></li>
+  </li>
+  <li><a class="black-text"><i class="black-text material-icons">home</i>Página Principal</a></li>
   <li><div class="divider"></div></li>
-  <li><a class="subheader">Subheader</a></li>
-  <li><a class="waves-effect">Third Link With Waves</a></li>
+  <li><a class='teal-text text-darken-2 dropdown-trigger text-left' data-target='dropdown1'><i class="teal-text text-darken-2 material-icons">arrow_drop_down</i>ProSolar-CTPI</a></li>
+  <li><a class='orange-text text-darken-4 dropdown-trigger text-left' data-target='dropdown2'><i class="orange-text text-darken-4 material-icons">arrow_drop_down</i>EEnergias</a></li>
+</ul>
+
+<ul id='dropdown1' class='dropdown-content'>
+  <li><a class="teal-text text-darken-2" (click)="viewChange(0)"><i class="teal-text text-darken-2 material-icons">show_chart</i>Tiempo Real</a></li>
+  <li class="divider" tabindex="-1"></li>
+  <li><a class="teal-text text-darken-2" (click)="viewChange(1)"><i class="teal-text text-darken-2 material-icons">multiline_chart</i>Consulta por día</a></li>
+  <li><a class="teal-text text-darken-2" (click)="viewChange(2)"><i class="teal-text text-darken-2 material-icons">insert_chart</i>Consulta por semana</a></li>
+  <li><a class="teal-text text-darken-2" (click)="viewChange(3)"><i class="teal-text text-darken-2 material-icons">insert_chart</i>Consulta por mes</a></li>
+  <li><a class="teal-text text-darken-2" (click)="viewChange(4)"><i class="teal-text text-darken-2 material-icons">pie_chart</i>Resumen</a></li>
+</ul>
+
+<ul id='dropdown2' class='dropdown-content'>
+  <li><a class="orange-text text-darken-4" (click)="viewChange(5)"><i class="orange-text text-darken-4 material-icons">show_chart</i>Tiempo Real</a></li>
+  <li class="divider" tabindex="-1"></li>
+  <li><a class="orange-text text-darken-4" (click)="viewChange(6)"><i class="orange-text text-darken-4 material-icons">multiline_chart</i>Consulta por día</a></li>
+  <li><a class="orange-text text-darken-4" (click)="viewChange(7)"><i class="orange-text text-darken-4 material-icons">insert_chart</i>Consulta por semana</a></li>
+  <li><a class="orange-text text-darken-4" (click)="viewChange(8)"><i class="orange-text text-darken-4 material-icons">insert_chart</i>Consulta por mes</a></li>
+  <li><a class="orange-text text-darken-4" (click)="viewChange(9)"><i class="orange-text text-darken-4 material-icons">pie_chart</i>Resumen</a></li>
 </ul>
 
 
-<nav>
-    <div class="nav-wrapper teal lighten-2">
-        <ul class="left hide-on-med-and-down">
-            <li data-target="slide-out" class="sidenav-trigger"><a><i class="material-icons">menu</i></a></li>
-        </ul>
-        <a class="brand-logo center">Innovatec</a>
+<app-real-time-chart *ngIf="viewChart === 0;"></app-real-time-chart>
+<app-query-for-day-pro-solar *ngIf="viewChart === 1;"></app-query-for-day-pro-solar>
+<app-query-for-week *ngIf="viewChart === 2;"></app-query-for-week>
+<app-query-for-month *ngIf="viewChart === 3;"></app-query-for-month>
 
-      </div>
-</nav>
-
-<app-real-time-chart></app-real-time-chart>
-<app-real-time-eenergias></app-real-time-eenergias>
+<app-real-time-eenergias *ngIf="viewChart === 5;"></app-real-time-eenergias>
+<app-query-for-day-ee *ngIf="viewChart === 6;"></app-query-for-day-ee>
+<app-query-for-week-ee *ngIf="viewChart === 7;"></app-query-for-week-ee>
+<app-query-for-month-ee *ngIf="viewChart === 8;"></app-query-for-month-ee>
+<app-resumen-eenergias-tarjeta1 *ngIf="viewChart === 9;"></app-resumen-eenergias-tarjeta1>

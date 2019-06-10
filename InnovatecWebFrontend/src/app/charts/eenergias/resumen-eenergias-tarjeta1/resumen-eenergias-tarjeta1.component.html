@@ -1,0 +1,200 @@
+<table>
+  <tbody class="row">
+    <td class="col m4 s12 orange-text text-darken-4">
+      <table class="centered" id="cabeceraC1">
+        <thead>
+          <tr>
+            <th>Circuito 1</th>
+          </tr>
+        </thead>
+      </table>
+      <table id="circuito1">
+        <tbody>
+          <tr>
+            <th>Día</th>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+          </tr>
+
+          <tr>
+            <th>Energía Día (W/día)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+          <tr>
+            <th>Potencia Máxima (W)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+          <tr>
+            <th>Hora de Potencia Máxima</th>
+            <td>11 a 12</td>
+            <td>12 a 13</td>
+            <td>14 a 15</td>
+          </tr>
+
+
+          <tr>
+            <th>Potencia Mínima (W)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+
+          <tr>
+            <th>Hora de Potencia Mínima</th>
+            <td>11 a 12</td>
+            <td>12 a 13</td>
+            <td>14 a 15</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="chart">
+        <canvas baseChart
+          [data]="pieChartData1"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [colors]="pieChartColors1"
+          [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </td>
+
+    <td class="col m4 s12 light-blue-text text-darken-3">
+      <table class="centered" id="cabeceraC2">
+        <thead>
+          <tr>
+            <th>Circuito 2</th>
+          </tr>
+        </thead>
+      </table>
+      <table id="circuito2">
+        <tbody>
+          <tr>
+            <th>Día</th>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+
+          </tr>
+
+          <tr>
+            <th>Energía Día (W/día)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+          <tr>
+            <th>Potencia Máxima (W)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+          <tr>
+            <th>Hora de Potencia Máxima</th>
+            <td>11 a 12</td>
+            <td>12 a 13</td>
+            <td>14 a 15</td>
+          </tr>
+
+
+          <tr>
+            <th>Potencia Mínima (W)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+
+          <tr>
+            <th>Hora de Potencia Mínima</th>
+            <td>11 a 12</td>
+            <td>12 a 13</td>
+            <td>14 a 15</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="chart">
+        <canvas baseChart
+          [data]="pieChartData2"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [colors]="pieChartColors2"
+          [legend]="pieChartLegend">
+        </canvas>
+      </div>
+
+    </td>
+    <td class="col m4 s12 indigo-text text-darken-4">
+      <table class="centered" id="cabeceraC3">
+        <thead>
+          <tr>
+            <th>Circuito 3</th>
+          </tr>
+        </thead>
+      </table>
+      <table id="circuito3">
+        <tbody>
+          <tr>
+            <th>Día</th>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+
+          </tr>
+
+          <tr>
+            <th>Energía Día (W/día)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+          <tr>
+            <th>Potencia Máxima (W)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+          <tr>
+            <th>Hora de Potencia Máxima</th>
+            <td>11 a 12</td>
+            <td>12 a 13</td>
+            <td>14 a 15</td>
+          </tr>
+
+
+          <tr>
+            <th>Potencia Mínima (W)</th>
+            <td>700</td>
+            <td>800</td>
+            <td>900</td>
+          </tr>
+
+          <tr>
+            <th>Hora de Potencia Mínima</th>
+            <td>11 a 12</td>
+            <td>12 a 13</td>
+            <td>14 a 15</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="chart">
+        <canvas baseChart
+          [data]="pieChartData3"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [colors]="pieChartColors3"
+          [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </td>
+  </tbody>
+</table>

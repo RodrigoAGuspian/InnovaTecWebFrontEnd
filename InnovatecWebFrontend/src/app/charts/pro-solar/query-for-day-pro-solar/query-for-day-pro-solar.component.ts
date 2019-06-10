@@ -166,7 +166,6 @@ export class QueryForDayProSolarComponent implements OnInit {
           this.InizialiteValues();
           this.InputValuesChart();
           this.totalAverage();
-          console.log('asd');
           this.solo1 = false;
         }
 
@@ -510,7 +509,7 @@ export class QueryForDayProSolarComponent implements OnInit {
     }
     this.charDataSets = { data: this.dataValues, label: this.valueLabel };
     this.charDataSets1 = { data: this.dataValues1, label: this.valueLabel1 };
-    this.chart.chart.update();
+    try {this.chart.chart.update(); } catch (error) {}
 
   }
 

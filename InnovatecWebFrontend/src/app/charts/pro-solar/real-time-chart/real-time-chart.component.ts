@@ -579,7 +579,7 @@ export class RealTimeChartComponent implements OnInit {
     }
     this.charDataSets = { data: this.dataValuesRT, label: this.valueLabel };
     this.charDataSets1 = { data: this.dataValuesRT1, label: this.valueLabel1 };
-    this.chart.chart.update();
+    try {this.chart.chart.update(); } catch (error) {}
 
   }
 

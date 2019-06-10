@@ -1,0 +1,53 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.input > * {
+  width: 100%;
+  height: 100%;
+}
+
+#datePicker{
+  margin-right: 10px;
+}
+
+#btn-graficar{
+  margin-right: 10px;
+}
+
+#datePicker{
+  width: 360px;
+}
+
+@media screen and (min-width:412px) and (max-width:568px) {
+  #datePicker{
+    width: 200px;
+  }
+}
+
+
+@media screen and (min-width:320px) and (max-width:412px){
+  #datePicker{
+    width: 300px;
+  }
+}
+
+@media screen and (max-width:320px){
+  #datePicker{
+    width: auto;
+  }
+}
+
+@media screen and (max-width:196px){
+  #datePicker{
+    margin-right: 2px;
+  }
+
+  #btn-graficar{
+    margin-right: 2px;
+  }
+}
+
