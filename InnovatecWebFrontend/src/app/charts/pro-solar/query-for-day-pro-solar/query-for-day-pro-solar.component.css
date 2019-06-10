@@ -23,7 +23,6 @@
   color:  white;
 }
 
-
 .input {
   display: flex;
   flex-direction: column;
@@ -36,7 +35,6 @@
   height: 100%;
 }
 
-
 .consulta{
   padding: 10px;
 
@@ -48,38 +46,54 @@
 }
 
 #tabla1{
-  margin: 2%;
+  padding: 10px;
 
 }
 
 #datePicker{
   margin-right: 10px;
-  width: 260px;
+  width: 240px;
 }
 
 #selector{
-  margin-right: 10px;
-  width: 260px;
+  margin: 34.6px 10px 0 -48px;
+  width: 240px;
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:788px) and (min-width:750px) {
+  #selector{
+    width: 220px;
+  }
 
+  #datePicker{
+    width: 200px;
+  }
 }
 
-@media screen and (max-width:720px) and (min-width:600px) {
 
+@media screen and (max-width:750px) and (min-width:720px) {
+  #selector{
+    width: 200px;
+  }
+
+  #datePicker{
+    width: 200px;
+  }
 }
 
-@media screen and (max-width:1024px) and (min-width:720px) {
+@media screen and (max-width:720px) {
+  #selector{
+    margin: 34.6px 10px 0 0;
+    width: 240px;
+  }
 
-}
-
-@media screen and (min-width:1024px) {
-
+  #datePicker{
+    width: 240px;
+  }
 }
 
 .btn-change{
-  margin: 0.5% 0.5%;
+  margin: 0.5%;
   width: 120px;
 }
 
@@ -87,4 +101,6 @@
   margin-bottom: 1%;
 }
 
-
+.chart{
+  margin-bottom: 48px;
+}

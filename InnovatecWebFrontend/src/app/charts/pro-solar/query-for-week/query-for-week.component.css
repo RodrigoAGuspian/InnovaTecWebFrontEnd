@@ -1,0 +1,109 @@
+#btn-humedad{
+  background-color: rgba(28,136,176,1);
+  color:  white;
+}
+
+#btn-temperatura{
+  background-color: rgba(230,155,105,1);
+  color:  white;
+}
+
+#btn-irradiancia{
+  background-color: rgba(227,73,59,1);
+  color:  white;
+}
+
+#btn-corriente{
+  background-color: rgba(128,64,0,1);
+  color:  white;
+}
+
+#btn-voltaje{
+  background-color: rgba(197,162,60,1);
+  color:  white;
+}
+
+
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.input > * {
+  width: 100%;
+  height: 100%;
+}
+
+
+.consulta{
+  padding: 10px;
+
+}
+
+.consulta> *{
+  margin: 0 1%;
+
+}
+
+#tabla1{
+  margin: 2%;
+
+}
+
+#datePicker{
+  margin-right: 10px;
+  width: 240px;
+}
+
+#selector{
+  margin: 34.6px 10px 0 -48px;
+  width: 240px;
+}
+
+@media screen and (max-width:788px) and (min-width:750px) {
+  #selector{
+    width: 220px;
+  }
+
+  #datePicker{
+    width: 200px;
+  }
+}
+
+
+@media screen and (max-width:750px) and (min-width:720px) {
+  #selector{
+    width: 200px;
+  }
+
+  #datePicker{
+    width: 200px;
+  }
+}
+
+@media screen and (max-width:720px) {
+  #selector{
+    margin: 34.6px 10px 0 0;
+    width: 240px;
+  }
+
+  #datePicker{
+    width: 240px;
+  }
+}
+
+.btn-change{
+  margin: 0.5%;
+  width: 120px;
+}
+
+.division{
+  margin-bottom: 1%;
+}
+
+.chart{
+  margin-bottom: 48px;
+}
+  

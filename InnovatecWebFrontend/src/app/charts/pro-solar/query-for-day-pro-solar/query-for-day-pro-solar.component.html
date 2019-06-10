@@ -1,31 +1,26 @@
 <div>
-  <form class="consulta center">
-    <div>
-      <mat-form-field id="datePicker" >
+  <div class="consulta center row">
+    <div class="col m6 s12 input-container">
+      <mat-form-field id="datePicker">
           <input matInput #datePicker [matDatepicker]="picker" ng-readonly="false" placeholder="Seleccione la fecha a graficar">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-    </div>
-    <div>
       <button id="btn-graficar" mat-raised-button color="primary" (click)="graficar()" >Graficar</button>
     </div>
-    <div>
+    <div class="col m5 s12 input-container">
       <mat-form-field class="input-select" id="selector">
         <mat-label>Gráficas</mat-label>
         <mat-select color="primary">
           <mat-option  *ngFor="let c of modos" [value]="c" (click)="mostrarCharts(c)">{{ c }}</mat-option>
         </mat-select >
       </mat-form-field>
-    </div>
-    <div>
       <button id="btn-exp" mat-raised-button color="primary" [disabled]="!deteccion" (click)="exportar()">Exportar</button>
     </div>
-
-  </form>
+  </div>
 
   <div class="row">
-    <div *ngIf="chartsEnables[0];" [ngClass]="{'offset-m3': !chartsEnables[1]}" class="col m6 s12 division">
+    <div *ngIf="chartsEnables[0];" [ngClass]="{'offset-m3': !chartsEnables[1]}" class="col m6 s12 chart">
       <div style="display: block;"  >
         <canvas baseChart
           height="276"
@@ -59,7 +54,7 @@
       </div>
     </div>
 
-    <div *ngIf="chartsEnables[1]" class="col m6 s12 division">
+    <div *ngIf="chartsEnables[1]" class="col m6 s12 chart">
       <div style="display: block;">
         <canvas baseChart
           height="276"
@@ -93,7 +88,7 @@
       </div>
     </div>
 
-    <div *ngIf="chartsEnables[2]" class="col m6 s12 division">
+    <div *ngIf="chartsEnables[2]" class="col m6 s12 chart">
       <div style="display: block;">
         <canvas baseChart
           height="276"
@@ -128,7 +123,7 @@
     </div>
 
 
-    <div *ngIf="chartsEnables[3]" class="col m6 s12 division">
+    <div *ngIf="chartsEnables[3]" class="col m6 s12 chart">
       <div style="display: block;">
         <canvas baseChart
           height="276"
@@ -163,8 +158,8 @@
     </div>
   </div>
 
-  <div class="row">
-      <table class="responsive-table striped col s12" id="tabla1">
+  <div class="row" id="tabla1">
+      <table class="responsive-table striped col s12" >
         <thead>
           <tr>
               <th>Hora</th>

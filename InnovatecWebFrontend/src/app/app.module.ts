@@ -1,3 +1,4 @@
+import { ChartsRoutingModule } from './charts/charts-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,6 +49,7 @@ import { MultiDatepickerModule } from './utilities/multidatepicker/multidatepick
 import { QueryForWeekEeComponent } from './charts/eenergias/query-for-week-ee/query-for-week-ee.component';
 import { QueryForMonthEeComponent } from './charts/eenergias/query-for-month-ee/query-for-month-ee.component';
 import { QueryForDayEeComponent } from './charts/eenergias/query-for-day-ee/query-for-day-ee.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -64,12 +66,14 @@ import { QueryForDayEeComponent } from './charts/eenergias/query-for-day-ee/quer
     QueryForWeekEeComponent,
     QueryForMonthEeComponent,
     QueryForDayEeComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ChartsModule,
+    ChartsRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

@@ -36,11 +36,21 @@
   height: 100%;
 }
 
-#selector {
-  margin-top: 10%;
-
-}
-
 #container{
   margin: 0 24%;
 }
+
+#selector{
+  margin-top: 8px;
+}
+
+.btn-change{
+  margin: 0.5%;
+  width: 120px;
+  height: 36px
+}
+
+.chart{
+  margin-bottom: 48px;
+}
+

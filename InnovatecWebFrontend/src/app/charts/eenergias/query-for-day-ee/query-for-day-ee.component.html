@@ -1,152 +1,155 @@
-<div class="row" id="consulta">
-    <mat-form-field class="col m2 s12 offset-m2">
-        <input matInput #datePicker [matDatepicker]="picker" ng-readonly="false" placeholder="Seleccione la fecha a graficar">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <div class="col m2 s2 offset-s1 offset-m1">
-      <button class="center" mat-raised-button color="primary" (click)="graficar()" >Graficar</button>
+<div>
+  <div class="consulta center row">
+    <div class="col m6 s12 input-container">
+      <mat-form-field id="datePicker">
+          <input matInput #datePicker [matDatepicker]="picker" ng-readonly="false" placeholder="Seleccione la fecha a graficar">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button id="btn-graficar" mat-raised-button color="primary" (click)="graficar()" >Graficar</button>
     </div>
-    <mat-form-field class="input-select">
+    <div class="col m5 s12 input-container">
+      <mat-form-field class="input-select" id="selector">
         <mat-label>Gráficas</mat-label>
         <mat-select color="primary">
           <mat-option  *ngFor="let c of listCircuitos" [value]="c" (click)="cambiarCircuitos(c)">{{ c }}</mat-option>
         </mat-select >
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" [disabled]="!deteccionE" (click)="exportar()">Exportar</button>
-</div>
-<div class="row">
-  <div class="col m4 s12" *ngIf="chartsEnables[0];" [ngClass]="{'offset-m2': chartsEnables[0] && chartsEnables[3] }">
-    <div style="display: block;"  >
-      <canvas baseChart
-        height="360"
-        [datasets]="lineChartData1"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors1"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins">
-      </canvas>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!deteccionE" (click)="exportar()">Exportar</button>
     </div>
   </div>
-
-  <div class="col m4 s12" *ngIf="chartsEnables[1];" [ngClass]="{'offset-m2': chartsEnables[1] && chartsEnables[3]}">
-    <div style="display: block;" >
-      <canvas baseChart
-        height="360"
-        [datasets]="lineChartData2"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors2"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins">
-      </canvas>
+  <div class="row">
+    <div class="col m4 s12" *ngIf="chartsEnables[0];" [ngClass]="{'offset-m2': chartsEnables[0] && chartsEnables[3] }">
+      <div style="display: block;"  >
+        <canvas baseChart
+          height="360"
+          [datasets]="lineChartData1"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors1"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
     </div>
-  </div>
 
-  <div class="col m4 s12" *ngIf="chartsEnables[2];" [ngClass]="{'offset-m2': chartsEnables[2] && chartsEnables[3]}">
-    <div style="display: block;">
-      <canvas baseChart
-        height="360"
-        [datasets]="lineChartData3"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors3"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins">
-      </canvas>
+    <div class="col m4 s12" *ngIf="chartsEnables[1];" [ngClass]="{'offset-m2': chartsEnables[1] && chartsEnables[3]}">
+      <div style="display: block;" >
+        <canvas baseChart
+          height="360"
+          [datasets]="lineChartData2"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors2"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
     </div>
-  </div>
 
-  <div class="col m4 s12">
-    <div style="display: block;"  *ngIf="chartsEnables[0];" >
-      <canvas baseChart
-        height="360"
-        [datasets]="lineChartData4"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors4"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins">
-      </canvas>
+    <div class="col m4 s12" *ngIf="chartsEnables[2];" [ngClass]="{'offset-m2': chartsEnables[2] && chartsEnables[3]}">
+      <div style="display: block;">
+        <canvas baseChart
+          height="360"
+          [datasets]="lineChartData3"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors3"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
     </div>
-  </div>
 
-  <div class="col m4 s12">
-    <div style="display: block;"  *ngIf="chartsEnables[1];" >
-      <canvas baseChart
-        height="360"
-        [datasets]="lineChartData5"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors5"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins">
-      </canvas>
+    <div class="col m4 s12">
+      <div style="display: block;"  *ngIf="chartsEnables[0];" >
+        <canvas baseChart
+          height="360"
+          [datasets]="lineChartData4"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors4"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
     </div>
-  </div>
 
-  <div class="col m4 s12">
-    <div style="display: block;"  *ngIf="chartsEnables[2];" >
-      <canvas baseChart
-        height="360"
-        [datasets]="lineChartData6"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors6"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins">
-      </canvas>
+    <div class="col m4 s12">
+      <div style="display: block;"  *ngIf="chartsEnables[1];" >
+        <canvas baseChart
+          height="360"
+          [datasets]="lineChartData5"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors5"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
     </div>
+
+    <div class="col m4 s12">
+      <div style="display: block;"  *ngIf="chartsEnables[2];" >
+        <canvas baseChart
+          height="360"
+          [datasets]="lineChartData6"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors6"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="chartsEnables[3];" id="tabla1">
+        <table class="responsive-table striped col s12" >
+          <thead>
+            <tr>
+                <th>Hora</th>
+                <th>Promedio Potencia</th>
+                <th>Promedio Corriente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of averageData">
+              <td>{{ e.hora }}</td>
+              <td *ngIf="chartsEnables[0];">{{ e.potenciaPromedio1 }}</td>
+              <td *ngIf="chartsEnables[0];">{{ e.corrientePromedio1 }}</td>
+              <td *ngIf="chartsEnables[1];">{{ e.potenciaPromedio2 }}</td>
+              <td *ngIf="chartsEnables[1];">{{ e.corrientePromedio2 }}</td>
+              <td *ngIf="chartsEnables[2];">{{ e.potenciaPromedio3 }}</td>
+              <td *ngIf="chartsEnables[2];">{{ e.corrientePromedio3 }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="col s6 offset-s3">
+
+          <tbody>
+            <tr>
+              <th>Energía Día (W/día)</th>
+              <td>{{ energiaDia }}</td>
+            </tr>
+            <tr>
+              <th>Potencia Máxima (W)</th>
+              <td>{{ potenciaMax }}</td>
+              <td>Hora: {{ horaMax }}</td>
+            </tr>
+            <tr>
+              <th>Potencia Mínima (W)</th>
+              <td>{{ potenciaMin }}</td>
+              <td>Hora: {{ horaMin }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
   </div>
-
-  <div class="row" *ngIf="chartsEnables[3];">
-      <table class="responsive-table striped col s12" id="tabla1">
-        <thead>
-          <tr>
-              <th>Hora</th>
-              <th>Promedio Potencia</th>
-              <th>Promedio Corriente</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let e of averageData">
-            <td>{{ e.hora }}</td>
-            <td *ngIf="chartsEnables[0];">{{ e.potenciaPromedio1 }}</td>
-            <td *ngIf="chartsEnables[0];">{{ e.corrientePromedio1 }}</td>
-            <td *ngIf="chartsEnables[1];">{{ e.potenciaPromedio2 }}</td>
-            <td *ngIf="chartsEnables[1];">{{ e.corrientePromedio2 }}</td>
-            <td *ngIf="chartsEnables[2];">{{ e.potenciaPromedio3 }}</td>
-            <td *ngIf="chartsEnables[2];">{{ e.corrientePromedio3 }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="col s6 offset-s3">
-
-        <tbody>
-          <tr>
-            <th>Energía Día (W/día)</th>
-            <td>{{ energiaDia }}</td>
-          </tr>
-          <tr>
-            <th>Potencia Máxima (W)</th>
-            <td>{{ potenciaMax }}</td>
-            <td>Hora: {{ horaMax }}</td>
-          </tr>
-          <tr>
-            <th>Potencia Mínima (W)</th>
-            <td>{{ potenciaMin }}</td>
-            <td>Hora: {{ horaMin }}</td>
-          </tr>
-        </tbody>
-      </table>
-  </div>
-
 </div>

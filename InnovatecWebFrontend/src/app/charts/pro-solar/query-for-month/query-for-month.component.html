@@ -1,21 +1,22 @@
 <div>
-  <div class="row" id="consulta">
-      <jp-multi-datepicker class="col m2 s12 offset-m2" [formControl]="monthInputCtrl" mode="MONTH" label="Seleccione el mes" touchUi="true"></jp-multi-datepicker>
-      <div class="col m2 s2 offset-s1 offset-m1">
-        <button class="center" mat-raised-button color="primary" (click)="getDataMonth()" >Graficar</button>
+  <div class="consulta center row">
+      <div class="col m6 s12 input-container">
+        <jp-multi-datepicker id="datePicker" [formControl]="monthInputCtrl" mode="MONTH" label="Seleccione el mes" touchUi="true"></jp-multi-datepicker>
+        <button id="btn-graficar" mat-raised-button color="primary" (click)="getDataMonth()" >Graficar</button>
       </div>
-    <div class="col m2 s3 offset-s1 offset-s1 offset-m1">
-      <mat-form-field class="input-select">
-        <mat-label>Gráficas</mat-label>
-        <mat-select color="primary">
-          <mat-option  *ngFor="let c of modos" [value]="c" (click)="mostrarCharts(c)">{{ c }}</mat-option>
-        </mat-select >
-      </mat-form-field>
-    </div>
-    <button mat-raised-button color="primary" [disabled]="!deteccion" (click)="exportar()">Exportar</button>
+      <div class="col m5 s12 input-container">
+        <mat-form-field class="input-select" id="selector">
+          <mat-label>Gráficas</mat-label>
+          <mat-select color="primary">
+            <mat-option  *ngFor="let c of modos" [value]="c" (click)="mostrarCharts(c)">{{ c }}</mat-option>
+          </mat-select >
+        </mat-form-field>
+        <button id="btn-exp" mat-raised-button color="primary" [disabled]="!deteccion" (click)="exportar()">Exportar</button>
+      </div>
   </div>
+
   <div class="row">
-    <div *ngIf="chartsEnables[0];" [ngClass]="{'offset-m3': !chartsEnables[1]}" class="col m6 s12">
+    <div *ngIf="chartsEnables[0];" [ngClass]="{'offset-m3': !chartsEnables[1]}" class="col m6 s12 chart">
       <div style="display: block;">
         <canvas baseChart
           height="300"
@@ -28,28 +29,28 @@
           [plugins]="lineChartPlugins">
         </canvas>
       </div>
-      <div class="center row">
-        <button class=" offset-s1 col s2" mat-raised-button id="btn-humedad" (click)="cambioDeChart(0)">
+      <div class="center">
+        <button class="btn-change" mat-raised-button id="btn-humedad" (click)="cambioDeChart(0)">
           Humedad
         </button>
-        <button class="col s2" mat-raised-button id="btn-temperatura" (click)="cambioDeChart(1)">
+        <button class="btn-change" mat-raised-button id="btn-temperatura" (click)="cambioDeChart(1)">
           Temperatura
         </button>
-        <button class="col s2" mat-raised-button id="btn-irradiancia" (click)="cambioDeChart(2)">
+        <button class="btn-change"  mat-raised-button id="btn-irradiancia" (click)="cambioDeChart(2)">
           Irradiancia
         </button>
 
-        <button class="col s2" mat-raised-button id="btn-corriente" (click)="cambioDeChart(3)">
+        <button class="flow-text btn-change" mat-raised-button id="btn-corriente" (click)="cambioDeChart(3)">
           Corriente
         </button>
 
-        <button class="col s2" mat-raised-button id="btn-voltaje" (click)="cambioDeChart(4)">
+        <button class="flow-text btn-change" mat-raised-button id="btn-voltaje" (click)="cambioDeChart(4)">
           Voltaje
         </button>
       </div>
     </div>
 
-    <div *ngIf="chartsEnables[1]" class="col m6 s12">
+    <div *ngIf="chartsEnables[1]" class="col m6 s12 chart">
       <div style="display: block;">
         <canvas baseChart
           height="300"
@@ -62,28 +63,28 @@
           [plugins]="lineChartPlugins">
         </canvas>
       </div>
-      <div class="center row">
-        <button class=" offset-s1 col s2" mat-raised-button id="btn-humedad" (click)="cambioDeChart1(0)">
+      <div class="center">
+        <button class="btn-change" mat-raised-button id="btn-humedad" (click)="cambioDeChart(0)">
           Humedad
         </button>
-        <button class="col s2" mat-raised-button id="btn-temperatura" (click)="cambioDeChart1(1)">
+        <button class="btn-change" mat-raised-button id="btn-temperatura" (click)="cambioDeChart(1)">
           Temperatura
         </button>
-        <button class="col s2" mat-raised-button id="btn-irradiancia" (click)="cambioDeChart1(2)">
+        <button class="btn-change"  mat-raised-button id="btn-irradiancia" (click)="cambioDeChart(2)">
           Irradiancia
         </button>
 
-        <button class="col s2" mat-raised-button id="btn-corriente" (click)="cambioDeChart1(3)">
+        <button class="flow-text btn-change" mat-raised-button id="btn-corriente" (click)="cambioDeChart(3)">
           Corriente
         </button>
 
-        <button class="col s2" mat-raised-button id="btn-voltaje" (click)="cambioDeChart1(4)">
+        <button class="flow-text btn-change" mat-raised-button id="btn-voltaje" (click)="cambioDeChart(4)">
           Voltaje
         </button>
       </div>
     </div>
 
-    <div *ngIf="chartsEnables[2]" class="col m6 s12">
+    <div *ngIf="chartsEnables[2]" class="col m6 s12 chart">
       <div style="display: block;">
         <canvas baseChart
           height="300"
@@ -96,29 +97,29 @@
           [plugins]="lineChartPlugins">
         </canvas>
       </div>
-      <div class="center row">
-        <button class=" offset-s1 col s2" mat-raised-button id="btn-humedad" (click)="cambioDeChart2(0)">
+      <div class="center">
+        <button class="btn-change" mat-raised-button id="btn-humedad" (click)="cambioDeChart(0)">
           Humedad
         </button>
-        <button class="col s2" mat-raised-button id="btn-temperatura" (click)="cambioDeChart2(1)">
+        <button class="btn-change" mat-raised-button id="btn-temperatura" (click)="cambioDeChart(1)">
           Temperatura
         </button>
-        <button class="col s2" mat-raised-button id="btn-irradiancia" (click)="cambioDeChart2(2)">
+        <button class="btn-change"  mat-raised-button id="btn-irradiancia" (click)="cambioDeChart(2)">
           Irradiancia
         </button>
 
-        <button class="col s2" mat-raised-button id="btn-corriente" (click)="cambioDeChart2(3)">
+        <button class="flow-text btn-change" mat-raised-button id="btn-corriente" (click)="cambioDeChart(3)">
           Corriente
         </button>
 
-        <button class="col s2" mat-raised-button id="btn-voltaje" (click)="cambioDeChart2(4)">
+        <button class="flow-text btn-change" mat-raised-button id="btn-voltaje" (click)="cambioDeChart(4)">
           Voltaje
         </button>
       </div>
     </div>
 
 
-    <div *ngIf="chartsEnables[3]" class="col m6 s12">
+    <div *ngIf="chartsEnables[3]" class="col m6 s12 chart">
       <div style="display: block;">
         <canvas baseChart
           height="300"
@@ -131,22 +132,22 @@
           [plugins]="lineChartPlugins">
         </canvas>
       </div>
-      <div class="center row">
-        <button class=" offset-s1 col s2" mat-raised-button id="btn-humedad" (click)="cambioDeChart3(0)">
+      <div class="center">
+        <button class="btn-change" mat-raised-button id="btn-humedad" (click)="cambioDeChart(0)">
           Humedad
         </button>
-        <button class="col s2" mat-raised-button id="btn-temperatura" (click)="cambioDeChart3(1)">
+        <button class="btn-change" mat-raised-button id="btn-temperatura" (click)="cambioDeChart(1)">
           Temperatura
         </button>
-        <button class="col s2" mat-raised-button id="btn-irradiancia" (click)="cambioDeChart3(2)">
+        <button class="btn-change"  mat-raised-button id="btn-irradiancia" (click)="cambioDeChart(2)">
           Irradiancia
         </button>
 
-        <button class="col s2" mat-raised-button id="btn-corriente" (click)="cambioDeChart3(3)">
+        <button class="flow-text btn-change" mat-raised-button id="btn-corriente" (click)="cambioDeChart(3)">
           Corriente
         </button>
 
-        <button class="col s2" mat-raised-button id="btn-voltaje" (click)="cambioDeChart3(4)">
+        <button class="flow-text btn-change" mat-raised-button id="btn-voltaje" (click)="cambioDeChart(4)">
           Voltaje
         </button>
       </div>
