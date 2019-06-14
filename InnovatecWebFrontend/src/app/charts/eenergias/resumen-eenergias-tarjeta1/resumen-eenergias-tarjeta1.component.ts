@@ -5,7 +5,6 @@ import { DatosEenergiasService } from 'src/app/shared/services/datos-eenergias.s
 import { MatSnackBar } from '@angular/material';
 import { DatosEenergias } from 'src/app/shared/models/datos-eenergias';
 import { FilterDataEEnergias } from 'src/app/shared/models/filter-data-eenergias';
-import { DatosExportarEenergias } from 'src/app/shared/models/datos-exportar-eenergias';
 import { DatosPromedioEenergias } from 'src/app/shared/models/datos-promedio-eenergias';
 import { ConvertHours } from 'src/app/shared/utilities/convert-hours';
 
@@ -23,7 +22,7 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
   public potenciasMins: number[] = [];
   public horasMaxs: string[] = [];
   public horasMins: string[] = [];
-
+  public fechas: string[] = [];
 
   public averageData: DatosPromedioEenergias[][] = [];
 
@@ -46,31 +45,31 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
     }
   };
 
-  public pieChartData1: number[] = [100, 100, 100];
+  public pieChartData1: number[] = [0, 0, 0];
   public pieChartColors1 = [
     {
-      backgroundColor: ['rgba(255,158,128,1)', 'rgba(255,61,0,1)', 'rgba(221,44,0,1)'],
+      backgroundColor: ['rgba(236,64,122,1)', 'rgba(0,131,143,1)', 'rgba(74,20,140,1)'],
     },
   ];
 
-  public pieChartData2: number[] = [100, 100, 100];
+  public pieChartData2: number[] = [0, 0, 0];
   public pieChartColors2 = [
     {
       backgroundColor: ['rgba(64,196,255,1)', 'rgba(0,176,255,1)', 'rgba(0,145,234,1)'],
     },
   ];
 
-  public pieChartData3: number[] = [100, 100, 100];
+  public pieChartData3: number[] = [0, 0, 0];
   public pieChartColors3 = [
     {
-      backgroundColor: ['rgba(140,158,255,1)', 'rgba(83,109,254,1)', 'rgba(48,79,254,1)'],
+      backgroundColor: ['rgba(140,158,255,1)', 'rgba(83,109,254,1)', 'rgba(38,59,254,1)'],
     },
   ];
 
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
-  public pieChartLabels: Label[] = [];
+  public pieChartLabels: Label[] = ['', '', ''];
 
   ngOnInit() {
     this.queryResume();
@@ -78,13 +77,13 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
 
   queryResume() {
     const currentDate = new Date();
-
+    this.fechas = [];
     for (let index = 3; index > 0; index--) {
       const myDate1 = new Date(currentDate.setDate(currentDate.getDate() - 1));
       const year = String(myDate1.getFullYear());
       const realMonth = String(myDate1.getMonth() + 1);
       const day = String(myDate1.getDate());
-      console.log(myDate1);
+      this.fechas.push(day + '/' + realMonth + '/' + year);
       this.infoList.getDataForDay(day, realMonth, year).snapshotChanges().subscribe(item => {
         const tmpValues: DatosEenergias[] = [];
         // tslint:disable-next-line: no-shadowed-variable
@@ -92,22 +91,6 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
           const x = element.payload.toJSON();
           // tslint:disable-next-line: no-string-literal
           x['skey'] = element.key;
-
-          const tmpExportData = new DatosExportarEenergias();
-          // tslint:disable-next-line: no-string-literal
-          tmpExportData.hora = x['hora'];
-          // tslint:disable-next-line: no-string-literal
-          tmpExportData.potencia1 = x['potencia1'];
-          // tslint:disable-next-line: no-string-literal
-          tmpExportData.potencia2 = x['potencia2'];
-          // tslint:disable-next-line: no-string-literal
-          tmpExportData.potencia3 = x['potencia3'];
-          // tslint:disable-next-line: no-string-literal
-          tmpExportData.corriente1 = x['corriente1'];
-          // tslint:disable-next-line: no-string-literal
-          tmpExportData.corriente2 = x['corriente2'];
-          // tslint:disable-next-line: no-string-literal
-          tmpExportData.corriente3 = x['corriente3'];
 
           tmpValues.push(x as DatosEenergias);
         });
@@ -253,6 +236,7 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
         element.forEach(el1 => {
           tmpAcumulador += el1.potenciaPromedio1;
         });
+        tmpAcumulador = Math.round(tmpAcumulador * 1000) / 1000 ;
         this.energiasDias.push(tmpAcumulador);
         this.potenciasMins.push(element[0].potenciaPromedio1);
         this.horasMins.push(element[0].hora);
@@ -260,11 +244,12 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
         this.horasMaxs.push(element[element.length - 1].hora);
       }
 
-      if (i >= 3 && i < 6) {
+      if (i > 2 && i < 6) {
         let tmpAcumulador = 0;
         element.forEach(el1 => {
           tmpAcumulador += el1.potenciaPromedio2;
         });
+        tmpAcumulador = Math.round(tmpAcumulador * 1000) / 1000 ;
         this.energiasDias.push(tmpAcumulador);
         this.potenciasMins.push(element[0].potenciaPromedio2);
         this.horasMins.push(element[0].hora);
@@ -272,11 +257,12 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
         this.horasMaxs.push(element[element.length - 1].hora);
       }
 
-      if (i >= 6) {
+      if (i > 5) {
         let tmpAcumulador = 0;
         element.forEach(el1 => {
           tmpAcumulador += el1.potenciaPromedio3;
         });
+        tmpAcumulador = Math.round(tmpAcumulador * 1000) / 1000 ;
         this.energiasDias.push(tmpAcumulador);
         this.potenciasMins.push(element[0].potenciaPromedio3);
         this.horasMins.push(element[0].hora);
@@ -285,10 +271,10 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
       }
 
     }
-
-    console.log(this.energiasDias, this.potenciasMaxs, this.potenciasMins);
+    this.graficar();
 
   }
+
   public sortByPotenciaMax1(array: DatosPromedioEenergias[]): DatosPromedioEenergias[] {
     return array.sort((a: DatosPromedioEenergias, b: DatosPromedioEenergias) => {
       return a.potenciaPromedio1 - b.potenciaPromedio1;
@@ -309,4 +295,39 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
     });
   }
 
+  graficar() {
+    const tmpFechas: string[] = [];
+    for (let i = this.fechas.length - 1 ; i >= 0; i--) {
+      tmpFechas.push(String(this.fechas[i]));
+    }
+    this.fechas = tmpFechas;
+
+    this.pieChartData1 = [];
+    this.pieChartData2 = [];
+    this.pieChartData3 = [];
+    this.pieChartLabels = [];
+
+    for (let i = 0; i < this.energiasDias.length; i++) {
+      const element = this.energiasDias[i];
+      if ( i < 3 ) {
+        this.pieChartData1.push(element);
+      }
+
+      if ( i > 2 && i < 6 ) {
+        this.pieChartData2.push(element);
+      }
+
+      if ( i > 5 ) {
+        this.pieChartData3.push(element);
+      }
+
+    }
+
+    this.fechas.forEach(element => {
+      this.pieChartLabels.push(element);
+    });
+
+    this.chart.chart.update();
+
+  }
 }

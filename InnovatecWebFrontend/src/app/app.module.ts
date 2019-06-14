@@ -53,6 +53,7 @@ import { QueryForDayEeComponent } from './charts/eenergias/query-for-day-ee/quer
 import { ResumenEenergiasTarjeta1Component } from './charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
 
 import { AdminComponent } from './components/admin/admin.component';
+import { ResumenProSolarComponent } from './charts/pro-solar/resumen-pro-solar/resumen-pro-solar.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { AdminComponent } from './components/admin/admin.component';
     QueryForDayEeComponent,
     AdminComponent,
     ResumenEenergiasTarjeta1Component,
+    ResumenProSolarComponent,
   ],
   imports: [
     BrowserModule,

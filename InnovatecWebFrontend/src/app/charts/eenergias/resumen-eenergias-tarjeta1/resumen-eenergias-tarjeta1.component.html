@@ -1,6 +1,6 @@
 <table>
   <tbody class="row">
-    <td class="col m4 s12 orange-text text-darken-4">
+    <td class="col m4 s12 amber-text text-darken-3">
       <table class="centered" id="cabeceraC1">
         <thead>
           <tr>
@@ -12,43 +12,43 @@
         <tbody>
           <tr>
             <th>Día</th>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
+            <td class="pink-text text-lighten-1">{{ fechas[0] }}</td>
+            <td class="cyan-text text-darken-3">{{ fechas[1] }}</td>
+            <td class="purple-text">{{ fechas[2] }}</td>
           </tr>
 
           <tr>
             <th>Energía Día (W/día)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ energiasDias[0] }}</td>
+            <td class="cyan-text text-darken-3">{{ energiasDias[1] }}</td>
+            <td class="purple-text">{{ energiasDias[2] }}</td>
           </tr>
           <tr>
             <th>Potencia Máxima (W)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ potenciasMaxs[0] }}</td>
+            <td class="cyan-text text-darken-3">{{ potenciasMaxs[1] }}</td>
+            <td class="purple-text">{{ potenciasMaxs[2] }}</td>
           </tr>
           <tr>
             <th>Hora de Potencia Máxima</th>
-            <td>11 a 12</td>
-            <td>12 a 13</td>
-            <td>14 a 15</td>
+            <td class="pink-text text-lighten-1">{{ horasMaxs[0] }}</td>
+            <td class="cyan-text text-darken-3">{{ horasMaxs[1] }}</td>
+            <td class="purple-text">{{ horasMaxs[2] }}</td>
           </tr>
 
 
           <tr>
             <th>Potencia Mínima (W)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ potenciasMins[0] }}</td>
+            <td class="cyan-text text-darken-3">{{ potenciasMins[1] }}</td>
+            <td class="purple-text">{{ potenciasMins[2] }}</td>
           </tr>
 
           <tr>
             <th>Hora de Potencia Mínima</th>
-            <td>11 a 12</td>
-            <td>12 a 13</td>
-            <td>14 a 15</td>
+            <td class="pink-text text-lighten-1">{{ horasMins[0] }}</td>
+            <td class="cyan-text text-darken-3">{{ horasMins[1] }}</td>
+            <td class="purple-text">{{ horasMins[2] }}</td>
           </tr>
         </tbody>
       </table>
@@ -77,44 +77,43 @@
         <tbody>
           <tr>
             <th>Día</th>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-
+            <td class="pink-text text-lighten-1">{{ fechas[0] }}</td>
+            <td class="cyan-text text-darken-3">{{ fechas[1] }}</td>
+            <td class="purple-text">{{ fechas[2] }}</td>
           </tr>
 
           <tr>
             <th>Energía Día (W/día)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ energiasDias[3] }}</td>
+            <td class="cyan-text text-darken-3">{{ energiasDias[4] }}</td>
+            <td class="purple-text">{{ energiasDias[5] }}</td>
           </tr>
           <tr>
             <th>Potencia Máxima (W)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ potenciasMaxs[3] }}</td>
+            <td class="cyan-text text-darken-3">{{ potenciasMaxs[4] }}</td>
+            <td class="purple-text">{{ potenciasMaxs[5] }}</td>
           </tr>
           <tr>
             <th>Hora de Potencia Máxima</th>
-            <td>11 a 12</td>
-            <td>12 a 13</td>
-            <td>14 a 15</td>
+            <td class="pink-text text-lighten-1">{{ horasMaxs[3] }}</td>
+            <td class="cyan-text text-darken-3">{{ horasMaxs[4] }}</td>
+            <td class="purple-text">{{ horasMaxs[5] }}</td>
           </tr>
 
 
           <tr>
             <th>Potencia Mínima (W)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ potenciasMins[3] }}</td>
+            <td class="cyan-text text-darken-3">{{ potenciasMins[4] }}</td>
+            <td class="purple-text">{{ potenciasMins[5] }}</td>
           </tr>
 
           <tr>
             <th>Hora de Potencia Mínima</th>
-            <td>11 a 12</td>
-            <td>12 a 13</td>
-            <td>14 a 15</td>
+            <td class="pink-text text-lighten-1">{{ horasMins[3] }}</td>
+            <td class="cyan-text text-darken-3">{{ horasMins[4] }}</td>
+            <td class="purple-text">{{ horasMins[5] }}</td>
           </tr>
         </tbody>
       </table>
@@ -125,7 +124,7 @@
           [chartType]="pieChartType"
           [options]="pieChartOptions"
           [plugins]="pieChartPlugins"
-          [colors]="pieChartColors2"
+          [colors]="pieChartColors1"
           [legend]="pieChartLegend">
         </canvas>
       </div>
@@ -143,44 +142,43 @@
         <tbody>
           <tr>
             <th>Día</th>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-
+            <td class="pink-text text-lighten-1">{{ fechas[0] }}</td>
+            <td class="cyan-text text-darken-3">{{ fechas[1] }}</td>
+            <td class="purple-text">{{ fechas[2] }}</td>
           </tr>
 
           <tr>
             <th>Energía Día (W/día)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ energiasDias[6] }}</td>
+            <td class="cyan-text text-darken-3">{{ energiasDias[7] }}</td>
+            <td class="purple-text">{{ energiasDias[8] }}</td>
           </tr>
           <tr>
             <th>Potencia Máxima (W)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ potenciasMaxs[6] }}</td>
+            <td class="cyan-text text-darken-3">{{ potenciasMaxs[7] }}</td>
+            <td class="purple-text">{{ potenciasMaxs[8] }}</td>
           </tr>
           <tr>
             <th>Hora de Potencia Máxima</th>
-            <td>11 a 12</td>
-            <td>12 a 13</td>
-            <td>14 a 15</td>
+            <td class="pink-text text-lighten-1">{{ horasMaxs[6] }}</td>
+            <td class="cyan-text text-darken-3">{{ horasMaxs[7] }}</td>
+            <td class="purple-text">{{ horasMaxs[8] }}</td>
           </tr>
 
 
           <tr>
             <th>Potencia Mínima (W)</th>
-            <td>700</td>
-            <td>800</td>
-            <td>900</td>
+            <td class="pink-text text-lighten-1">{{ potenciasMins[6] }}</td>
+            <td class="cyan-text text-darken-3">{{ potenciasMins[7] }}</td>
+            <td class="purple-text">{{ potenciasMins[8] }}</td>
           </tr>
 
           <tr>
             <th>Hora de Potencia Mínima</th>
-            <td>11 a 12</td>
-            <td>12 a 13</td>
-            <td>14 a 15</td>
+            <td class="pink-text text-lighten-1">{{ horasMins[6] }}</td>
+            <td class="cyan-text text-darken-3">{{ horasMins[7] }}</td>
+            <td class="purple-text">{{ horasMins[8] }}</td>
           </tr>
         </tbody>
       </table>
@@ -191,7 +189,7 @@
           [chartType]="pieChartType"
           [options]="pieChartOptions"
           [plugins]="pieChartPlugins"
-          [colors]="pieChartColors3"
+          [colors]="pieChartColors1"
           [legend]="pieChartLegend">
         </canvas>
       </div>
