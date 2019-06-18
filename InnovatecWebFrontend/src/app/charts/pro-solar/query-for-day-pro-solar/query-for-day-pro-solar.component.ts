@@ -599,7 +599,6 @@ export class QueryForDayProSolarComponent implements OnInit {
 
     this.getGlobal();
 
-
   }
 
 
