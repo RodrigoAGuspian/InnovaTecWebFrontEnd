@@ -298,7 +298,6 @@ export class QueryForDayEeComponent implements OnInit {
         potenciaMinima: this.potenciaMin + ' Hora:' + this.horaMin,
       };
       jsonExport2.push(tmpAny1);
-      console.log(jsonExportC);
       if (this.chartsEnables[3]) {
         this.excelService.exportAsExcelFile(jsonExportC, day + '-' + month + '-' + year + ' ' + 'datos-eenergias', jsonExport1,
                                           jsonExport2, 'E1', 'I1' );
@@ -353,7 +352,6 @@ export class QueryForDayEeComponent implements OnInit {
           acumulador.corrientePromedio3 += Number(el1.corriente3);
 
           const horaDato = ConvertHours.toConver24(el1.hora);
-          console.log(horaDato, acmH);
           if (acmH === 0) {
             acmH = horaDato.getHours();
           }

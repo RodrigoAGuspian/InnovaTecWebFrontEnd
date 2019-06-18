@@ -43,13 +43,18 @@ import { RealTimeChartComponent } from './charts/pro-solar/real-time-chart/real-
 import { RealTimeEenergiasComponent } from './charts/eenergias/real-time-eenergias/real-time-eenergias.component';
 import { QueryForDayProSolarComponent } from './charts/pro-solar/query-for-day-pro-solar/query-for-day-pro-solar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { QueryForWeekComponent } from './charts/pro-solar/query-for-week/query-for-week.component';
 import { QueryForMonthComponent } from './charts/pro-solar/query-for-month/query-for-month.component';
 import { MultiDatepickerModule } from './utilities/multidatepicker/multidatepicker.module';
 import { QueryForWeekEeComponent } from './charts/eenergias/query-for-week-ee/query-for-week-ee.component';
 import { QueryForMonthEeComponent } from './charts/eenergias/query-for-month-ee/query-for-month-ee.component';
 import { QueryForDayEeComponent } from './charts/eenergias/query-for-day-ee/query-for-day-ee.component';
+import { ResumenEenergiasTarjeta1Component } from './charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
+
 import { AdminComponent } from './components/admin/admin.component';
+import { ResumenProSolarComponent } from './charts/pro-solar/resumen-pro-solar/resumen-pro-solar.component';
+
 
 @NgModule({
   declarations: [
@@ -67,6 +72,8 @@ import { AdminComponent } from './components/admin/admin.component';
     QueryForMonthEeComponent,
     QueryForDayEeComponent,
     AdminComponent,
+    ResumenEenergiasTarjeta1Component,
+    ResumenProSolarComponent,
   ],
   imports: [
     BrowserModule,

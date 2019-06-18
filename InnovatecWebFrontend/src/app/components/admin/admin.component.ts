@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  changes = [false, false, false, false , false , false, false, false];
+  public viewChart = 0;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public viewChange(modo: number) {
+    this.viewChart = modo;
   }
 
 }
