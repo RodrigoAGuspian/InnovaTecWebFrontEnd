@@ -1,5 +1,5 @@
 <div class="row">
-  <form method="POST" [formGroup]="formSignIn" class="col s12 m6 offset-m3" autocomplete="off" >
+  <form method="POST" [formGroup]="formSignIn" class="col s12 m6 offset-m3" autocomplete="off" (submit) = "authService.SignIn(userName.value, userPassword.value)">
       <div class="row">
           <div class="input-field col s12 m12">
               <input formControlName="email" id="correo" type="email" #userName required>
@@ -21,7 +21,7 @@
                 </div>
           </div>
       </div>
-      <button [disabled]="formSignIn.invalid" class="btn teal waves-effect waves-light col s6 m6 offset-m3 offset-s3" type="submit" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">Iniciar sesión</button>
+      <button [disabled]="formSignIn.invalid" class="btn teal waves-white col s6 m6 offset-m3 offset-s3" type="submit" value="Log in">Iniciar sesión</button>
   </form>
   <div class="col s12 m6 offset-m3">
       <div class="card-panel teal lighten-5">

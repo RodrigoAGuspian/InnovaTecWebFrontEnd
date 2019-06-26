@@ -119,6 +119,7 @@ export class ResumenProSolarComponent implements OnInit {
             acumulador.corrientePromedio = Math.round (acumulador.corrientePromedio / contador * 1000) / 1000;
             acumulador.voltajePromedio = Math.round (acumulador.voltajePromedio / contador * 1000) / 1000;
             acumulador.temperaturaPromedio = Math.round (acumulador.temperaturaPromedio / contador * 1000) / 1000;
+            acumulador.potenciaPromedio = Math.round( (acumulador.voltajePromedio) * (acumulador.corrientePromedio)  * 1000 ) / 1000 ;
             if (tmpAcmH === 24) {
               tmpAcmH = 0;
 
@@ -143,13 +144,9 @@ export class ResumenProSolarComponent implements OnInit {
   }
 
   public getValuesTables() {
-    const listPotencias: DatosPromedioProSolar[][] = [];
-    const sortListPotencias: DatosPromedioProSolar[][] = [];
-
     this.irradianciasGlobs = [];
     this.energiasGlobs = [];
     this.horasSol = [];
-
 
     this.averageData.forEach(element => {
       let tmpIrradianciaGlob = 0;
@@ -157,8 +154,10 @@ export class ResumenProSolarComponent implements OnInit {
       element.forEach(el1 => {
           tmpIrradianciaGlob += el1.irradianciaPromedio;
           tmpEnergiaGlob += el1.potenciaPromedio;
+          console.log(tmpEnergiaGlob);
         });
       tmpIrradianciaGlob = Math.round(tmpIrradianciaGlob * 1000 ) / 1000;
+      tmpEnergiaGlob = Math.round(tmpEnergiaGlob * 1000 ) / 1000;
       const tmpHorasSol = Math.round(tmpIrradianciaGlob / 1000 * 1000 ) / 1000;
       this.irradianciasGlobs.push(tmpIrradianciaGlob);
       this.energiasGlobs.push(tmpEnergiaGlob);
@@ -175,7 +174,27 @@ export class ResumenProSolarComponent implements OnInit {
     for (let i = this.fechas.length - 1 ; i >= 0; i--) {
       tmpFechas.push(String(this.fechas[i]));
     }
+
+    const tmpHoras: number[] = [];
+    const tmpIrradianciasGlobs: number[] = [];
+    const tmpEnergiasGlobs: number[] = [];
+
+    for (let i = this.horasSol.length - 1 ; i >= 0; i--) {
+      tmpHoras.push(this.horasSol[i]);
+    }
+
+    for (let i = this.irradianciasGlobs.length - 1 ; i >= 0; i--) {
+      tmpIrradianciasGlobs.push(this.irradianciasGlobs[i]);
+    }
+
+    for (let i = this.fechas.length - 1 ; i >= 0; i--) {
+      tmpEnergiasGlobs.push(this.energiasGlobs[i]);
+    }
+
     this.fechas = tmpFechas;
+    this.horasSol = tmpHoras;
+    this.irradianciasGlobs = tmpIrradianciasGlobs;
+    this.energiasGlobs = tmpEnergiasGlobs;
 
     this.pieChartData1 = [];
     this.pieChartLabels = [];

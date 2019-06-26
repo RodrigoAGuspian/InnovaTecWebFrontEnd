@@ -557,8 +557,6 @@ export class QueryForDayProSolarComponent implements OnInit {
           !isNaN(Number(el1.temperatura))) {
           try {
             contador++;
-            // Injerto que no debe hacerce
-
             acumulador.irradianciaPromedio += Number(el1.irradiancia);
             acumulador.humedadPromedio += Number(el1.humedad);
             acumulador.corrientePromedio += Number(el1.corrientePanel);

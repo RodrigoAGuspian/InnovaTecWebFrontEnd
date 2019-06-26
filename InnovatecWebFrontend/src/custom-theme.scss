@@ -9,3 +9,38 @@ $custom-theme-warn: mat-palette($mat-teal);
 $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
 @include angular-material-theme($custom-theme);
+
+.blue-snackbar {
+  background: #2196F3;
+  color: aliceblue !important;
+  .mat-simple-snackbar-action {
+    color: aliceblue !important;
+  }
+
+}
+
+.green-snackbar {
+  background-color: #00C853 ;
+  color: aliceblue !important;
+  .mat-simple-snackbar-action {
+    color: aliceblue !important;
+  }
+
+}
+
+.yellow-snackbar {
+  background-color: #FFAB00  ;
+  color: aliceblue !important;
+  .mat-simple-snackbar-action {
+    color: aliceblue !important;
+  }
+
+}
+
+.red-snackbar {
+  background-color: #F44336;
+  color: aliceblue !important;
+  .mat-simple-snackbar-action {
+    color: aliceblue !important;
+  }
+}

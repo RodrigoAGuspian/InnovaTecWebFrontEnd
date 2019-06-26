@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material';
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../models/user';
 import { auth } from 'firebase/app';
@@ -6,8 +7,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { UserInfoService } from './user-info.service';
-import { ToastrService } from 'ngx-toastr';
-import { AngularFireList } from '@angular/fire/database';
 import { UserInfo } from '../models/user-info';
 
 @Injectable({
@@ -25,7 +24,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     public userInfoService: UserInfoService,
-    private toastr: ToastrService,
+    private snackBar: MatSnackBar
   ) {
     this.userInfoService.getUsers().snapshotChanges()
     .subscribe(item => {
@@ -52,24 +51,40 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(email, password) {
+    let solo1 = true;
     for (const element of this.userList) {
       if (element.email === email) {
         if (element.rol !== 'No Verificado') {
           this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then((result) => {
           this.ngZone.run(() => {
-            this.router.navigate(['dashboard']);
-            this.toastr.success('Inicio de sesión correcto.', 'Bienvenido.');
+            if (solo1) {
+              this.router.navigate(['']);
+              solo1 = false;
+            }
+            this.snackBar.open('Inicio de sesión correcto.', 'Bienvenido', {
+              duration: 2000,
+              panelClass: ['green-snackbar']
+            });
           });
           this.SetUserData(result.user);
         }).catch((error) => {
-          this.toastr.error('Por favor revise que su correo electrónico y su contraseña esten bien escritos.', 'Algo anda mal :(');
+          this.snackBar.open('Por favor revise que su correo electrónico y su contraseña esten bien escritos.', 'Algo anda mal :(', {
+            duration: 2000,
+            panelClass: ['red-snackbar']
+          });
         });
         } else {
-          this.toastr.warning('Por favor espera que uno de nuestros administradores te de acceso', 'No puedes acceder a la plataforma');
+          this.snackBar.open('Por favor espera que uno de nuestros administradores te de acceso.', 'No puedes acceder a la plataforma', {
+            duration: 2000,
+            panelClass: ['yellow-snackbar']
+          });
         }
-      } else if (this.userList[this.userList.length - 1] === element) {
-        this.toastr.error('Su correo electrónico no se encuentra en nuestra base de datos', 'Algo anda mal :(');
+      } else if (this.userList[this.userList.length - 1] !== element) {
+        this.snackBar.open('Su correo electrónico no se encuentra en nuestra base de datos.', 'Algo anda mal :(', {
+          duration: 2000,
+          panelClass: ['red-snackbar']
+        });
       }
     }
   }
@@ -84,10 +99,16 @@ export class AuthService {
         this.router.navigate(['/']);
         this.SetUserData(result.user);
         this.userInfoService.insertUser(formSignUp.value);
-        this.toastr.warning('Espere que un administrador apruebe su cuenta para ingresar a la plataforma.', 'Registro completado.');
+        this.snackBar.open('Espere que un administrador apruebe su cuenta para ingresar a la plataforma.', 'Registro completado.', {
+          duration: 2000,
+          panelClass: ['blue-snackbar']
+        });
 
       }).catch((error) => {
-        this.toastr.error('El usuario ya está registrado.', 'Algo anda mal :(');
+        this.snackBar.open('El usuario ya está registrado.', 'Algo anda mal :(', {
+          duration: 2000,
+          panelClass: ['red-snackbar']
+        });
 
       });
   }
@@ -113,7 +134,7 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    return (user !== null) ? true : false;
   }
 
   // Sign in with Google
@@ -126,7 +147,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
     .then((result) => {
        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['panel-de-control']);
         });
        this.SetUserData(result.user);
     }).catch((error) => {
@@ -153,10 +174,15 @@ export class AuthService {
 
   // Sign out
   SignOut() {
-    return this.afAuth.auth.signOut().then(() => {
+    return this.afAuth.auth.signOut().then(async () => {
+      await delay(100);
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
     });
+
+    function delay(ms: number) {
+      return new Promise( resolve => setTimeout(resolve, ms) );
+    }
   }
 
 }
