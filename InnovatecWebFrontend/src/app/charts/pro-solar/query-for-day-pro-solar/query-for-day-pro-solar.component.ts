@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BaseChartDirective, Color, Label } from 'ng2-charts';
 import { ChartType, ChartDataSets, ChartOptions } from 'chart.js';
@@ -122,8 +123,12 @@ export class QueryForDayProSolarComponent implements OnInit {
 
   constructor(private snackBar: MatSnackBar, public infoList: DatosProSolarService, private excelService: ExportExcelService) {
     this.InizialiteValues();
-   }
+  }
+  compareFn: ((f1: any, f2: any) => boolean)| null = this.comapreByValue;
 
+  comapreByValue(f1: any, f2: any) {
+    return f1 && f2 && f1.value === f2.value;
+  }
   ngOnInit() {
   }
 

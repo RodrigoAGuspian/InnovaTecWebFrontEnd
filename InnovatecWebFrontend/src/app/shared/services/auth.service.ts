@@ -177,7 +177,7 @@ export class AuthService {
     return this.afAuth.auth.signOut().then(async () => {
       await delay(100);
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['iniciar-sesion']);
     });
 
     function delay(ms: number) {

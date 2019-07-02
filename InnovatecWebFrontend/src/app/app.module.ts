@@ -54,6 +54,7 @@ import { ResumenEenergiasTarjeta1Component } from './charts/eenergias/resumen-ee
 
 import { AdminComponent } from './components/admin/admin.component';
 import { ResumenProSolarComponent } from './charts/pro-solar/resumen-pro-solar/resumen-pro-solar.component';
+import { IndexComponent } from './components/index/index.component';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { ResumenProSolarComponent } from './charts/pro-solar/resumen-pro-solar/r
     AdminComponent,
     ResumenEenergiasTarjeta1Component,
     ResumenProSolarComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,

@@ -157,11 +157,11 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
       });
       this.averageData.push(tmpListDE);
     });
-    this.getValuesTables();
+    this.getValuesForTables();
   }
 
 
-  public getValuesTables() {
+  public getValuesForTables() {
     const listPotencias: DatosPromedioEenergias[][] = [];
     const sortListPotencias: DatosPromedioEenergias[][] = [];
 
@@ -228,8 +228,13 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
       tmp1.push(element);
     });
     sortListPotencias.push(tmp1);
-
-    for (let i = 0; i < sortListPotencias.length; i++) {
+    let size = 0;
+    try {
+      size = sortListPotencias.length;
+    } catch (error) {
+      size = 0;
+    }
+    for (let i = 0; i < size; i++) {
       const element = sortListPotencias[i];
       if (i < 3) {
         let tmpAcumulador = 0;
@@ -238,10 +243,28 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
         });
         tmpAcumulador = Math.round(tmpAcumulador * 1000) / 1000 ;
         this.energiasDias.push(tmpAcumulador);
-        this.potenciasMins.push(element[0].potenciaPromedio1);
-        this.horasMins.push(element[0].hora);
-        this.potenciasMaxs.push(element[element.length - 1].potenciaPromedio1);
-        this.horasMaxs.push(element[element.length - 1].hora);
+        try {
+          this.potenciasMins.push(element[0].potenciaPromedio1);
+        } catch (error) {
+          this.potenciasMins.push(0);
+        }
+
+        try {
+          this.horasMins.push(element[0].hora);
+        } catch (error) {
+          this.horasMins.push('No Disponible');
+        }
+
+        try {
+          this.potenciasMaxs.push(element[element.length - 1].potenciaPromedio1);
+        } catch (error) {
+          this.potenciasMaxs.push(0);
+        }
+        try {
+          this.horasMaxs.push(element[element.length - 1].hora);
+        } catch (error) {
+          this.horasMaxs.push('No Disponible');
+        }
       }
 
       if (i > 2 && i < 6) {
@@ -251,10 +274,29 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
         });
         tmpAcumulador = Math.round(tmpAcumulador * 1000) / 1000 ;
         this.energiasDias.push(tmpAcumulador);
-        this.potenciasMins.push(element[0].potenciaPromedio2);
-        this.horasMins.push(element[0].hora);
-        this.potenciasMaxs.push(element[element.length - 1].potenciaPromedio2);
-        this.horasMaxs.push(element[element.length - 1].hora);
+        try {
+          this.potenciasMins.push(element[0].potenciaPromedio2);
+        } catch (error) {
+          this.potenciasMins.push(0);
+        }
+
+        try {
+          this.potenciasMaxs.push(element[element.length - 1].potenciaPromedio2);
+        } catch (error) {
+          this.potenciasMaxs.push(0);
+        }
+        try {
+          this.horasMins.push(element[0].hora);
+        } catch (error) {
+          this.horasMins.push('No Disponible');
+        }
+
+        try {
+          this.horasMaxs.push(element[element.length - 1].hora);
+        } catch (error) {
+          this.horasMaxs.push('No Disponible');
+        }
+
       }
 
       if (i > 5) {
@@ -264,10 +306,29 @@ export class ResumenEenergiasTarjeta1Component implements OnInit {
         });
         tmpAcumulador = Math.round(tmpAcumulador * 1000) / 1000 ;
         this.energiasDias.push(tmpAcumulador);
-        this.potenciasMins.push(element[0].potenciaPromedio3);
-        this.horasMins.push(element[0].hora);
-        this.potenciasMaxs.push(element[element.length - 1].potenciaPromedio3);
-        this.horasMaxs.push(element[element.length - 1].hora);
+        try {
+          this.potenciasMins.push(element[0].potenciaPromedio3);
+        } catch (error) {
+          this.potenciasMins.push(0);
+        }
+
+        try {
+          this.horasMins.push(element[0].hora);
+        } catch (error) {
+          this.horasMins.push('No Disponible');
+        }
+
+        try {
+          this.potenciasMaxs.push(element[element.length - 1].potenciaPromedio3);
+        } catch (error) {
+          this.potenciasMaxs.push(0);
+        }
+
+        try {
+          this.horasMaxs.push(element[element.length - 1].hora);
+        } catch (error) {
+          this.horasMaxs.push('No Disponible');
+        }
       }
 
     }

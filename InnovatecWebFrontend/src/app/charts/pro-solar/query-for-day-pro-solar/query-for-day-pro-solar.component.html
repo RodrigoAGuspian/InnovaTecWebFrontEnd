@@ -11,9 +11,9 @@
     <div class="col m5 s12 input-container">
       <mat-form-field class="input-select" id="selector">
         <mat-label>Gráficas</mat-label>
-        <mat-select color="primary">
-          <mat-option  *ngFor="let c of modos" [value]="c" (click)="mostrarCharts(c)">{{ c }}</mat-option>
-        </mat-select >
+        <mat-select color="primary" [compareWith]="compareFn">
+          <mat-option *ngFor="let c of modos" [value]="c" (click)="mostrarCharts(c)">{{ c }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <button id="btn-exp" mat-raised-button color="primary" [disabled]="!deteccion" (click)="exportar()">Exportar</button>
     </div>
