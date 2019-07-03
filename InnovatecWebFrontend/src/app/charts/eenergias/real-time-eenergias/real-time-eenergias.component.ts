@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { RealTimeEenergias } from 'src/app/shared/models/real-time-eenergias';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label, Color, BaseChartDirective } from 'ng2-charts';
-import { RealTimeEenergiasService } from 'src/app/shared/services/real-time-eenergias.service';
+import { DatosEenergiasService } from 'src/app/shared/services/datos-eenergias.service';
 
 @Component({
   selector: 'app-real-time-eenergias',
@@ -11,7 +11,7 @@ import { RealTimeEenergiasService } from 'src/app/shared/services/real-time-eene
 })
 export class RealTimeEenergiasComponent implements OnInit {
 
-  constructor(public infoList: RealTimeEenergiasService) { }
+  constructor(public infoList: DatosEenergiasService) { }
   public realTimeList: RealTimeEenergias[] = [];
   public deteccion = true;
 

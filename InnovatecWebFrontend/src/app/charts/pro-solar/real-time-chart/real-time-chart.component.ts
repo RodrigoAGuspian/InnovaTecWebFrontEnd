@@ -1,9 +1,8 @@
+import { DatosProSolarService } from 'src/app/shared/services/datos-pro-solar.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label, BaseChartDirective } from 'ng2-charts';
-import { RealTimeProSolarService } from 'src/app/shared/services/real-time-pro-solar.service';
 import { RealTimeProSolar } from 'src/app/shared/models/real-time-pro-solar';
-import { DatePipe, formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-real-time-chart',
@@ -12,7 +11,7 @@ import { DatePipe, formatDate } from '@angular/common';
 })
 export class RealTimeChartComponent implements OnInit {
 
-  constructor(public infoList: RealTimeProSolarService) {
+  constructor(public infoList: DatosProSolarService) {
 
     this.InizialiteValues();
 

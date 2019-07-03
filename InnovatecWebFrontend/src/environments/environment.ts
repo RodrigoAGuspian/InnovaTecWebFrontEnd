@@ -13,6 +13,30 @@ export const environment = {
     messagingSenderId: '811818195535',
     appId: '1:811818195535:web:7a6f09e088d2bd58'
   },
+
+  firebaseProSolar: {
+    apiKey: 'AIzaSyDfA-zAA1xtY6D8WPhJ1GuV-jS7g89gt1k',
+    authDomain: 'datoscasasolar.firebaseapp.com',
+    databaseURL: 'https://datoscasasolar.firebaseio.com',
+    projectId: 'datoscasasolar',
+    storageBucket: 'datoscasasolar.appspot.com',
+    messagingSenderId: '715135539587',
+    appId: '1:715135539587:web:962633c32a74beb3'
+  },
+
+  firebaseEEnergias: {
+    apiKey: 'AIzaSyCiRBHuNVoVSovrQt6lghkqrz_tXcLOA6w',
+    authDomain: 'eenergiasctpi.firebaseapp.com',
+    databaseURL: 'https://eenergiasctpi.firebaseio.com',
+    projectId: 'eenergiasctpi',
+    storageBucket: 'eenergiasctpi.appspot.com',
+    messagingSenderId: '725121675421',
+    appId: '1:725121675421:web:746f97d939da55a1'
+  },
+
+
+
+
 };
 
 /*
