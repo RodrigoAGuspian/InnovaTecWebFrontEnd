@@ -2,13 +2,13 @@
   <div class="nav-wrapper teal lighten-2">
 
     <ul class="left">
-        <li data-activates="slide-out" class="sidenav"><a><i class="material-icons">menu</i></a></li>
+        <li data-target="slide-out" class="sidenav"><a><i class="material-icons">menu</i></a></li>
     </ul>
     <a class="brand-logo center">Innovatec</a>
   </div>
 </nav>
 
-<ul id="slide-out" class="side-nav">
+<ul id="slide-out" class="sidenav">
   <li>
       <div class="user-view">
       <div class="background">
@@ -21,8 +21,8 @@
   </li>
   <li><a class="black-text" (click)="viewChangeIndex()"><i class="black-text material-icons">home</i>Página Principal</a></li>
   <li><div class="divider"></div></li>
-  <li><a class='teal-text text-darken-2 dropdown-trigger text-left'  data-activates='dropdown1'><i class="teal-text text-darken-2 material-icons">arrow_drop_down</i>ProSolar-CTPI</a></li>
-  <li><a class='orange-text text-darken-4 dropdown-trigger text-left' data-activates='dropdown2'><i class="orange-text text-darken-4 material-icons">arrow_drop_down</i>EEnergias</a></li>
+  <li><a class='teal-text text-darken-2 dropdown-trigger text-left'  data-target='dropdown1'><i class="teal-text text-darken-2 material-icons">arrow_drop_down</i>ProSolar-CTPI</a></li>
+  <li><a class='orange-text text-darken-4 dropdown-trigger text-left' data-target='dropdown2'><i class="orange-text text-darken-4 material-icons">arrow_drop_down</i>EEnergias</a></li>
   <li><a class="black-text sidenav-close" (click)="authservice.SignOut()"><i></i>Cerrar sesión</a></li>
 </ul>
 

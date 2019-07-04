@@ -14,9 +14,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Angular Material Library -->
 
 
@@ -36,7 +35,9 @@
 
   </body>
   <script>
-    $('.sidenav').sideNav();
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+    });
     $('.dropdown-trigger').dropdown();
   </script>
 </html>
