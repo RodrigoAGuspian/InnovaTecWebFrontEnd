@@ -2,6 +2,7 @@ import { ChartsRoutingModule } from './components/charts/charts-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SatPopoverModule } from '@ncstate/sat-popover';
 
 // Routing modules
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +35,7 @@ import {MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
 
 // Módulos para la utilizacion de graficas.
 import { LayoutModule } from '@angular/cdk/layout';
@@ -83,6 +85,7 @@ import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias
     BrowserAnimationsModule,
     ChartsModule,
     ChartsRoutingModule,
+    SatPopoverModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -105,6 +108,8 @@ import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias
     MatNativeDateModule,
     MatSnackBarModule,
     MultiDatepickerModule,
+    MatMenuModule,
+
 
   ],
   providers: [

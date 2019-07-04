@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material';
 import { ChartOptions, ChartType } from 'chart.js';
 import { DatosProSolarService } from 'src/app/shared/services/datos-pro-solar.service';
 import { ConvertHours } from 'src/app/shared/utilities/convert-hours';
+declare let $: any;
 
 @Component({
   selector: 'app-resumen-pro-solar',
@@ -57,6 +58,8 @@ export class ResumenProSolarComponent implements OnInit {
   public pieChartLabels: Label[] = ['', '', ''];
 
   ngOnInit() {
+    $('.dropdown-trigger').dropdown();
+    $('.sidenav').sidenav();
     this.queryResume();
   }
 

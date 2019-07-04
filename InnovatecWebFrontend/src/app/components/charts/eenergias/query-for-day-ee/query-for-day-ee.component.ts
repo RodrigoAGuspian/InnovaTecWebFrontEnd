@@ -130,7 +130,6 @@ export class QueryForDayEeComponent implements OnInit {
   @ViewChild('datePicker') datePicker: ElementRef;
 
   ngOnInit() {
-    ( $('.sidenav') as any).sideNav();
   }
 
   graficar() {

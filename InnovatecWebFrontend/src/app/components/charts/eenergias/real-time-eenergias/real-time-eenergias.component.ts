@@ -154,7 +154,9 @@ export class RealTimeEenergiasComponent implements OnInit {
     this.charDataSetsCorriente2 = { data: this.dataValuesCorriente2, label: this.labelCorriente2 };
     this.charDataSetsPotencia3 = { data: this.dataValuesPotencia3, label: this.labelPotencia3 };
     this.charDataSetsCorriente3 = { data: this.dataValuesCorriente3, label: this.labelCorriente3 };
-    this.chart.chart.update();
+    try {
+      this.chart.chart.update();
+    } catch (error) {}
   }
 
 

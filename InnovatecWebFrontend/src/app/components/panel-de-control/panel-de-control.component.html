@@ -1,14 +1,13 @@
 <nav>
   <div class="nav-wrapper teal lighten-2">
-
     <ul class="left">
-        <li data-target="slide-out" class="sidenav"><a><i class="material-icons">menu</i></a></li>
+        <li data-target="slide-out" class="sidenav-trigger"><a><i class="material-icons">menu</i></a></li>
     </ul>
     <a class="brand-logo center">Innovatec</a>
   </div>
 </nav>
 
-<ul id="slide-out" class="sidenav">
+<ul id="slide-out" class="sidenav row">
   <li>
       <div class="user-view">
       <div class="background">
@@ -19,30 +18,86 @@
       <a><span class="black-text email"></span></a>
     </div>
   </li>
-  <li><a class="black-text" (click)="viewChangeIndex()"><i class="black-text material-icons">home</i>Página Principal</a></li>
-  <li><div class="divider"></div></li>
-  <li><a class='teal-text text-darken-2 dropdown-trigger text-left'  data-target='dropdown1'><i class="teal-text text-darken-2 material-icons">arrow_drop_down</i>ProSolar-CTPI</a></li>
-  <li><a class='orange-text text-darken-4 dropdown-trigger text-left' data-target='dropdown2'><i class="orange-text text-darken-4 material-icons">arrow_drop_down</i>EEnergias</a></li>
-  <li><a class="black-text sidenav-close" (click)="authservice.SignOut()"><i></i>Cerrar sesión</a></li>
+  <li><a class="black-text col s12" (click)="viewChangeIndex()"><i class="black-text material-icons">home</i>Inicio</a></li>
+
+  <mat-menu #proSolarMenu="matMenu" horizontalAlign="center" forceAlignment class="row menu-drop">
+    <a mat-menu-item class="teal-text text-darken-2 sidenav-close col s12" (click)="viewChangeProSolar(0)">
+      <mat-icon class="teal-text text-darken-2 material-icons">show_chart</mat-icon>
+      <span>Tiempo Real</span>
+    </a>
+    <a mat-menu-item class="teal-text text-darken-2 sidenav-close col s12" (click)="viewChangeProSolar(1)">
+      <mat-icon class="teal-text text-darken-2 material-icons">multiline_chart</mat-icon>
+      <span>Consulta por día</span>
+    </a>
+
+    <a mat-menu-item class="teal-text text-darken-2 sidenav-close col s12" (click)="viewChangeProSolar(2)">
+      <mat-icon class="teal-text text-darken-2 material-icons">insert_chart</mat-icon>
+      <span>Consulta por semana</span>
+    </a>
+    <a mat-menu-item class="teal-text text-darken-2 sidenav-close col s12" (click)="viewChangeProSolar(3)">
+      <mat-icon class="teal-text text-darken-2 material-icons">insert_chart</mat-icon>
+      <span>Consulta por mes</span>
+    </a>
+
+    <a mat-menu-item class="teal-text text-darken-2 sidenav-close col s12" (click)="viewChangeProSolar(4)">
+      <mat-icon class="teal-text text-darken-2 material-icons">pie_chart</mat-icon>
+      <span>Resumen</span>
+    </a>
+  </mat-menu>
+
+
+  <li>
+    <a class="col s12" class='teal-text text-darken-2 col s12 text-left'  [matMenuTriggerFor]="proSolarMenu">
+      <i class="teal-text text-darken-2 material-icons">arrow_drop_down</i>ProSolar-CTPI
+    </a>
+  </li>
+
+  <mat-menu #menuEEnergias="matMenu" horizontalAlign="center" forceAlignment class="row menu-drop">
+      <a mat-menu-item class="orange-text text-darken-4 sidenav-close col s12" (click)="viewChangeEenergias(0)">
+        <mat-icon class="orange-text text-darken-4 material-icons">show_chart</mat-icon>
+        <span>Tiempo Real</span>
+      </a>
+      <a mat-menu-item class="orange-text text-darken-4 sidenav-close col s12" (click)="viewChangeEenergias(1)">
+        <mat-icon class="orange-text text-darken-4 material-icons">multiline_chart</mat-icon>
+        <span>Consulta por día</span>
+      </a>
+
+      <a mat-menu-item class="orange-text text-darken-4 sidenav-close col s12" (click)="viewChangeEenergias(2)">
+        <mat-icon class="orange-text text-darken-4 material-icons">insert_chart</mat-icon>
+        <span>Consulta por semana</span>
+      </a>
+      <a mat-menu-item class="orange-text text-darken-4 sidenav-close col s12" (click)="viewChangeEenergias(3)">
+        <mat-icon class="orange-text text-darken-4 material-icons">insert_chart</mat-icon>
+        <span>Consulta por mes</span>
+      </a>
+
+      <a mat-menu-item class="orange-text text-darken-4 sidenav-close col s12" (click)="viewChangeEenergias(4)">
+        <mat-icon class="orange-text text-darken-4 material-icons">pie_chart</mat-icon>
+        <span>Resumen</span>
+      </a>
+    </mat-menu>
+
+
+    <li>
+      <a class="col s12" class='orange-text text-darken-4 col s12 text-left'  [matMenuTriggerFor]="menuEEnergias">
+        <i class="orange-text text-darken-4 material-icons">arrow_drop_down</i>EEnergias
+      </a>
+    </li>
+
+  <li ><a class="col s12 black-text sidenav-close" (click)="authservice.SignOut()"><i class="black-text material-icons">arrow_back</i>Cerrar sesión</a></li>
 </ul>
 
-<ul id='dropdown1' class='dropdown-content'>
-  <li><a class="teal-text text-darken-2 sidenav-close" (click)="viewChangeProSolar(0)"><i class="teal-text text-darken-2 material-icons">show_chart</i>Tiempo Real</a></li>
-  <li class="divider" tabindex="-1"></li>
-  <li><a class="teal-text text-darken-2 sidenav-close" (click)="viewChangeProSolar(1)"><i class="teal-text text-darken-2 material-icons">multiline_chart</i>Consulta por día</a></li>
-  <li><a class="teal-text text-darken-2 sidenav-close" (click)="viewChangeProSolar(2)"><i class="teal-text text-darken-2 material-icons">insert_chart</i>Consulta por semana</a></li>
-  <li><a class="teal-text text-darken-2 sidenav-close" (click)="viewChangeProSolar(3)"><i class="teal-text text-darken-2 material-icons">insert_chart</i>Consulta por mes</a></li>
-  <li><a class="teal-text text-darken-2 sidenav-close" (click)="viewChangeProSolar(4)"><i class="teal-text text-darken-2 material-icons">pie_chart</i>Resumen</a></li>
-</ul>
 
 <ul id='dropdown2' class='dropdown-content'>
-  <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(0)"><i class="orange-text text-darken-4 material-icons">show_chart</i>Tiempo Real</a></li>
-  <li class="divider" tabindex="-1"></li>
-  <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(1)"><i class="orange-text text-darken-4 material-icons">multiline_chart</i>Consulta por día</a></li>
-  <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(2)"><i class="orange-text text-darken-4 material-icons">insert_chart</i>Consulta por semana</a></li>
-  <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(3)"><i class="orange-text text-darken-4 material-icons">insert_chart</i>Consulta por mes</a></li>
-  <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(4)"><i class="orange-text text-darken-4 material-icons">pie_chart</i>Resumen</a></li>
-</ul>
+    <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(0)"><i class="orange-text text-darken-4 material-icons">show_chart</i>Tiempo Real</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(1)"><i class="orange-text text-darken-4 material-icons">multiline_chart</i>Consulta por día</a></li>
+    <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(2)"><i class="orange-text text-darken-4 material-icons">insert_chart</i>Consulta por semana</a></li>
+    <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(3)"><i class="orange-text text-darken-4 material-icons">insert_chart</i>Consulta por mes</a></li>
+    <li><a class="orange-text text-darken-4 sidenav-close" (click)="viewChangeEenergias(4)"><i class="orange-text text-darken-4 material-icons">pie_chart</i>Resumen</a></li>
+  </ul>
+
+
 
 
 <!--

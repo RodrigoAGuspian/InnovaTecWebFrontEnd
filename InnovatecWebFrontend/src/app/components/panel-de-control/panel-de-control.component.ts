@@ -1,7 +1,9 @@
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
+import { MatMenuTrigger } from '@angular/material';
+declare let $: any;
+
 
 @Component({
   selector: 'app-panel-de-control',
@@ -17,20 +19,39 @@ export class PanelDeControlComponent implements OnInit  {
     'panel-de-control/pro-solar-tiempo-real',
     'panel-de-control/prosolar-consultar-por-dia',
     'panel-de-control/prosolar-consultar-por-semana',
-    'panel-de-control/prosolar-consultar-por-mes'];
+    'panel-de-control/prosolar-consultar-por-mes',
+    'panel-de-control/prosolar-resumen',
+  ];
 
   private urlEenergias = [
     'panel-de-control/eenergias-tarjeta1-tiempo-real',
     'panel-de-control/eenergias-consultar-por-dia',
     'panel-de-control/eenergias-consultar-por-semana',
     'panel-de-control/eenergias-consultar-por-mes',
+    'panel-de-control/eenergias-resumen',
   ];
 
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
+  someMethod() {
+    this.trigger.openMenu();
+  }
+
   ngOnInit() {
+    $('.sidenav').sidenav();
+    $('.dropdown-trigger').dropdown({
+      belowOrigin: true,
+      alignment: 'left',
+      inDuration: 200,
+      outDuration: 150,
+      constrain_width: true,
+      hover: false,
+      gutter: 1
+    });
   }
 
   public viewChangeIndex() {
-    this.router.navigate(['iniciar-sesion']);
+    this.router.navigate(['panel-de-control']);
   }
 
   public viewChangeProSolar(modo: number) {

@@ -10,16 +10,20 @@ import { QueryForMonthComponent } from './pro-solar/query-for-month/query-for-mo
 import { QueryForDayEeComponent } from './eenergias/query-for-day-ee/query-for-day-ee.component';
 import { QueryForWeekEeComponent } from './eenergias/query-for-week-ee/query-for-week-ee.component';
 import { QueryForMonthEeComponent } from './eenergias/query-for-month-ee/query-for-month-ee.component';
+import { ResumenProSolarComponent } from './pro-solar/resumen-pro-solar/resumen-pro-solar.component';
+import { ResumenEenergiasTarjeta1Component } from './eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
 
 const routes = [
   { path: 'panel-de-control/pro-solar-tiempo-real', component: RealTimeChartComponent, canActivate: [AuthGuard] },
   { path: 'panel-de-control/prosolar-consultar-por-dia', component: QueryForDayProSolarComponent, canActivate: [AuthGuard] },
   { path: 'panel-de-control/prosolar-consultar-por-semana', component: QueryForWeekComponent, canActivate: [AuthGuard] },
   { path: 'panel-de-control/prosolar-consultar-por-mes', component: QueryForMonthComponent, canActivate: [AuthGuard] },
+  { path: 'panel-de-control/prosolar-resumen', component: ResumenProSolarComponent, canActivate: [AuthGuard] },
   { path: 'panel-de-control/eenergias-tarjeta1-tiempo-real', component: RealTimeEenergiasComponent, canActivate: [AuthGuard] },
   { path: 'panel-de-control/eenergias-consultar-por-dia', component: QueryForDayEeComponent, canActivate: [AuthGuard] },
   { path: 'panel-de-control/eenergias-consultar-por-semana', component: QueryForWeekEeComponent, canActivate: [AuthGuard] },
   { path: 'panel-de-control/eenergias-consultar-por-mes', component: QueryForMonthEeComponent, canActivate: [AuthGuard] },
+  { path: 'panel-de-control/eenergias-resumen', component: ResumenEenergiasTarjeta1Component, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

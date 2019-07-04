@@ -1,3 +1,4 @@
+import { InicioPanelDeControlComponent } from './components/panel-de-control/inicio-panel-de-control/inicio-panel-de-control.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -16,7 +17,7 @@ const routes: Routes = [
 { path: 'iniciar-sesion', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
 { path: 'registro-de-usuario', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] },
 { path: 'recuperar-clave', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
-{ path: 'panel-de-control', component: PanelDeControlComponent, canActivate: [AuthGuard] },
+{ path: 'panel-de-control', component: InicioPanelDeControlComponent, canActivate: [AuthGuard] },
 
 ];
 
