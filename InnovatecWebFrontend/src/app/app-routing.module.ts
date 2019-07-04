@@ -1,4 +1,4 @@
-import { AdminComponent } from './components/admin/admin.component';
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -9,13 +9,14 @@ import { ForgotPasswordComponent } from '../app/components/forgot-password/forgo
 import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard.ts.guard';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { IndexComponent } from './components/index/index.component';
+import { PanelDeControlComponent } from './components/panel-de-control/panel-de-control.component';
 
 const routes: Routes = [
 { path: '', component: IndexComponent },
 { path: 'iniciar-sesion', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
 { path: 'registro-de-usuario', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] },
 { path: 'recuperar-clave', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
-{ path: 'panel-de-control', component: AdminComponent, canActivate: [AuthGuard] },
+{ path: 'panel-de-control', component: PanelDeControlComponent, canActivate: [AuthGuard] },
 
 ];
 
