@@ -1,0 +1,22 @@
+<div class="card white darken-1">
+  <div class="card-content black-text">
+    <span class="card-title">Lista de novedades</span>
+    <table class="responsive-table highlight striped">
+      <tbody>
+        <tr *ngFor="let novedad of novedadesList">
+          <td>{{ novedad.titulo }}</td>
+          <td>{{ novedad.contenido }}</td>
+          <td>
+            <a class="waves-light btn green accent-4" (click)="onEdit(novedad)">
+              <i class="material-icons">edit</i>
+            </a>
+            <a class="waves-light btn red accent-4" (click)="onDelete(novedad.skey)">
+              <i class="material-icons">delete_forever</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

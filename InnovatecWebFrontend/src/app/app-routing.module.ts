@@ -1,5 +1,3 @@
-import { InicioPanelDeControlComponent } from './components/panel-de-control/inicio-panel-de-control/inicio-panel-de-control.component';
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -10,7 +8,8 @@ import { ForgotPasswordComponent } from '../app/components/forgot-password/forgo
 import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard.ts.guard';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { IndexComponent } from './components/index/index.component';
-import { PanelDeControlComponent } from './components/panel-de-control/panel-de-control.component';
+import { CrudNovedadesComponent } from './components/panel-de-control/crud-novedades/crud-novedades.component';
+import { InicioPanelDeControlComponent } from './components/panel-de-control/inicio-panel-de-control/inicio-panel-de-control.component';
 
 const routes: Routes = [
 { path: '', component: IndexComponent },
@@ -18,6 +17,7 @@ const routes: Routes = [
 { path: 'registro-de-usuario', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] },
 { path: 'recuperar-clave', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
 { path: 'panel-de-control', component: InicioPanelDeControlComponent, canActivate: [AuthGuard] },
+{ path: 'registro-de-novedades', component: CrudNovedadesComponent, canActivate: [AuthGuard] },
 
 ];
 

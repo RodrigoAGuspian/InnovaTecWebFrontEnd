@@ -10,13 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 // App Componets
 import { AppComponent } from './app.component';
 
-// Firebase Realtime Database.
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-
 // Firebase services + enviorment module
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
+
 import { environment } from '../environments/environment';
 
 // Firebase services + enviorment module.
@@ -57,6 +57,9 @@ import { InicioPanelDeControlComponent } from './components/panel-de-control/ini
 import { MultiDatepickerModule } from './utilities/multidatepicker/multidatepicker.module';
 // tslint:disable-next-line: max-line-length
 import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
+import { CrudNovedadesComponent } from './components/panel-de-control/crud-novedades/crud-novedades.component';
+import { ListNovedadesComponent } from './components/panel-de-control/crud-novedades/list-novedades/list-novedades.component';
+import { NovedadComponent } from './components/panel-de-control/crud-novedades/novedad/novedad.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +81,9 @@ import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias
     ResumenProSolarComponent,
     IndexComponent,
     InicioPanelDeControlComponent,
+    CrudNovedadesComponent,
+    ListNovedadesComponent,
+    NovedadComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +96,7 @@ import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
@@ -114,6 +121,7 @@ import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias
   ],
   providers: [
     DatePipe,
+    { provide: StorageBucket, useValue: 'bucket-images' },
   ],
   bootstrap: [AppComponent]
 })
