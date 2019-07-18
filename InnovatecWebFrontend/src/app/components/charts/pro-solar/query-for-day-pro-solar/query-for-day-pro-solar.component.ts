@@ -675,7 +675,7 @@ export class QueryForDayProSolarComponent implements OnInit {
       };
       jsonExport2.push(tmpAny1);
       this.excelService.exportAsExcelFile(this.exportList, day + '-' + month + '-' + year + ' ' + 'datos-prosolar', jsonExport1,
-                                          jsonExport2, 'G1', 'P1' );
+                                          jsonExport2, 'H1', 'P1' );
     } else {
       this.snackBar.open('Por favor espere', 'Advertencia', {
         duration: 2000,

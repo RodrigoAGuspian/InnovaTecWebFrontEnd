@@ -32,9 +32,9 @@ export class ListNovedadesComponent implements OnInit {
     this.novedadesService.selectNovedad = Object.assign({}, novedad);
   }
 
-  onDelete(skey: string) {
+  onDelete(novedad: Novedad) {
     if (confirm('Estas seguro de eliminar esta novedad')) {
-      this.novedadesService.deleteNovedad(skey);
+      this.novedadesService.deleteNovedad(novedad);
       this.snackBar.open('Operación exitosa.', 'Novedad eliminada', {
         duration: 2000,
         panelClass: ['green-snackbar']

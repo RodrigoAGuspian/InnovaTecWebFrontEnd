@@ -55,6 +55,8 @@ import { ResumenProSolarComponent } from './components/charts/pro-solar/resumen-
 import { IndexComponent } from './components/index/index.component';
 import { InicioPanelDeControlComponent } from './components/panel-de-control/inicio-panel-de-control/inicio-panel-de-control.component';
 import { MultiDatepickerModule } from './utilities/multidatepicker/multidatepicker.module';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+
 // tslint:disable-next-line: max-line-length
 import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
 import { CrudNovedadesComponent } from './components/panel-de-control/crud-novedades/crud-novedades.component';
@@ -116,12 +118,10 @@ import { NovedadComponent } from './components/panel-de-control/crud-novedades/n
     MatSnackBarModule,
     MultiDatepickerModule,
     MatMenuModule,
-
+    MaterialFileInputModule,
 
   ],
   providers: [
-    DatePipe,
-    { provide: StorageBucket, useValue: 'bucket-images' },
   ],
   bootstrap: [AppComponent]
 })

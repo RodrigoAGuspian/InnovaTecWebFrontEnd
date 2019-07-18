@@ -1,14 +1,14 @@
 import { Observable, combineLatest } from 'rxjs';
-import { Upload } from './../../../../shared/models/upload';
 import { MatSnackBar } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { NovedadService } from 'src/app/shared/services/novedad.service';
-import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Novedad } from 'src/app/shared/models/novedad';
 import * as _ from 'lodash';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, finalize } from 'rxjs/operators';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-novedad',
@@ -16,18 +16,24 @@ import { tap, map } from 'rxjs/operators';
   styleUrls: ['./novedad.component.css']
 })
 export class NovedadComponent implements OnInit {
-  constructor(public fb: FormBuilder, public novedadService: NovedadService,  private snackBar: MatSnackBar,
-              public afs: AngularFirestore, public storage: AngularFireStorage) { }
   linksDeDescarga: string[];
   filelist = [];
+  pathfilelist: string[] = [];
   uploads: any[];
-  allPercentage: Observable<any>;
   files: Observable<any>;
-
+  formNovedad: NgForm;
+  formFile: FormGroup;
+  enableSubmit = true;
+  constructor(public fb: FormBuilder, public novedadService: NovedadService,  private snackBar: MatSnackBar,
+              public storage: AngularFireStorage) {
+    this.formFile = this.fb.group({
+      multiplefile: [],
+    });
+  }
   ngOnInit() {
     this.novedadService.getNovedades();
     this.resetForm();
-
+    AngularFireModule.initializeApp(environment.firebase);
   }
 
   resetForm(novedadForm?: NgForm) {
@@ -38,72 +44,81 @@ export class NovedadComponent implements OnInit {
     }
   }
 
-  insertInfo(novedadForm: NgForm) {
-    for (let i = 0; i < this.uploads.length; i++) {
-      const element = this.uploads[i];
-      const tmp = this.novedadService.uploadFile(element);
-      this.linksDeDescarga.push(tmp.urlDeLaImagen);
-      if (i === this.uploads.length - 1) {
-        const novedad = new Novedad();
-        novedad.titulo = novedadForm.value.titulo;
-        novedad.contenido = novedadForm.value.contenido;
-        novedad.imgsNovedad = this.linksDeDescarga;
-        this.novedadService.insertNovedad(novedad);
-      }
-    }
-  }
+
 
   importImages(event) {
     // reset the array
-    this.uploads = [];
     this.filelist = event.target.files;
 
   }
 
-  onSubmit(novedadForm: NgForm) {
+  onSubmit(formNovedad: NgForm) {
+    this.formNovedad = formNovedad;
+    this.uploads = [];
+    this.pathfilelist = [];
     const allPercentage: Observable<number>[] = [];
-    for (let i = 0 ; i < this.filelist.length; i++) {
-      const file = this.filelist[i];
-      const path = `novedades/${file.name}`;
+    // tslint:disable-next-line: prefer-for-of
+    if (this.formNovedad.value.skey != null ) {
+      const tmpList: string[] = Object.values(this.novedadService.selectNovedad.pathImgsNovedad);
+      tmpList.forEach(element => {
+        this.novedadService.deleteFileStorage(element);
+      });
+    }
+    for (const file of this.filelist) {
+      const dateNow = Date.now();
+      const path = 'novedades/' + `${file.name}` + ' ' + dateNow;
       const ref = this.storage.ref(path);
       const task = this.storage.upload(path, file);
       // tslint:disable-next-line: variable-name
       const _percentage$ = task.percentageChanges();
       allPercentage.push(_percentage$);
-
-      // create composed object with different information. ADAPT THIS ACCORDING YOUR NEED
+      this.pathfilelist.push(path);
       const uploadTrack = {
         fileName: file.name,
         percentage: _percentage$
       };
-
-      // push each upload into the array
-
-      // for every upload do whatever you want in firestore with the uploaded file
-      let tmpDownloadURL = ' ';
-      task.then((f) => {
-        f.ref.getDownloadURL().then(a => {
-          tmpDownloadURL = a;
-          this.uploads.push(tmpDownloadURL);
-          if (i === this.filelist.length) {
-            this.insertInfo(novedadForm);
-          }
-        });
-    });
-
+      task.snapshotChanges().pipe( finalize(() => this.obtenerURL(ref.getDownloadURL()) )).subscribe();
     }
 
-    this.allPercentage = combineLatest(allPercentage)
-      .pipe(
-      map((percentages) => {
-        let result = 0;
-        for (const percentage of percentages) {
-          result = result + percentage;
-        }
-        return result / percentages.length;
-      }),
-      tap(console.log)
-      );
+    this.enableSubmit = false;
+
   }
 
+  obtenerURL(url: Observable<string | null>, ) {
+    url.forEach(element => {
+      this.uploads.push(element);
+      if (this.uploads.length === this.filelist.length) {
+        this.insertInfo();
+      }
+    });
+
+  }
+
+  insertInfo() {
+    this.linksDeDescarga = [];
+    for (let i = 0; i < this.uploads.length; i++) {
+      const element = this.uploads[i];
+      this.linksDeDescarga.push(element);
+      if (i === this.uploads.length - 1) {
+        const novedad = new Novedad();
+        novedad.titulo = this.formNovedad.value.titulo;
+        novedad.contenido = this.formNovedad.value.contenido;
+        novedad.imgsNovedad = this.linksDeDescarga;
+        novedad.pathImgsNovedad = this.pathfilelist;
+        if (this.formNovedad.value.skey == null) {
+          this.novedadService.insertNovedad(novedad);
+        } else {
+          novedad.skey = this.formNovedad.value.skey;
+          this.novedadService.updateNovedad(novedad);
+        }
+        this.resetForm(this.formNovedad);
+        this.formFile.reset();
+        this.enableSubmit = true;
+        this.snackBar.open('Operación exitosa.', 'Se ha añadido una nueva novedad.' , {
+          duration: 2000,
+          panelClass: ['green-snackbar']
+        });
+      }
+    }
+  }
 }

@@ -298,8 +298,21 @@ export class QueryForDayEeComponent implements OnInit {
         potenciaMinima: this.potenciaMin + ' Hora:' + this.horaMin,
       };
       jsonExport2.push(tmpAny1);
+      let circuito = '';
+      if (this.chartsEnables[0]) {
+        circuito = 'circuito-1';
+      }
+
+      if (this.chartsEnables[1]) {
+        circuito = 'circuito-2';
+      }
+
+      if (this.chartsEnables[2]) {
+        circuito = 'circuito-3';
+      }
+
       if (this.chartsEnables[3]) {
-        this.excelService.exportAsExcelFile(jsonExportC, day + '-' + month + '-' + year + ' ' + 'datos-eenergias', jsonExport1,
+        this.excelService.exportAsExcelFile(jsonExportC, day + '-' + month + '-' + year + ' ' + 'datos-eenergias ' + circuito, jsonExport1,
                                           jsonExport2, 'E1', 'I1' );
       } else {
         this.excelService.exportAsExcelFile(this.exportList, day + '-' + month + '-' + year + ' ' + 'datos-eenergias');

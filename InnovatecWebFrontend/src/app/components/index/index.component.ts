@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NovedadService } from 'src/app/shared/services/novedad.service';
 
 @Component({
   selector: 'app-index',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(private novedadesService: NovedadService) { }
 
   ngOnInit() {
   }

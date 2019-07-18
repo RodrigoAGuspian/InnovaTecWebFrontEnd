@@ -6,6 +6,7 @@ import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,7 @@ export class NovedadService {
     this.novedadList.update(novedad.skey, {
       titulo: novedad.titulo,
       imgsNovedad: novedad.imgsNovedad,
+      pathImgsNovedad: novedad.pathImgsNovedad,
       contenido: novedad.contenido,
     });
   }
@@ -60,12 +62,21 @@ export class NovedadService {
     this.novedadList.push({
       titulo: novedad.titulo,
       imgsNovedad: novedad.imgsNovedad,
+      pathImgsNovedad: novedad.pathImgsNovedad,
       contenido: novedad.contenido,
     });
   }
 
-  deleteNovedad(skey: string) {
-    this.novedadList.remove(skey);
+  deleteNovedad(novedad: Novedad) {
+    this.novedadList.remove(novedad.skey);
+    const tmpList: string[] = Object.values(novedad.pathImgsNovedad);
+    tmpList.forEach(element => {
+        this.deleteFileStorage(element);
+    });
   }
 
+  deleteFileStorage(name: string) {
+    const storageRef = firebase.storage().ref();
+    storageRef.child(name).delete();
+  }
 }
