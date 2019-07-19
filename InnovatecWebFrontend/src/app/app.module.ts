@@ -56,12 +56,14 @@ import { IndexComponent } from './components/index/index.component';
 import { InicioPanelDeControlComponent } from './components/panel-de-control/inicio-panel-de-control/inicio-panel-de-control.component';
 import { MultiDatepickerModule } from './utilities/multidatepicker/multidatepicker.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 // tslint:disable-next-line: max-line-length
 import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
 import { CrudNovedadesComponent } from './components/panel-de-control/crud-novedades/crud-novedades.component';
 import { ListNovedadesComponent } from './components/panel-de-control/crud-novedades/list-novedades/list-novedades.component';
 import { NovedadComponent } from './components/panel-de-control/crud-novedades/novedad/novedad.component';
+
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { NovedadComponent } from './components/panel-de-control/crud-novedades/n
     CrudNovedadesComponent,
     ListNovedadesComponent,
     NovedadComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -119,7 +123,7 @@ import { NovedadComponent } from './components/panel-de-control/crud-novedades/n
     MultiDatepickerModule,
     MatMenuModule,
     MaterialFileInputModule,
-
+    CarouselModule,
   ],
   providers: [
   ],
