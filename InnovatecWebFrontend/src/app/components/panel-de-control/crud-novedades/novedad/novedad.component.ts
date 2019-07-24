@@ -44,12 +44,9 @@ export class NovedadComponent implements OnInit {
     }
   }
 
-
-
   importImages(event) {
     // reset the array
     this.filelist = event.target.files;
-
   }
 
   onSubmit(formNovedad: NgForm) {
@@ -121,4 +118,5 @@ export class NovedadComponent implements OnInit {
       }
     }
   }
+
 }

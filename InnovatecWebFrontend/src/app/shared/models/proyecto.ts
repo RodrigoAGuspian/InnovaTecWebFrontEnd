@@ -10,7 +10,7 @@ export class Proyecto {
   resumen: string;
   objetivoG: string;
   objetivosE: string[];
-  resultados: Resultado;
+  resultados: Resultado[];
   infoGraficas: Grafica[];
 
 }

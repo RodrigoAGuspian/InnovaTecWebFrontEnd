@@ -12,11 +12,11 @@ export class ProyectoService {
   proyectoList: AngularFireList<any>;
   selectProyecto: Proyecto = new Proyecto();
   constructor(private firebaseDataBase: AngularFireDatabase, private storage: AngularFireStorage) { }
-  getNovedades() {
+  getProyectos() {
     return this.proyectoList = this.firebaseDataBase.list('proyectos');
   }
 
-  insertNovedad(proyecto: Proyecto) {
+  insertProyecto(proyecto: Proyecto) {
     this.proyectoList.push({
       titulo: proyecto.titulo,
       imgsProyecto: proyecto.imgsProyecto,
@@ -30,7 +30,7 @@ export class ProyectoService {
     });
   }
 
-  updateNovedad(proyecto: Proyecto) {
+  updateProyecto(proyecto: Proyecto) {
     this.proyectoList.update(proyecto.skey, {
       titulo: proyecto.titulo,
       imgsProyecto: proyecto.imgsProyecto,
@@ -44,7 +44,7 @@ export class ProyectoService {
     });
   }
 
-  deleteNovedad(proyecto: Proyecto) {
+  deleteProyecto(proyecto: Proyecto) {
     this.proyectoList.remove(proyecto.skey);
     const tmpList: string[] = Object.values(proyecto.pathImgsProyecto);
     const tmpListResultados: Resultado[] = Object.values(proyecto.resultados);
@@ -60,4 +60,5 @@ export class ProyectoService {
     const storageRef = firebase.storage().ref();
     storageRef.child(name).delete();
   }
+
 }

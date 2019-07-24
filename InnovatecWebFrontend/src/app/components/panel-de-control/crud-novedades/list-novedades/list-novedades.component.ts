@@ -2,7 +2,6 @@ import { MatSnackBar } from '@angular/material';
 import { NovedadService } from './../../../../shared/services/novedad.service';
 import { Novedad } from './../../../../shared/models/novedad';
 import { Component, OnInit } from '@angular/core';
-import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-list-novedades',
@@ -17,10 +16,9 @@ export class ListNovedadesComponent implements OnInit {
     this.novedadesService.getNovedades().snapshotChanges().subscribe(
       item => {
         this.novedadesList = [];
-// tslint:disable-next-line: no-shadowed-variable
         item.forEach(element => {
           const x = element.payload.toJSON();
-// tslint:disable-next-line: no-string-literal
+          // tslint:disable-next-line: no-string-literal
           x['skey'] = element.key;
           this.novedadesList.push(x as Novedad);
         });
