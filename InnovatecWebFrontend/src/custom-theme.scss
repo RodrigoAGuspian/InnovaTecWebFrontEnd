@@ -5,7 +5,6 @@
 $custom-theme-primary: mat-palette($mat-teal);
 $custom-theme-accent: mat-palette($mat-orange, A200, A100, A400);
 $custom-theme-warn: mat-palette($mat-teal);
-
 $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
 @include angular-material-theme($custom-theme);
@@ -20,7 +19,7 @@ $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $cus
 }
 
 .green-snackbar {
-  background-color: #00C853 ;
+  background-color: #00C853;
   color: aliceblue !important;
   .mat-simple-snackbar-action {
     color: aliceblue !important;
@@ -29,7 +28,7 @@ $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $cus
 }
 
 .yellow-snackbar {
-  background-color: #FFAB00  ;
+  background-color: #FFAB00;
   color: aliceblue !important;
   .mat-simple-snackbar-action {
     color: aliceblue !important;
@@ -44,3 +43,31 @@ $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $cus
     color: aliceblue !important;
   }
 }
+
+.backgroud-img-nav {
+  background-image: url("./assets/img/renewable-1989416_1280.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.logo-seineree{
+  background-image: url("./assets/img/logo01.png");
+  background-size: cover;
+  background-position: center;
+  width: 72px;
+  height: 72px;
+  filter: hue-rotate(0deg) brightness(0%) saturate(0%) invert(1);
+
+}
+
+.logo-sena{
+  background-image: url("./assets/img/icono-sena.png");
+  background-size: cover;
+  background-position: center;
+  width: 64px;
+  height: 64px;
+  filter: invert(1);
+
+}
+
+

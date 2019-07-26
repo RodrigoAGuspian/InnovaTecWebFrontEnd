@@ -1,3 +1,74 @@
-<p>
-  proyecto works!
-</p>
+<div>
+  <button class="teal" mat-fab (click)="resetForm(proyectoForm)"><i class="white-text material-icons">replay</i></button>
+  <form class="row" #proyectoForm='ngForm'  method="POST" (ngSubmit)="onSubmit(proyectoForm)" autocomplete="off" >
+    <input type="hidden" name="skey" #skey="ngModel" [(ngModel)]="proyectoService.selectProyecto.skey">
+    <div class="card col l6 m12">
+      <div class="card-content row">
+        <div class="form-group col s12">
+          <input type="text" class="form-control" name="titulo" #titulo= "ngModel"
+          [(ngModel)]="proyectoService.selectProyecto.titulo" placeholder="Ingrese el título del proyecto" ngModel required >
+        </div>
+
+        <div class="col s12 chips-config">
+          <span class="light">Ingrese un(a) autor(a) y oprima ingresar</span>
+          <div class="chips chips-autores">
+          </div>
+        </div>
+
+        <mat-form-field class="col s12" [formGroup]="formFile">
+          <ngx-mat-file-input formControlName="multiplefile" (change)="importImages($event)" placeholder="Seleccione las imagenes correspondientes" multiple></ngx-mat-file-input>
+          <mat-icon matSuffix>folder</mat-icon>
+        </mat-form-field>
+
+        <div class="form-group col s12">
+          <textarea type="text" class="form-control" name="resumen" #resumen="ngModel"
+          [(ngModel)]="proyectoService.selectProyecto.resumen" placeholder="Ingrese el resumen del proyecto" ngModel required></textarea>
+        </div>
+
+        <div class="form-group col s12">
+          <input type="text" class="form-control" name="objetivoG" #objetivoG="ngModel"
+          [(ngModel)]="proyectoService.selectProyecto.objetivoG" placeholder="Ingrese el objetivo general del proyecto" ngModel required>
+        </div>
+
+        <div class="col s12 chips-config">
+          <span class="light">Ingrese un objetivo especifico y oprima ingresar</span>
+          <div class="chips chips-objetivos-especificos">
+          </div>
+        </div>
+
+        <div class="form-group col s12">
+          <textarea type="text" class="form-control" name="resumenResultados" #resumenResultados="ngModel"
+          [(ngModel)]="proyectoService.selectProyecto.resumenResultados" placeholder="Ingrese un Resumen de los resultados del proyecto"></textarea>
+        </div>
+
+      </div>
+    </div>
+    <div class="col l6 m12">
+      <div class="card col s12">
+        <div class="card-content">
+          <app-resultado></app-resultado>
+          <app-list-resultados></app-list-resultados>
+        </div>
+      </div>
+
+
+      <div class="card col s12">
+        <div class="card-content">
+          <app-grafica></app-grafica>
+          <app-list-graficas></app-list-graficas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12">
+      <button mat-raised-button color="primary" [disabled]="!enableSubmit || !proyectoForm.valid"
+        class="col s4 push-s4 pull-s4  btn teal waves-white" type="submit">
+        {{ this.proyectoService.aEproyecto }}
+      </button>
+    </div>
+
+  </form>
+</div>
+
+
+

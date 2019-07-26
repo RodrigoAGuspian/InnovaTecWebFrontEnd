@@ -25,7 +25,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -56,6 +56,7 @@ import { IndexComponent } from './components/index/index.component';
 import { InicioPanelDeControlComponent } from './components/panel-de-control/inicio-panel-de-control/inicio-panel-de-control.component';
 import { MultiDatepickerModule } from './utilities/multidatepicker/multidatepicker.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import {MatTabsModule} from '@angular/material/tabs';
 
 // tslint:disable-next-line: max-line-length
 import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
@@ -67,6 +68,12 @@ import { InfoIndexComponent } from './components/info-index/info-index.component
 import { CrudProyectosComponent } from './components/panel-de-control/crud-proyectos/crud-proyectos.component';
 import { ProyectoComponent } from './components/panel-de-control/crud-proyectos/proyecto/proyecto.component';
 import { ListProyectosComponent } from './components/panel-de-control/crud-proyectos/list-proyectos/list-proyectos.component';
+import { ListResultadosComponent } from './components/panel-de-control/crud-proyectos/resultados/list-resultados/list-resultados.component';
+import { ResultadoComponent } from './components/panel-de-control/crud-proyectos/resultados/resultado/resultado.component';
+import { ListGraficasComponent } from './components/panel-de-control/crud-proyectos/graficas/list-graficas/list-graficas.component';
+import { GraficaComponent } from './components/panel-de-control/crud-proyectos/graficas/grafica/grafica.component';
+import { ProyectosComponent } from './components/proyectos/proyectos.component';
+import { ListaDeProyectosComponent } from './components/lista-de-proyectos/lista-de-proyectos.component';
 
 
 @NgModule({
@@ -97,6 +104,12 @@ import { ListProyectosComponent } from './components/panel-de-control/crud-proye
     CrudProyectosComponent,
     ProyectoComponent,
     ListProyectosComponent,
+    ListResultadosComponent,
+    ResultadoComponent,
+    ListGraficasComponent,
+    GraficaComponent,
+    ProyectosComponent,
+    ListaDeProyectosComponent,
 
 
   ],
@@ -132,6 +145,7 @@ import { ListProyectosComponent } from './components/panel-de-control/crud-proye
     MultiDatepickerModule,
     MatMenuModule,
     MaterialFileInputModule,
+    MatTabsModule,
   ],
   providers: [
   ],

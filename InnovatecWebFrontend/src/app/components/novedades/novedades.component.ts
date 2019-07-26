@@ -13,7 +13,7 @@ export class NovedadesComponent implements OnInit {
   public novedadId = '';
   private novedadesList = [];
   public novedad = new Novedad();
-  constructor(private activateRoute: ActivatedRoute, private novedadesService: NovedadService ) {
+  constructor(activateRoute: ActivatedRoute, private novedadesService: NovedadService) {
     this.novedadId = activateRoute.snapshot.params.id;
    }
 
@@ -51,7 +51,8 @@ export class NovedadesComponent implements OnInit {
     const aCarouselItem = '<a class="carousel-item" >';
     const tmpList: string[] = Object.values(this.novedad.imgsNovedad);
     tmpList.forEach(element => {
-      const responsiveConfig = "width: 100%; height: 350px; background-position: center center; background-repeat: no-repeat; background-size: cover;"
+      // tslint:disable-next-line: max-line-length
+      const responsiveConfig = 'width: 100%; height: 350px; background-position: center center; background-repeat: no-repeat; background-size: cover;';
       const vistaImg = '<div class="imgs-slider card " style="' + responsiveConfig + 'background-image: url(' + element + ');">';
       const appendValue = aCarouselItem + vistaImg + '</div> </a>';
       console.log(appendValue);

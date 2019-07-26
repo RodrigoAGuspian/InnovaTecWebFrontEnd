@@ -1,4 +1,6 @@
 export class Grafica {
+  skey: number;
+  nombreDeGrafica: string;
   tipoDeGrafica: string;
-  linkDelLaGrafica: string;
+  linkDeLaGrafica: string;
 }

@@ -4,6 +4,8 @@ import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import firebase from 'firebase';
 import { Resultado } from '../models/resultado';
+import { Grafica } from '../models/grafica';
+import { PreResultado } from '../models/pre-resultado';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,11 @@ import { Resultado } from '../models/resultado';
 export class ProyectoService {
   proyectoList: AngularFireList<any>;
   selectProyecto: Proyecto = new Proyecto();
+  public infoGraficas: Grafica[] = [];
+  public preResultadosList: PreResultado[] = [];
+  public selectResultado = new PreResultado();
+  public selectGrafica = new Grafica();
+  public aEproyecto = '';
   constructor(private firebaseDataBase: AngularFireDatabase, private storage: AngularFireStorage) { }
   getProyectos() {
     return this.proyectoList = this.firebaseDataBase.list('proyectos');
@@ -26,6 +33,7 @@ export class ProyectoService {
       objetivoG: proyecto.objetivoG,
       objetivosE: proyecto.objetivosE,
       resultados: proyecto.resultados,
+      resumenResultados: proyecto.resumenResultados,
       infoGraficas: proyecto.infoGraficas,
     });
   }
@@ -40,6 +48,7 @@ export class ProyectoService {
       objetivoG: proyecto.objetivoG,
       objetivosE: proyecto.objetivosE,
       resultados: proyecto.resultados,
+      resumenResultados: proyecto.resumenResultados,
       infoGraficas: proyecto.infoGraficas,
     });
   }

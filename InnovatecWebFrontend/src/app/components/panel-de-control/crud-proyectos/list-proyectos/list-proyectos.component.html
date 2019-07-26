@@ -1,3 +1,21 @@
-<p>
-  list-proyectos works!
-</p>
+<div class="card white darken-1" *ngIf="enableTable === true">
+  <div class="card-content black-text">
+    <span class="card-title">Lista de proyectos</span>
+    <table class="responsive-table highlight striped centered">
+      <tbody>
+        <tr *ngFor="let proyecto of proyectosList">
+          <td>{{ proyecto.titulo }}</td>
+          <td>{{ proyecto.objetivoG }}</td>
+          <td>
+            <a class="waves-light btn green accent-4" (click)="onEdit(proyecto)">
+              <i class="material-icons">edit</i>
+            </a>
+            <a class="waves-light btn red accent-4" (click)="onDelete(proyecto)">
+              <i class="material-icons">delete_forever</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

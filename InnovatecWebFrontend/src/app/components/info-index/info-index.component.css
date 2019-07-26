@@ -1,5 +1,5 @@
 .slider .indicators .indicator-item.active {
-  background-color: #00bfa5 !important;
+  background-color: #238276 !important;
 }
 
 .slider{
@@ -7,5 +7,5 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  margin-top: 5%;
+  margin-top: 2%;
 }

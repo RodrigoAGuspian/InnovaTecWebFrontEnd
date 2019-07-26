@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Novedad } from 'src/app/shared/models/novedad';
 import { NovedadService } from 'src/app/shared/services/novedad.service';
+import { Router } from '@angular/router';
+
 declare const $: any;
 
 @Component({
@@ -12,7 +14,7 @@ declare const $: any;
 export class InfoIndexComponent implements OnInit {
 
   novedadesList: Novedad[];
-  constructor(private novedadesService: NovedadService) { }
+  constructor(private novedadesService: NovedadService, public router: Router) { }
   ngOnInit() {
 
     this.novedadesService.getNovedades().snapshotChanges().subscribe(
@@ -31,13 +33,21 @@ export class InfoIndexComponent implements OnInit {
 
 
   createCarouselToHand() {
-    const divCaption = '<div class="caption right-align"> <h2>';
-    for (const element of this.novedadesList) {
+    const divCaption = '<div style="cursor: pointer" class="caption right-align"> <h2>';
+
+    for (let index = 0; index < this.novedadesList.length; index++) {
+
+      const element = this.novedadesList[index];
       const vistaImagen = '<img class="imagen-slider" src="' + element.imgsNovedad[0] + '">';
       const vistaTitutlo = divCaption + element.titulo + '</h2>';
       const vistaContenido = '<h4 class="light white-text" maxlength=50>' + element.contenido + '</h4>';
-      const appendValue = '<li>' + vistaImagen + vistaTitutlo + vistaContenido + '</div></li>';
+      const appendValue = '<li> <a id="item-' + index + '">' + vistaImagen + vistaTitutlo + vistaContenido + '</div> </a> </li>';
       $('.slides').append(appendValue);
+      $( '#item-' + index ).click(() => {
+        this.router.navigate(['novedades/' + index]);
+      });
+
+
     }
 
     if ($('.slider').hasClass('initialized')) {
@@ -48,5 +58,7 @@ export class InfoIndexComponent implements OnInit {
     });
 
   }
+
+
 
 }

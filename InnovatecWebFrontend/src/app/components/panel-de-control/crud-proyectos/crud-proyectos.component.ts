@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PreResultado } from 'src/app/shared/models/pre-resultado';
+import { Grafica } from 'src/app/shared/models/grafica';
 
 @Component({
   selector: 'app-crud-proyectos',

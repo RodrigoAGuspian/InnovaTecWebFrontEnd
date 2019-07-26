@@ -1,0 +1,21 @@
+<div class="row">
+  <form #preResultadoForm='ngForm'  method="POST" (ngSubmit)="insertPreResultado(preResultadoForm)" autocomplete="off" >
+    <input type="hidden" name="skey" #skey="ngModel" [(ngModel)]="proyectoService.selectResultado.skey">
+    <div class="form-group col s12">
+      <textarea type="text" class="form-control" name="infoResultado" #infoResultado= "ngModel"
+      [(ngModel)]="proyectoService.selectResultado.infoResultado" placeholder="Ingrese la información del resultado"></textarea>
+    </div>
+
+    <mat-form-field class="col s12" [formGroup]="formFile">
+      <ngx-mat-file-input formControlName="basicfile" (change)="importImageResultado($event)" placeholder="Seleccione la imagen correspondiente"></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+
+    <div class="container center">
+      <button mat-raised-button color="primary" class="btn teal waves-white" type="submit">Añadir Resultado</button>
+    </div>
+
+  </form>
+</div>
+
+

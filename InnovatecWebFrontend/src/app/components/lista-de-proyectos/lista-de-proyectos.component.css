@@ -1,0 +1,10 @@
+.responsive-img{
+  width: 100% !important;
+  height: 250px !important;
+}
+.contenedor{
+  margin-top: 16px;
+}
+.cursor{
+  cursor: pointer;
+}

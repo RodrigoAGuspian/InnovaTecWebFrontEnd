@@ -1,0 +1,25 @@
+<div class="black-text" *ngIf="proyectoService.preResultadosList.length>0">
+  <span class="card-title">Lista de resultados</span>
+  <table class="responsive-table highlight striped">
+    <tbody>
+      <tr *ngFor="let resultado of proyectoService.preResultadosList">
+        <td>{{ resultado.infoResultado }}</td>
+        <td>
+          <a class="waves-light btn green accent-4" (click)="onEdit(resultado)">
+            <i class="material-icons">edit</i>
+          </a>
+          <a class="waves-light btn red accent-4" (click)="onDelete(resultado)">
+            <i class="material-icons">delete_forever</i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Precaución</h4>
+    <p>Tenga en cuenta que si usted quiere editar un proyecto; tendra que volver a agregar las imágenes y los resultados</p>
+  </div>
+</div>
