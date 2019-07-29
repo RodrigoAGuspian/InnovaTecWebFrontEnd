@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NovedadService } from 'src/app/shared/services/novedad.service';
 import { Novedad } from 'src/app/shared/models/novedad';
@@ -18,6 +18,12 @@ export class NovedadesComponent implements OnInit {
    }
 
   ngOnInit() {
+    try {
+      $('.carousel.carousel-slider').destroy();
+    } catch (error) {
+
+    }
+
     this.novedadesService.getNovedades().snapshotChanges().subscribe(
       item => {
         this.novedadesList = [];
@@ -65,14 +71,13 @@ export class NovedadesComponent implements OnInit {
     }
 
     let autoplay = true;
-    setInterval(() =>  {
-      if (autoplay) { $('.carousel.carousel-slider').carousel('next'); }
-    }, 5000);
+    if (NovedadService.controlarCambios) {
+      setInterval(() =>  {
+        if (autoplay) { $('.carousel.carousel-slider').carousel('next'); }
+      }, 5000);
+      NovedadService.controlarCambios = false;
+    }
     $('.carousel.carousel-slider').hover(() =>  { autoplay = false; }, () =>  { autoplay = true; });
-    $('.carousel.carousel-slider').carousel({
-      fullWidth: true,
-      indicators: true,
-    });
 
     $(document).ready(() => {
       $('.carousel.carousel-slider').carousel({
@@ -83,7 +88,6 @@ export class NovedadesComponent implements OnInit {
     });
 
   }
-
 
 
 }

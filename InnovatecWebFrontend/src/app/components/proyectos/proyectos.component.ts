@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Proyecto } from 'src/app/shared/models/proyecto';
 import { ProyectoService } from 'src/app/shared/services/proyecto.service';
@@ -12,7 +12,8 @@ declare const $: any;
   styleUrls: ['./proyectos.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ProyectosComponent implements OnInit {
+export class ProyectosComponent implements OnInit, OnDestroy {
+
   public proyectoId = '';
   private proyectosList = [];
   public proyecto = new Proyecto();
@@ -127,9 +128,14 @@ export class ProyectosComponent implements OnInit {
     }
 
     let autoplay = true;
-    setInterval(() =>  {
-      if (autoplay) { $('.carousel.carousel-slider').carousel('next'); }
-    }, 5000);
+
+    if (ProyectoService.controlarCambios) {
+      setInterval(() =>  {
+        if (autoplay) { $('.carousel.carousel-slider').carousel('next'); }
+      }, 5000);
+      ProyectoService.controlarCambios = false;
+    }
+
     $('.carousel.carousel-slider').hover(() =>  { autoplay = false; }, () =>  { autoplay = true; });
     $('.carousel.carousel-slider').carousel({
       fullWidth: true,
@@ -143,6 +149,15 @@ export class ProyectosComponent implements OnInit {
         duration: 200,
       });
     });
+
+  }
+
+  ngOnDestroy() {
+    try {
+      $('.carousel.carousel-slider').destroy();
+    } catch (error) {
+
+    }
 
   }
 

@@ -12,10 +12,12 @@ import firebase from 'firebase';
   providedIn: 'root'
 })
 export class NovedadService {
+  constructor(private firebaseDataBase: AngularFireDatabase, private storage: AngularFireStorage) { }
+
+  public static controlarCambios = true;
   novedadList: AngularFireList<any>;
   selectNovedad: Novedad = new Novedad();
 
-  constructor(private firebaseDataBase: AngularFireDatabase, private storage: AngularFireStorage) { }
   getNovedades() {
     return this.novedadList = this.firebaseDataBase.list('novedades');
   }

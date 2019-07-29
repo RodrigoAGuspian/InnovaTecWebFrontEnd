@@ -11,6 +11,8 @@ import { PreResultado } from '../models/pre-resultado';
   providedIn: 'root'
 })
 export class ProyectoService {
+  constructor(private firebaseDataBase: AngularFireDatabase, private storage: AngularFireStorage) { }
+  public static controlarCambios = true;
   proyectoList: AngularFireList<any>;
   selectProyecto: Proyecto = new Proyecto();
   public infoGraficas: Grafica[] = [];
@@ -18,7 +20,6 @@ export class ProyectoService {
   public selectResultado = new PreResultado();
   public selectGrafica = new Grafica();
   public aEproyecto = '';
-  constructor(private firebaseDataBase: AngularFireDatabase, private storage: AngularFireStorage) { }
   getProyectos() {
     return this.proyectoList = this.firebaseDataBase.list('proyectos');
   }
