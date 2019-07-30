@@ -14,6 +14,8 @@ import { NovedadesComponent } from './components/novedades/novedades.component';
 import { CrudProyectosComponent } from './components/panel-de-control/crud-proyectos/crud-proyectos.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { ListaDeProyectosComponent } from './components/lista-de-proyectos/lista-de-proyectos.component';
+import { AdministrarRolesComponent } from './components/panel-de-control/administrar-roles/administrar-roles.component';
+import { AdminGuard } from './shared/guard/admin.guard';
 
 const routes: Routes = [
   { path: '', component: InfoIndexComponent },
@@ -26,6 +28,7 @@ const routes: Routes = [
   { path: 'novedades/:id', component: NovedadesComponent },
   { path: 'proyectos', component: ListaDeProyectosComponent },
   { path: 'proyectos/:id', component: ProyectosComponent },
+  { path: 'panel-de-control/administar-roles', component: AdministrarRolesComponent, canActivate: [AdminGuard]},
 ];
 
 @NgModule({

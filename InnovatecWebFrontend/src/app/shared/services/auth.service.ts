@@ -69,10 +69,17 @@ export class AuthService {
           });
           this.SetUserData(result.user);
         }).catch((error) => {
-          this.snackBar.open('Por favor revise que su correo electrónico y su contraseña esten bien escritos.', 'Algo anda mal :(', {
-            duration: 2000,
-            panelClass: ['red-snackbar']
-          });
+          if (this.userList[this.userList.length - 1] !== element) {
+            this.snackBar.open('Su correo electrónico no se encuentra en nuestra base de datos.', 'Algo anda mal :(', {
+              duration: 2000,
+              panelClass: ['red-snackbar']
+            });
+          } else {
+            this.snackBar.open('Por favor revise que su correo electrónico y su contraseña esten bien escritos.', 'Algo anda mal :(', {
+              duration: 2000,
+              panelClass: ['red-snackbar']
+            });
+          }
         });
         } else {
           this.snackBar.open('Por favor espera que uno de nuestros administradores te de acceso.', 'No puedes acceder a la plataforma', {
@@ -80,11 +87,6 @@ export class AuthService {
             panelClass: ['yellow-snackbar']
           });
         }
-      } else if (this.userList[this.userList.length - 1] !== element) {
-        this.snackBar.open('Su correo electrónico no se encuentra en nuestra base de datos.', 'Algo anda mal :(', {
-          duration: 2000,
-          panelClass: ['red-snackbar']
-        });
       }
     }
   }

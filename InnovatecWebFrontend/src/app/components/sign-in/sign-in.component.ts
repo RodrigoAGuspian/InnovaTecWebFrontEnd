@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class SignInComponent implements OnInit {
   public breakpoint: number;
   formSignIn: FormGroup;
-  constructor(public fb: FormBuilder, public authService: AuthService,
+  constructor(public fb: FormBuilder, public authService: AuthService, public router: Router,
   ) {
       this.formSignIn = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -24,8 +25,8 @@ export class SignInComponent implements OnInit {
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
   }
-  validateData() {
-    console.log(this.formSignIn.value);
-  }
 
+  enviarA() {
+    this.router.navigate(['registro-de-usuario']);
+  }
 }

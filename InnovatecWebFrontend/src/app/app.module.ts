@@ -74,6 +74,7 @@ import { ListGraficasComponent } from './components/panel-de-control/crud-proyec
 import { GraficaComponent } from './components/panel-de-control/crud-proyectos/graficas/grafica/grafica.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { ListaDeProyectosComponent } from './components/lista-de-proyectos/lista-de-proyectos.component';
+import { AdministrarRolesComponent } from './components/panel-de-control/administrar-roles/administrar-roles.component';
 
 
 @NgModule({
@@ -110,6 +111,7 @@ import { ListaDeProyectosComponent } from './components/lista-de-proyectos/lista
     GraficaComponent,
     ProyectosComponent,
     ListaDeProyectosComponent,
+    AdministrarRolesComponent,
 
 
   ],
