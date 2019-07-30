@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { UserInfoService } from './user-info.service';
 import { UserInfo } from '../models/user-info';
+import { Rol } from '../models/rol';
+import { RolesService } from './roles.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +20,18 @@ import { UserInfo } from '../models/user-info';
 export class AuthService {
   userData: any; // Save logged in user data
   userList: UserInfo[];
+  superAdminstradoresList: Rol[];
+  administradoresList: Rol[];
+  invitadosList: Rol[];
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     public userInfoService: UserInfoService,
-    private snackBar: MatSnackBar
-  ) {
-    this.userInfoService.getUsers().snapshotChanges()
-    .subscribe(item => {
+    public rolesService: RolesService,
+    private snackBar: MatSnackBar) {
+    this.userInfoService.getUsers().snapshotChanges().subscribe(item => {
       this.userList = []; item.forEach(element => {
         const x = element.payload.toJSON();
         // tslint:disable-next-line: no-string-literal
@@ -35,6 +39,35 @@ export class AuthService {
         this.userList.push(x as UserInfo);
       });
     });
+
+    this.rolesService.getSuperAdministradores().snapshotChanges().subscribe(item => {
+      this.superAdminstradoresList = [];
+      item.forEach(element => {
+        const x = element.payload.toJSON();
+        // tslint:disable-next-line: no-string-literal
+        this.superAdminstradoresList.push(x as Rol);
+      });
+    });
+
+    this.rolesService.getAdministradores().snapshotChanges().subscribe(item => {
+      this.administradoresList = [];
+      item.forEach(element => {
+        const x = element.payload.toJSON();
+        // tslint:disable-next-line: no-string-literal
+        this.administradoresList.push(x as Rol);
+      });
+    });
+
+    this.rolesService.getInvitados().snapshotChanges().subscribe(item => {
+      this.invitadosList = [];
+      item.forEach(element => {
+        const x = element.payload.toJSON();
+        // tslint:disable-next-line: no-string-literal
+        this.invitadosList.push(x as Rol);
+      });
+    });
+
+
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
@@ -52,43 +85,69 @@ export class AuthService {
   // Sign in with email/password
   SignIn(email, password) {
     let solo1 = true;
-    for (const element of this.userList) {
-      if (element.email === email) {
-        if (element.rol !== 'No Verificado') {
-          this.afAuth.auth.signInWithEmailAndPassword(email, password)
-        .then((result) => {
-          this.ngZone.run(() => {
-            if (solo1) {
-              this.router.navigate(['']);
-              solo1 = false;
-            }
-            this.snackBar.open('Inicio de sesión correcto.', 'Bienvenido', {
-              duration: 2000,
-              panelClass: ['green-snackbar']
-            });
-          });
-          this.SetUserData(result.user);
-        }).catch((error) => {
-          if (this.userList[this.userList.length - 1] !== element) {
-            this.snackBar.open('Su correo electrónico no se encuentra en nuestra base de datos.', 'Algo anda mal :(', {
-              duration: 2000,
-              panelClass: ['red-snackbar']
-            });
-          } else {
-            this.snackBar.open('Por favor revise que su correo electrónico y su contraseña esten bien escritos.', 'Algo anda mal :(', {
-              duration: 2000,
-              panelClass: ['red-snackbar']
-            });
-          }
-        });
-        } else {
-          this.snackBar.open('Por favor espera que uno de nuestros administradores te de acceso.', 'No puedes acceder a la plataforma', {
-            duration: 2000,
-            panelClass: ['yellow-snackbar']
-          });
-        }
+    let seEncuentra = false;
+    for (const element of this.invitadosList) {
+      if (email === element.email) {
+        seEncuentra = true;
       }
     }
+
+    for (const element of this.administradoresList) {
+      if (email === element.email) {
+        seEncuentra = true;
+      }
+    }
+
+    for (const element of this.superAdminstradoresList) {
+      if (email === element.email) {
+        seEncuentra = true;
+      }
+    }
+
+    if (seEncuentra) {
+      this.afAuth.auth.signInWithEmailAndPassword(email, password).then((result) => {
+        this.ngZone.run(() => {
+          if (solo1) {
+            this.router.navigate(['']);
+            solo1 = false;
+          }
+          this.snackBar.open('Inicio de sesión correcto.', 'Bienvenido', {
+            duration: 2000,
+            panelClass: ['green-snackbar']
+          });
+        });
+        this.SetUserData(result.user);
+      }).catch(() => {
+
+        let correoRegistrado = false;
+        this.userList.forEach(element => {
+          if (element.email === email) {
+            correoRegistrado = true;
+          }
+        });
+
+        if (correoRegistrado) {
+          this.snackBar.open('Por favor revise que su correo electrónico y su contraseña esten bien escritos.', 'Algo anda mal :(', {
+            duration: 2000,
+            panelClass: ['red-snackbar']
+          });
+        } else {
+          this.snackBar.open('Su correo electrónico no se encuentra en nuestra base de datos.', 'Algo anda mal :(', {
+            duration: 2000,
+            panelClass: ['red-snackbar']
+          });
+        }
+
+       });
+
+    } else {
+        this.snackBar.open('Por favor espera que uno de nuestros administradores te permita acceso.', 'No puedes acceder a la plataforma', {
+          duration: 2000,
+          panelClass: ['yellow-snackbar']
+        });
+
+    }
+
   }
 
   // Sign up with email/password

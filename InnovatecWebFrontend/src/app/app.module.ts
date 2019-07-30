@@ -57,6 +57,7 @@ import { InicioPanelDeControlComponent } from './components/panel-de-control/ini
 import { MultiDatepickerModule } from './utilities/multidatepicker/multidatepicker.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 // tslint:disable-next-line: max-line-length
 import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
@@ -148,6 +149,7 @@ import { AdministrarRolesComponent } from './components/panel-de-control/adminis
     MatMenuModule,
     MaterialFileInputModule,
     MatTabsModule,
+    MatTableModule,
   ],
   providers: [
   ],

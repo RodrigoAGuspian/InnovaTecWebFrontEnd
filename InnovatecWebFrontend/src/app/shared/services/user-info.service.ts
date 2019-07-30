@@ -23,7 +23,6 @@ export class UserInfoService {
       institucion: userInfo.institucion,
       departamento: userInfo.departamento,
       ciudad: userInfo.ciudad,
-      rol: 'No Verificado',
     });
   }
   updateUser(userInfo: UserInfo) {
@@ -41,19 +40,4 @@ export class UserInfoService {
     });
   }
 
-  updateUserForAdmin(userInfo: UserInfo) {
-    this.getUsers();
-    this.userslist.update(userInfo.skey, {
-      email: userInfo.email,
-      primerN: userInfo.primerN,
-      segundoN: userInfo.segundoN,
-      primerA: userInfo.primerA,
-      segundoA: userInfo.segundoA,
-      tipoDeUso: userInfo.tipoDeUso,
-      pais: userInfo.pais,
-      departamento: userInfo.departamento,
-      ciudad: userInfo.ciudad,
-      rol: userInfo.rol,
-    });
-  }
 }
