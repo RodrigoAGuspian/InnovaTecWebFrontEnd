@@ -1,20 +1,84 @@
-<input (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+<div class="container">
+  <button class="teal" mat-fab (click)="resetForm()"><i class="white-text material-icons">replay</i></button>
+</div>
+<form class="container formulario" #userRolForm='ngForm'  method="POST" (ngSubmit)="cambiarRol()" autocomplete="off">
+  <input type="hidden" name="skeyRol" #skeyRol="ngModel" [(ngModel)]="rolesService.selectUserRol.skeyRol">
+  <div class="card-panel white row">
+    <div class="col l4 m6 s12">
+      <label>Nombres: </label>
+      <span>{{ rolesService.selectUserRol.user.primerN }} {{ rolesService.selectUserRol.user.segundoN}}</span>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <label>Apellidos: </label>
+      <span>{{ rolesService.selectUserRol.user.primerA }} {{ rolesService.selectUserRol.user.segundoA}}</span>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <label>Correo: </label>
+      <span>{{ rolesService.selectUserRol.user.email }}</span>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <label>País: </label>
+      <span>{{ rolesService.selectUserRol.user.pais }}</span>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <label>Departamento: </label>
+      <span>{{ rolesService.selectUserRol.user.departamento }}</span>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <label>Ciudad: </label>
+      <span>{{ rolesService.selectUserRol.user.ciudad }}</span>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <label>Institución: </label>
+      <span>{{ rolesService.selectUserRol.user.institucion }}</span>
+    </div>
 
 
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!-- Position Column -->
-  <ng-container matColumnDef="Correo">
-    <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-  </ng-container>
+    <div class="col l4 m6 s12">
+      <label>Tipo de uso: </label>
+      <span>{{ rolesService.selectUserRol.user.tipoDeUso }}</span>
+    </div>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="Rol">
-    <mat-header-cell *matHeaderCellDef> Tipo de Rol </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.tipoDeRol}} </mat-cell>
-  </ng-container>
+    <div class="inputs col s12">
+      <mat-form-field class="input-select" [formGroup]="formSelectol">
+        <mat-label class="input-select">Rol</mat-label>
+        <mat-select class="input-select" [disabled]="selectUserRolTmp == null" color="primary" formControlName="rol">
+          <mat-option class="input-select" *ngFor="let c of tipos" [value]="c" (click)="cambiarRolAlTmp(c)">{{ c }}</mat-option>
+        </mat-select >
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary" *ngIf="rolesService.selectUserRol.tipoDeRol != null" class="btn teal right" type="submit">Modificar Rol</button>
+      </div>
+    </div>
+  </div>
+</form>
 
+<div class="container">
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+  <div class="input-field">
+    <input id="buscar" type="text" (keyup)="applyFilter($event.target.value)">
+    <label for="buscar">Escriba el correo o el rol</label>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" >
+
+    <ng-container matColumnDef="Correo">
+      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Rol">
+      <mat-header-cell *matHeaderCellDef> Tipo de Rol </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tipoDeRol}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row class="efectClick" matRipple *matRowDef="let row; columns: displayedColumns;" (click)="mostrarMas(row)"></mat-row>
+  </mat-table>
+</div>

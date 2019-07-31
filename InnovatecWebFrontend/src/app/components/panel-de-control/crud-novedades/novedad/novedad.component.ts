@@ -2,7 +2,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { NovedadService } from 'src/app/shared/services/novedad.service';
-import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
 import { Novedad } from 'src/app/shared/models/novedad';
 import * as _ from 'lodash';
 import { AngularFireStorage } from '@angular/fire/storage';

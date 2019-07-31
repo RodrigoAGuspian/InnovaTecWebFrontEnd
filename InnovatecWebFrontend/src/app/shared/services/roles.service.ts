@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Rol } from '../models/rol';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { UserRol } from '../models/user-rol';
+import { UserInfo } from '../models/user-info';
 
 
 @Injectable({
@@ -11,7 +12,8 @@ export class RolesService {
   superAdminstradoresList: AngularFireList<any>;
   administradoresList: AngularFireList<any>;
   invitadosList: AngularFireList<any>;
-  public selectUserRol: UserRol;
+  public selectUserRol: UserRol = new UserRol();
+
   constructor(public firebaseDataBase: AngularFireDatabase) { }
 
   getSuperAdministradores() {
@@ -23,7 +25,31 @@ export class RolesService {
   }
 
   getInvitados() {
-    return this.administradoresList = this.firebaseDataBase.list('roles/inivitados');
+    return this.invitadosList = this.firebaseDataBase.list('roles/invitados');
+  }
+
+  insertInvitado(userRol: UserRol) {
+    this.getInvitados();
+    this.invitadosList.push({
+      email: userRol.email
+    });
+  }
+
+  insertAdministrador(userRol: UserRol) {
+    this.getAdministradores();
+    this.administradoresList.push({
+      email: userRol.email
+    });
+  }
+
+  deleteInvitado(userRol: UserRol) {
+    this.getInvitados();
+    this.invitadosList.remove(userRol.skeyRol);
+  }
+
+  deleteAdministrador(userRol: UserRol) {
+    this.getAdministradores();
+    this.administradoresList.remove(userRol.skeyRol);
   }
 
 }

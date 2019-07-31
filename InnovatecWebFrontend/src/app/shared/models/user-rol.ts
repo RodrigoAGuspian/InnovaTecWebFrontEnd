@@ -4,5 +4,5 @@ export class UserRol {
   tipoDeRol: string;
   skeyRol: string;
   email: string;
-  user: UserInfo;
+  user: UserInfo = new UserInfo();
 }

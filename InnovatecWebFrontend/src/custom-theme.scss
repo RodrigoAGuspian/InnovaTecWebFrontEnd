@@ -28,7 +28,7 @@ $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $cus
 }
 
 .yellow-snackbar {
-  background-color: #FFAB00;
+  background-color: rgb(202, 165, 0);
   color: aliceblue !important;
   .mat-simple-snackbar-action {
     color: aliceblue !important;
