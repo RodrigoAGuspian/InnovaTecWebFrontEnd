@@ -34,7 +34,6 @@ export class ProyectoService {
       objetivoG: proyecto.objetivoG,
       objetivosE: proyecto.objetivosE,
       resultados: proyecto.resultados,
-      resumenResultados: proyecto.resumenResultados,
       infoGraficas: proyecto.infoGraficas,
     });
   }
@@ -49,7 +48,6 @@ export class ProyectoService {
       objetivoG: proyecto.objetivoG,
       objetivosE: proyecto.objetivosE,
       resultados: proyecto.resultados,
-      resumenResultados: proyecto.resumenResultados,
       infoGraficas: proyecto.infoGraficas,
     });
   }
@@ -57,13 +55,9 @@ export class ProyectoService {
   deleteProyecto(proyecto: Proyecto) {
     this.proyectoList.remove(proyecto.skey);
     const tmpList: string[] = Object.values(proyecto.pathImgsProyecto);
-    const tmpListResultados: Resultado[] = Object.values(proyecto.resultados);
     tmpList.forEach(element => {
         this.deleteFileStorage(element);
     });
-    tmpListResultados.forEach(element => {
-      this.deleteFileStorage(element.pathImgResultado);
-  });
   }
 
   deleteFileStorage(name: string) {

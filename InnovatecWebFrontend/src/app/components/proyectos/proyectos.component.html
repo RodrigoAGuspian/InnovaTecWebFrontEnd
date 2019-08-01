@@ -1,39 +1,49 @@
 <app-index></app-index>
-<div class="container row" id="contenedor-proyectos">
+<div class="container">
   <div class="carousel carousel-slider col m6 s12">
   </div>
-  <div class="card col s12 row" id="info-proyectos">
-    <h2 class="offset-m7 col m5 s12" id="titulo">{{ proyecto.titulo }}</h2>
-
+</div>
+<div class="container row">
+  <div class="card col s12">
+    <h3 class="col s12 center" id="titulo">{{ proyecto.titulo }}</h3>
     <div class="col s12 contenido">
-        <h4>Resumen</h4>
-        <h6 class="light">{{ proyecto.resumen }}</h6>
+      <h4>Autores</h4>
+      <ul class="collection" *ngFor="let autor of autores">
+        <li class="collection-item">
+          <h6 class="light">{{ autor }}</h6>
+        </li>
+      </ul>
     </div>
 
     <div class="col s12 contenido">
-        <h4>Objetivo General</h4>
-        <h6 class="light">{{ proyecto.objetivoG }}</h6>
+      <h4>Resumen</h4>
+      <h6 class="light">{{ proyecto.resumen }}</h6>
     </div>
 
     <div class="col s12 contenido">
-        <h4>Objetivos Especificos</h4>
-        <ul class="collection" *ngFor="let objE of objsEsp">
-          <li class="collection-item">
-            <h6 class="light">{{ objE }}</h6>
-          </li>
-        </ul>
+      <h4>Objetivo General</h4>
+      <h6 class="light">{{ proyecto.objetivoG }}</h6>
     </div>
 
+    <div class="col s12 contenido">
+      <h4>Objetivos Especificos</h4>
+      <ul class="collection" *ngFor="let objE of objsEsp">
+        <li class="collection-item">
+          <h6 class="light">{{ objE }}</h6>
+        </li>
+      </ul>
+    </div>
     <div class="col s12 contenido">
         <h4>Resultados</h4>
-        <h6> {{ proyecto.resumenResultados }} </h6>
-        <div class="resultado">
-        </div>
+        <ul class="collection" *ngFor="let resultado of resultados">
+          <li class="collection-item">
+            <h6 class="light">{{ resultado.infoResultado }}</h6>
+          </li>
+        </ul>
     </div>
 
     <mat-tab-group class="col s12" mat-align-tabs="center" *ngFor="let item of listNombreGrafica">
       <mat-tab label="{{ item.tipoDeGrafica }}" *ngFor="let content of graficas"> <div *ngIf="content.tipoDeGrafica === item.tipoDeGrafica"> <a href=""></a></div> </mat-tab>
     </mat-tab-group>
-
   </div>
 </div>

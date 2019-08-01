@@ -40,8 +40,8 @@ export class InfoIndexComponent implements OnInit {
       const element = this.novedadesList[index];
       const vistaImagen = '<img class="imagen-slider" src="' + element.imgsNovedad[0] + '">';
       const vistaTitutlo = divCaption + element.titulo + '</h2>';
-      const vistaContenido = '<h4 class="light white-text" maxlength=50>' + element.contenido + '</h4>';
-      const appendValue = '<li> <a id="item-' + index + '">' + vistaImagen + vistaTitutlo + vistaContenido + '</div> </a> </li>';
+      // const vistaContenido = '<h4 class="light white-text" maxlength=20>' + element.contenido + '</h4>';
+      const appendValue = '<li> <a id="item-' + index + '">' + vistaImagen + vistaTitutlo + '</div> </a> </li>';
       $('.slides').append(appendValue);
       $( '#item-' + index ).click(() => {
         this.router.navigate(['novedades/' + index]);

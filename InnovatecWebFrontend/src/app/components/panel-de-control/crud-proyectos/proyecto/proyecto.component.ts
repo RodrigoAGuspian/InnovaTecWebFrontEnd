@@ -122,9 +122,6 @@ export class ProyectoComponent implements OnInit {
           tmpList.forEach(element => {
             this.proyectoService.deleteFileStorage(element);
           });
-          tmpListResultados.forEach(element => {
-            this.proyectoService.deleteFileStorage(element.pathImgResultado);
-          });
         }
         this.insertImgs();
         this.enableSubmit = false;
@@ -149,24 +146,17 @@ export class ProyectoComponent implements OnInit {
     url.forEach(element => {
       this.uploads.push(element);
       if (this.uploads.length === this.filelist.length) {
-        this.insertImgsResultados();
+        this.proyectoService.preResultadosList.forEach(element1 => {
+          const resultado = new Resultado();
+          resultado.infoResultado = element1.infoResultado;
+          this.resultadosList.push(resultado);
+        });
+        this.insertInfo();
       }
     });
 
   }
 
-  insertImgsResultados() {
-    this.proyectoService.preResultadosList.forEach(element => {
-      this.resultadosList = [];
-      const dateNow = Date.now();
-      const path = 'proyectos/resultados/' + `${element.fileImgResultado.name}` + ' ' + dateNow;
-      const ref = this.storage.ref(path);
-      const task = this.storage.upload(path, element.fileImgResultado);
-      task.snapshotChanges().pipe( finalize(() => this.obtenerURLImgResultado(ref.getDownloadURL(), path) )).subscribe();
-
-    });
-
-  }
 
   initializeChips() {
 
@@ -191,29 +181,12 @@ export class ProyectoComponent implements OnInit {
 
   }
 
-
-
   insertGrafica(formGrafica: NgForm) {
     const grafica = new Grafica();
     grafica.linkDeLaGrafica = formGrafica.value.linkDeLaGrafica;
     grafica.tipoDeGrafica = formGrafica.value.tipoDeGrafica;
     this.proyectoService.infoGraficas.push(grafica);
   }
-
-  obtenerURLImgResultado(url: Observable<string | null>, path: string ) {
-    url.forEach(element => {
-      const resultado = new Resultado();
-      const index = this.resultadosList.length;
-      resultado.imgResultado = element;
-      resultado.pathImgResultado = path;
-      resultado.infoResultado = this.proyectoService.preResultadosList[index].infoResultado;
-      this.resultadosList.push(resultado);
-      if (this.resultadosList.length === this.proyectoService.preResultadosList.length) {
-        this.insertInfo();
-      }
-    });
-  }
-
 
   insertInfo() {
     this.linksDeDescarga = [];
@@ -244,7 +217,6 @@ export class ProyectoComponent implements OnInit {
         proyecto.resumen = this.formProyecto.value.resumen;
         proyecto.objetivoG = this.formProyecto.value.objetivoG;
         proyecto.objetivosE = objetivosE;
-        proyecto.resumenResultados = this.formProyecto.value.resumenResultados;
         proyecto.resultados = this.resultadosList;
         proyecto.infoGraficas = this.proyectoService.infoGraficas;
 

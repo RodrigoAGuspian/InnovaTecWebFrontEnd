@@ -17,6 +17,7 @@ export class ProyectosComponent implements OnInit, OnDestroy {
   public proyectoId = '';
   private proyectosList = [];
   public proyecto = new Proyecto();
+  public autores: string[] = [];
   public objsEsp: string[] = [];
   public resultados: Resultado[] = [];
   public graficas: Grafica[] = [];
@@ -49,7 +50,6 @@ export class ProyectosComponent implements OnInit, OnDestroy {
         this.proyecto = this.proyectosList[id];
         this.inputInfoInList();
         this.createCarouselToHand();
-        this.initializeScriptImg();
       } else {
         console.log('Error en el id');
       }
@@ -58,24 +58,13 @@ export class ProyectosComponent implements OnInit, OnDestroy {
 
   }
 
-  initializeScriptImg() {
-    if ($('.materialboxed').hasClass('initialized')) {
-      $('.materialboxed').removeClass('initialized');
+  inputInfoInList() {
+    try {
+      this.autores = Object.values(this.proyecto.autores);
+    } catch (error) {
+
     }
 
-    this.resultados.forEach(element => {
-      const tmpInfo = '<h6 class="light">' + element.infoResultado + '</h6>';
-      const tmpLi = '<img class="materialboxed" height="250" width="auto" src="' + element.imgResultado + '">';
-      const appendValue = tmpInfo + ' ' + tmpLi;
-      $('.resultado').append(appendValue);
-    });
-
-    $(document).ready(() => {
-      $('.materialboxed').materialbox();
-    });
-  }
-
-  inputInfoInList() {
     try {
       this.objsEsp = Object.values(this.proyecto.objetivosE);
     } catch (error) {

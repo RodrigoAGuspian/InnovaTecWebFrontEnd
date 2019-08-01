@@ -1,7 +1,7 @@
 <div class="container">
   <button class="teal" mat-fab (click)="resetForm()"><i class="white-text material-icons">replay</i></button>
 </div>
-<form class="container formulario" #userRolForm='ngForm'  method="POST" (ngSubmit)="cambiarRol()" autocomplete="off">
+<form class="container formulario" #userRolForm='ngForm'  method="POST" (ngSubmit)="comprobarRol()" autocomplete="off">
   <input type="hidden" name="skeyRol" #skeyRol="ngModel" [(ngModel)]="rolesService.selectUserRol.skeyRol">
   <div class="card-panel white row">
     <div class="col l4 m6 s12">

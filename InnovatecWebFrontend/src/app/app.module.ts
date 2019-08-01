@@ -15,7 +15,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 import { environment } from '../environments/environment';
 
@@ -77,6 +78,7 @@ import { GraficaComponent } from './components/panel-de-control/crud-proyectos/g
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { ListaDeProyectosComponent } from './components/lista-de-proyectos/lista-de-proyectos.component';
 import { AdministrarRolesComponent } from './components/panel-de-control/administrar-roles/administrar-roles.component';
+import { EnsayoCloudMesseComponent } from './components/ensayo-cloud-messe/ensayo-cloud-messe.component';
 
 
 @NgModule({
@@ -114,6 +116,7 @@ import { AdministrarRolesComponent } from './components/panel-de-control/adminis
     ProyectosComponent,
     ListaDeProyectosComponent,
     AdministrarRolesComponent,
+    EnsayoCloudMesseComponent,
 
   ],
   imports: [
@@ -128,6 +131,7 @@ import { AdministrarRolesComponent } from './components/panel-de-control/adminis
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    AngularFireMessagingModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

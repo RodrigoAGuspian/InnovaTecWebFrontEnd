@@ -6,6 +6,7 @@ import { Rol } from 'src/app/shared/models/rol';
 import { UserRol } from 'src/app/shared/models/user-rol';
 import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AdministrarRolesComponent implements OnInit {
 
   formSelectol: FormGroup;
   constructor(public fb: FormBuilder, public rolesService: RolesService,
-              private userInfoService: UserInfoService, private snackBar: MatSnackBar) {
+              private userInfoService: UserInfoService, private snackBar: MatSnackBar, public router: Router) {
     this.formSelectol = this.fb.group({
       rol: [],
     });
@@ -143,94 +144,155 @@ export class AdministrarRolesComponent implements OnInit {
     this.selectUserRolTmp.tipoDeRol = rol;
   }
 
-  cambiarRol() {
+  comprobarRol() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    let rolSuperAdministrador = false;
+    let rolAdministrador = false;
+    let verificar = true;
+    this.rolesService.getSuperAdministradores().snapshotChanges().subscribe(
+      item => {
 
-    if (this.rolesService.selectUserRol.tipoDeRol === this.selectUserRolTmp.tipoDeRol) {
-      this.snackBar.open('Se mantendrá el mismo rol.', 'Rol no modificado', {
+        for (let i = 0; i < item.length; i++) {
+          const element = item[i];
+          const x = element.payload.toJSON();
+          // tslint:disable-next-line: no-string-literal
+          if (x['email'] === user.email ) {
+            // tslint:disable-next-line: no-string-literal
+              rolSuperAdministrador = true;
+          }
+          if (item.length - 1 === i) {
+
+            this.rolesService.getAdministradores().snapshotChanges().subscribe(
+              item1 => {
+                item1.forEach(element1 => {
+                  const x1 = element1.payload.toJSON();
+                  // tslint:disable-next-line: no-string-literal
+                  if (x1['email'] === user.email ) {
+                    // tslint:disable-next-line: no-string-literal
+                      rolAdministrador = true;
+                  }
+                });
+                if (verificar) {
+                  if (rolSuperAdministrador || rolAdministrador) {
+                    this.cambiarRol();
+                  } else {
+                    window.alert('Usted no puede acceder a esta dirección');
+                    this.router.navigate(['']);
+                  }
+                  verificar = false;
+                }
+              }
+            );
+
+          }
+        }
+      }
+    );
+  }
+
+  cambiarRol() {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (this.selectUserRolTmp.email === user.email) {
+      this.snackBar.open('El mismo usuario no puede cambiarse de rol.', 'Rol no modificado', {
         duration: 2000,
         panelClass: ['blue-snackbar']
       });
+
     } else {
 
-      if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[3]) {
-        this.snackBar.open('A los super administradores no se les puede cambiar el rol.', 'Rol no modificado', {
+      if (this.rolesService.selectUserRol.tipoDeRol === this.selectUserRolTmp.tipoDeRol) {
+        this.snackBar.open('Se mantendrá el mismo rol.', 'Rol no modificado', {
           duration: 2000,
           panelClass: ['blue-snackbar']
         });
-
       } else {
 
-        if (this.selectUserRolTmp.tipoDeRol === this.tipos[3]) {
-          this.snackBar.open('A nadie se le puede asignar el rol de super administrador.', 'Rol no modificado', {
+        if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[3]) {
+          this.snackBar.open('A los super administradores no se les puede cambiar el rol.', 'Rol no modificado', {
             duration: 2000,
             panelClass: ['blue-snackbar']
           });
+
         } else {
 
-          if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[0] && this.selectUserRolTmp.tipoDeRol === this.tipos[1]) {
-            // solo pasar a invitado
-            this.rolesService.insertInvitado(this.selectUserRolTmp);
-            this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es invitado .', 'Rol modificado', {
+          if (this.selectUserRolTmp.tipoDeRol === this.tipos[3]) {
+            this.snackBar.open('A nadie se le puede asignar el rol de super administrador.', 'Rol no modificado', {
               duration: 2000,
-              panelClass: ['green-snackbar']
+              panelClass: ['blue-snackbar']
             });
-          }
+          } else {
 
-          if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[1] && this.selectUserRolTmp.tipoDeRol === this.tipos[0] ) {
-            // solo quitar de invitado
-            this.rolesService.deleteInvitado(this.selectUserRolTmp);
-            this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es no definido .', 'Rol modificado', {
-              duration: 2000,
-              panelClass: ['red-snackbar']
-            });
-          }
+            if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[0] && this.selectUserRolTmp.tipoDeRol === this.tipos[1]) {
+              // solo pasar a invitado
+              this.rolesService.insertInvitado(this.selectUserRolTmp);
+              this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es invitado .', 'Rol modificado', {
+                duration: 2000,
+                panelClass: ['green-snackbar']
+              });
+            }
 
-          if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[0] && this.selectUserRolTmp.tipoDeRol === this.tipos[2]) {
-            // solo pasar a administrador
-            this.rolesService.insertAdministrador(this.selectUserRolTmp);
-            this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es administrador .', 'Rol modificado', {
-              duration: 2000,
-              panelClass: ['green-snackbar']
-            });
-          }
+            if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[1] && this.selectUserRolTmp.tipoDeRol === this.tipos[0] ) {
+              // solo quitar de invitado
+              this.rolesService.deleteInvitado(this.selectUserRolTmp);
+              this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es no definido .', 'Rol modificado', {
+                duration: 2000,
+                panelClass: ['red-snackbar']
+              });
+            }
 
-          if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[2] && this.selectUserRolTmp.tipoDeRol === this.tipos[0] ) {
-            // solo quitar de administrador
-            this.rolesService.deleteAdministrador(this.selectUserRolTmp);
-            this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es no definido .', 'Rol modificado', {
-              duration: 2000,
-              panelClass: ['red-snackbar']
-            });
-          }
+            if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[0] && this.selectUserRolTmp.tipoDeRol === this.tipos[2]) {
+              // solo pasar a administrador
+              this.rolesService.insertAdministrador(this.selectUserRolTmp);
+              this.snackBar.open('Se ha cambiado el rol a ' +
+              this.selectUserRolTmp.email + ', ahora es administrador .', 'Rol modificado', {
+                duration: 2000,
+                panelClass: ['green-snackbar']
+              });
+            }
 
-          if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[1] && this.selectUserRolTmp.tipoDeRol === this.tipos[2]) {
-            // pasar de invitado a administrador
-            this.rolesService.deleteInvitado(this.selectUserRolTmp);
-            this.rolesService.insertAdministrador(this.selectUserRolTmp);
-            this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es administrador .', 'Rol modificado', {
-              duration: 2000,
-              panelClass: ['yellow-snackbar']
-            });
-          }
+            if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[2] && this.selectUserRolTmp.tipoDeRol === this.tipos[0] ) {
+              // solo quitar de administrador
+              this.rolesService.deleteAdministrador(this.selectUserRolTmp);
+              this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es no definido .', 'Rol modificado', {
+                duration: 2000,
+                panelClass: ['red-snackbar']
+              });
+            }
+            if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[1] && this.selectUserRolTmp.tipoDeRol === this.tipos[2]) {
+              // pasar de invitado a administrador
+              this.rolesService.deleteInvitado(this.selectUserRolTmp);
+              this.rolesService.insertAdministrador(this.selectUserRolTmp);
+              this.snackBar.open('Se ha cambiado el rol a ' +
+                this.selectUserRolTmp.email + ', ahora es administrador .', 'Rol modificado', {
+                duration: 2000,
+                panelClass: ['yellow-snackbar']
+              });
+            }
 
-          if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[2] && this.selectUserRolTmp.tipoDeRol === this.tipos[1] ) {
-            // pasar de administrador a invitado
-            this.rolesService.deleteAdministrador(this.selectUserRolTmp);
-            this.rolesService.insertInvitado(this.selectUserRolTmp);
-            this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es invitado .', 'Rol modificado', {
-              duration: 2000,
-              panelClass: ['yellow-snackbar']
-            });
+            if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[2] && this.selectUserRolTmp.tipoDeRol === this.tipos[1] ) {
+              // pasar de administrador a invitado
+              this.rolesService.deleteAdministrador(this.selectUserRolTmp);
+              this.rolesService.insertInvitado(this.selectUserRolTmp);
+              this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es invitado .', 'Rol modificado', {
+                duration: 2000,
+                panelClass: ['yellow-snackbar']
+              });
+            }
+
           }
 
         }
 
       }
 
+
     }
+
     this.resetForm();
 
   }
+
 
   resetForm() {
     this.rolesService.selectUserRol = new UserRol();

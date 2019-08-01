@@ -24,7 +24,6 @@ export class AdminGuard implements CanActivate {
           resolve(false);
         } else {
           const user = JSON.parse(localStorage.getItem('user'));
-          console.log(user.email);
           let rolSuperAdministrador = false;
           let rolAdministrador = false;
           this.rolesService.getSuperAdministradores().snapshotChanges().subscribe(

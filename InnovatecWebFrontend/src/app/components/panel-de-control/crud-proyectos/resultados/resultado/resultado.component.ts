@@ -4,6 +4,7 @@ import { ProyectoComponent } from '../../proyecto/proyecto.component';
 import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { ListResultadosComponent } from '../list-resultados/list-resultados.component';
 import { ProyectoService } from 'src/app/shared/services/proyecto.service';
+import { Resultado } from 'src/app/shared/models/resultado';
 
 @Component({
   selector: 'app-resultado',
@@ -29,13 +30,14 @@ export class ResultadoComponent implements OnInit {
       this.fileImgResultado = null;
       resultado.infoResultado = formPreResultado.value.infoResultado;
       this.proyectoService.preResultadosList.push(resultado);
+      this.proyectoService.selectResultado = new PreResultado();
     } else {
       for (let i = 0; i < this.proyectoService.preResultadosList.length; i++) {
         const element = this.proyectoService.preResultadosList[i];
         if (element.skey === i) {
           element.infoResultado = formPreResultado.value.infoResultado;
-          element.fileImgResultado = this.fileImgResultado;
-      }
+          this.proyectoService.selectResultado = new PreResultado();
+        }
       }
     }
 
@@ -43,9 +45,5 @@ export class ResultadoComponent implements OnInit {
   }
 
 
-
-  importImageResultado(event) {
-    this.fileImgResultado = event.target.files[0];
-  }
 
 }

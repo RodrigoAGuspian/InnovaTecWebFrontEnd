@@ -3,14 +3,8 @@
 }
 .carousel{
   z-index: 1;
-  margin-left: 2% !important;
 }
 #titulo{
   word-wrap: break-word;
 }
-#info-novedad{
-  margin-top: -150px;
-}
-#contenido{
-  margin-top: 10px;
-}
+

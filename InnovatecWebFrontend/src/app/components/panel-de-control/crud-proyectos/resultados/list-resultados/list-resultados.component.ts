@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PreResultado } from 'src/app/shared/models/pre-resultado';
-import { ProyectoComponent } from '../../proyecto/proyecto.component';
 import { ProyectoService } from 'src/app/shared/services/proyecto.service';
 
 @Component({
@@ -19,7 +18,12 @@ export class ListResultadosComponent implements OnInit {
   }
 
   onDelete(preResultado: PreResultado) {
-    this.proyectoService.preResultadosList.splice(preResultado.skey, 1);
+    if (this.proyectoService.preResultadosList.length > 1) {
+      this.proyectoService.preResultadosList.splice(preResultado.skey, 1);
+    } else {
+      this.proyectoService.preResultadosList = [];
+    }
+
 
   }
 

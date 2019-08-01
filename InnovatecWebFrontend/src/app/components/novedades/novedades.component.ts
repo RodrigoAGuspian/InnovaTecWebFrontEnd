@@ -58,7 +58,7 @@ export class NovedadesComponent implements OnInit {
     const tmpList: string[] = Object.values(this.novedad.imgsNovedad);
     tmpList.forEach(element => {
       // tslint:disable-next-line: max-line-length
-      const responsiveConfig = 'width: 100%; height: 350px; background-position: center center; background-repeat: no-repeat; background-size: cover;';
+      const responsiveConfig = 'height:400px; background-position: center center; background-repeat: no-repeat; background-size: cover;';
       const vistaImg = '<div class="imgs-slider card " style="' + responsiveConfig + 'background-image: url(' + element + ');">';
       const appendValue = aCarouselItem + vistaImg + '</div> </a>';
       console.log(appendValue);
@@ -81,7 +81,7 @@ export class NovedadesComponent implements OnInit {
 
     $(document).ready(() => {
       $('.carousel.carousel-slider').carousel({
-        fullWidth: true,
+        fullWidth: false,
         indicators: true,
         duration: 200,
       });
