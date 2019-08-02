@@ -33,13 +33,13 @@ export class InfoIndexComponent implements OnInit {
 
 
   createCarouselToHand() {
-    const divCaption = '<div style="cursor: pointer" class="caption right-align"> <h2>';
+    const divCaption = '<div style="cursor: pointer" class="caption right-align"> <h3>';
 
     for (let index = 0; index < this.novedadesList.length; index++) {
 
       const element = this.novedadesList[index];
       const vistaImagen = '<img class="imagen-slider" src="' + element.imgsNovedad[0] + '">';
-      const vistaTitutlo = divCaption + element.titulo + '</h2>';
+      const vistaTitutlo = divCaption + element.titulo + '</h3>';
       // const vistaContenido = '<h4 class="light white-text" maxlength=20>' + element.contenido + '</h4>';
       const appendValue = '<li> <a id="item-' + index + '">' + vistaImagen + vistaTitutlo + '</div> </a> </li>';
       $('.slides').append(appendValue);

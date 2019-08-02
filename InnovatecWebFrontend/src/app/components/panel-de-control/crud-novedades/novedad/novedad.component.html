@@ -1,29 +1,28 @@
-<div class="card col m5">
-  <div>
-    <form #novedadForm='ngForm'  method="POST" (ngSubmit)="onSubmit(novedadForm)" autocomplete="off" >
-      <input type="hidden" name="skey" #skey="ngModel" [(ngModel)]="novedadService.selectNovedad.skey">
-      <div class="form-group">
-        <input type="text" class="form-control" name="titulo" #titulo= "ngModel"
-        [(ngModel)]="novedadService.selectNovedad.titulo" placeholder="Ingrese el título de la novedad">
-      </div>
+<div class="container row">
+  <form class="card col s12 formulario" #novedadForm='ngForm'  method="POST" (ngSubmit)="onSubmit(novedadForm)" autocomplete="off" >
+    <input type="hidden" name="skey" #skey="ngModel" [(ngModel)]="novedadService.selectNovedad.skey">
+    <div class="form-group col s12">
+      <input type="text" class="form-control" name="titulo" #titulo= "ngModel"
+      [(ngModel)]="novedadService.selectNovedad.titulo" placeholder="Ingrese el título de la novedad">
+    </div>
 
-      <div class="form-group">
-        <textarea type="text" class="form-control" name="contenido" #contenido="ngModel"
-        [(ngModel)]="novedadService.selectNovedad.contenido" placeholder="Ingrese el contenido de la novedad"></textarea>
+    <div class="form-group col s12">
+      <textarea type="text" class="form-control" name="contenido" #contenido="ngModel"
+      [(ngModel)]="novedadService.selectNovedad.contenido" placeholder="Ingrese el contenido de la novedad"></textarea>
 
-      </div>
+    </div>
 
 
-      <mat-form-field [formGroup]="formFile">
-        <ngx-mat-file-input formControlName="multiplefile" (change)="importImages($event)" placeholder="Seleccione las imagenes correspondientes" multiple></ngx-mat-file-input>
-        <mat-icon matSuffix>folder</mat-icon>
-      </mat-form-field>
+    <mat-form-field [formGroup]="formFile" class="col s12">
+      <ngx-mat-file-input formControlName="multiplefile" (change)="importImages($event)" placeholder="Seleccione las imagenes correspondientes" multiple></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
 
-      <div>
-        <button mat-raised-button color="primary" [disabled]="!enableSubmit" class="btn teal waves-white" type="submit">Crear Novedad</button>
-      </div>
+    <div class="right">
+      <button mat-raised-button color="primary" [disabled]="!enableSubmit" class="btn teal waves-white" type="submit">Crear Novedad</button>
+    </div>
 
-    </form>
-  </div>
+  </form>
+
 </div>
 

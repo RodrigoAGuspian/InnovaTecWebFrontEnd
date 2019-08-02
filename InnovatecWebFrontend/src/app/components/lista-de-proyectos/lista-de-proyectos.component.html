@@ -2,14 +2,13 @@
 <div class="light container"><h3>Proyectos</h3></div>
 <div class="row container contenedor">
   <div class="col s12 m6" *ngFor="let proyecto of proyectosList">
-    <div class="card small cursor" (click)="enviarA(proyecto)">
-        <div class="card-image black-text">
-          <img preload-src="" src="{{ proyecto.imgsProyecto[0] }}">
-        </div>
-        <div class="card-content black-text">
-          <span class="card-title">{{ proyecto.titulo }}</span>
-        </div>
-
+    <div class="card medium cursor" (click)="enviarA(proyecto)">
+      <div class="card-image black-text">
+        <img preload-src="" src="{{ proyecto.imgsProyecto[0] }}">
+      </div>
+      <div class="card-content black-text">
+        <span class="card-title" style="text-overflow: ellipsis;" >{{ proyecto.titulo }}</span>
+      </div>
     </div>
   </div>
 </div>
