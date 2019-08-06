@@ -1,0 +1,11 @@
+<form #formLineas='ngForm'  method="POST" (ngSubmit)="onSubmit(formLineas)" autocomplete="off">
+  <div>
+      <input type="hidden" name="skey" #skey="ngModel" [(ngModel)]="semilleroService.selectLinea.skey">
+  </div>
+  <div>
+    <textarea type="text" class="form-control" name="linea" #linea= "ngModel"
+    [(ngModel)]="semilleroService.selectLinea.linea" placeholder="Ingrese una línea de investigación" required></textarea>
+  </div>
+  <button mat-raised-button color="primary" [disabled]="!enableLinea || !formLineas.valid" class="btn right teal waves-white" type="submit">{{ semilleroService.aElineaDe }}</button>
+</form>
+<button class="teal boton-flotante" mat-mini-fab (click)="resetForm(formLineas)"><i class="white-text material-icons">replay</i></button>

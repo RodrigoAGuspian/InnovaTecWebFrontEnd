@@ -84,6 +84,14 @@
       </a>
     </li>
 
+    <li ><a class="col s12 black-text sidenav-close" *ngIf="admin" (click)="viewChageRoles()"><i class="black-text material-icons">https</i>Cambiar roles</a></li>
+
+    <li ><a class="col s12 black-text sidenav-close" *ngIf="admin" (click)="viewChageProyectos()"><i class="black-text material-icons">update</i>Proyectos</a></li>
+
+    <li ><a class="col s12 black-text sidenav-close" *ngIf="admin" (click)="viewChageNovedades()"><i class="black-text material-icons">update</i>Novedades</a></li>
+
+    <li ><a class="col s12 black-text sidenav-close" *ngIf="admin" (click)="viewChageSemillero()"><i class="black-text material-icons">update</i>Semillero de investigación</a></li>
+
   <li ><a class="col s12 black-text sidenav-close" (click)="authservice.SignOut()"><i class="black-text material-icons">arrow_back</i>Cerrar sesión</a></li>
 </ul>
 

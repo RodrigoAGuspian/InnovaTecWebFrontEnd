@@ -33,6 +33,8 @@ export class ListProyectosComponent implements OnInit {
 
         if (this.proyectosList != null && this.proyectosList.length > 0) {
           this.enableTable = true;
+        } else {
+          this.enableTable = false;
         }
       }
     );

@@ -1,4 +1,5 @@
 <div class="container row">
+  <button class="teal boton-flotante" mat-mini-fab (click)="resetForm(novedadForm)"><i class="white-text material-icons">replay</i></button>
   <form class="card col s12 formulario" #novedadForm='ngForm'  method="POST" (ngSubmit)="onSubmit(novedadForm)" autocomplete="off" >
     <input type="hidden" name="skey" #skey="ngModel" [(ngModel)]="novedadService.selectNovedad.skey">
     <div class="form-group col s12">
@@ -19,10 +20,9 @@
     </mat-form-field>
 
     <div class="right">
-      <button mat-raised-button color="primary" [disabled]="!enableSubmit" class="btn teal waves-white" type="submit">Crear Novedad</button>
+      <button mat-raised-button color="primary" [disabled]="!enableSubmit" class="btn teal waves-white" type="submit">{{ novedadService.aENovedad }}</button>
     </div>
 
   </form>
-
 </div>
 

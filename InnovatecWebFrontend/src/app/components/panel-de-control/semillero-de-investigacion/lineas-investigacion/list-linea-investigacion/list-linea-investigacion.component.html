@@ -1,0 +1,20 @@
+<div *ngIf="enableTableLineaInves === true">
+  <div class="card-content black-text">
+    <span class="card-title">Lista de líneas de investigación</span>
+    <table class="responsive-table highlight striped centered">
+      <tbody>
+        <tr *ngFor="let lineaDeInvestigacion of lineasDeInvestigacionList">
+          <td>{{ lineaDeInvestigacion.linea }}</td>
+          <td>
+            <a class="waves-light btn green accent-4" (click)="onEditLinea(lineaDeInvestigacion)">
+              <i class="material-icons">edit</i>
+            </a>
+            <a class="waves-light btn red accent-4" (click)="onDeleteLinea(lineaDeInvestigacion)">
+              <i class="material-icons">delete_forever</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

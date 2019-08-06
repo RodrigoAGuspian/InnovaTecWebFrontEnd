@@ -1,0 +1,19 @@
+<div *ngIf="enableTable === true">
+  <span class="card-title">Lista de proyectos</span>
+  <table class="responsive-table highlight striped centered">
+    <tbody>
+      <tr *ngFor="let proyectoPeq of proyectosPeqList">
+        <td>{{ proyectoPeq.nombre }}</td>
+        <td>{{ proyectoPeq.colaboraciones }}</td>
+        <td>
+          <a class="waves-light btn green accent-4" (click)="onEdit(proyectoPeq)">
+            <i class="material-icons">edit</i>
+          </a>
+          <a class="waves-light btn red accent-4" (click)="onDelete(proyectoPeq)">
+            <i class="material-icons">delete_forever</i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

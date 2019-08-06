@@ -79,6 +79,25 @@ import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { ListaDeProyectosComponent } from './components/lista-de-proyectos/lista-de-proyectos.component';
 import { AdministrarRolesComponent } from './components/panel-de-control/administrar-roles/administrar-roles.component';
 import { EnsayoCloudMesseComponent } from './components/ensayo-cloud-messe/ensayo-cloud-messe.component';
+// tslint:disable-next-line: max-line-length
+import { SemilleroDeInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/semillero-de-investigacion.component';
+import { ProyectosPeqComponent } from './components/panel-de-control/semillero-de-investigacion/proyectos-peq/proyectos-peq.component';
+// tslint:disable-next-line: max-line-length
+import { ProyectoPeqComponent } from './components/panel-de-control/semillero-de-investigacion/proyectos-peq/proyecto-peq/proyecto-peq.component';
+// tslint:disable-next-line: max-line-length
+import { ListProyectosPeqComponent } from './components/panel-de-control/semillero-de-investigacion/proyectos-peq/list-proyectos-peq/list-proyectos-peq.component';
+// tslint:disable-next-line: max-line-length
+import { ObjetivosComponent } from './components/panel-de-control/semillero-de-investigacion/objetivos/objetivos.component';
+// tslint:disable-next-line: max-line-length
+import { ListObjetivosComponent } from './components/panel-de-control/semillero-de-investigacion/objetivos/list-objetivos/list-objetivos.component';
+// tslint:disable-next-line: max-line-length
+import { ObjetivoComponent } from './components/panel-de-control/semillero-de-investigacion/objetivos/objetivo/objetivo.component';
+// tslint:disable-next-line: max-line-length
+import { LineasInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/lineas-investigacion/lineas-investigacion.component';
+// tslint:disable-next-line: max-line-length
+import { ListLineaInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/lineas-investigacion/list-linea-investigacion/list-linea-investigacion.component';
+// tslint:disable-next-line: max-line-length
+import { LineaInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/lineas-investigacion/linea-investigacion/linea-investigacion.component';
 
 
 @NgModule({
@@ -117,6 +136,16 @@ import { EnsayoCloudMesseComponent } from './components/ensayo-cloud-messe/ensay
     ListaDeProyectosComponent,
     AdministrarRolesComponent,
     EnsayoCloudMesseComponent,
+    SemilleroDeInvestigacionComponent,
+    ProyectosPeqComponent,
+    ProyectoPeqComponent,
+    ListProyectosPeqComponent,
+    ObjetivosComponent,
+    ListObjetivosComponent,
+    ObjetivoComponent,
+    LineasInvestigacionComponent,
+    ListLineaInvestigacionComponent,
+    LineaInvestigacionComponent,
 
   ],
   imports: [

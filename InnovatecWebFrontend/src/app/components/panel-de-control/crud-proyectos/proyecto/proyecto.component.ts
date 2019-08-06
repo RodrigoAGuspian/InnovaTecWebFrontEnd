@@ -10,7 +10,6 @@ import { Proyecto } from 'src/app/shared/models/proyecto';
 import { Resultado } from 'src/app/shared/models/resultado';
 import { finalize } from 'rxjs/operators';
 import { Grafica } from 'src/app/shared/models/grafica';
-import { PreResultado } from 'src/app/shared/models/pre-resultado';
 declare const $: any;
 declare const M;
 
@@ -23,11 +22,8 @@ export class ProyectoComponent implements OnInit {
   enableSubmit = true;
   linksDeDescarga: string[];
   filelist = [];
-  fileImgResultado: any;
   pathfilelist: string[] = [];
   uploads: any[];
-  pathfilelistResultados: string[] = [];
-  uploadsResultados: any[];
   files: Observable<any>;
   formProyecto: NgForm;
   formFile: FormGroup;
@@ -118,7 +114,6 @@ export class ProyectoComponent implements OnInit {
         this.pathfilelist = [];
         if (this.formProyecto.value.skey != null ) {
           const tmpList: string[] = Object.values(this.proyectoService.selectProyecto.pathImgsProyecto);
-          const tmpListResultados: Resultado[] = Object.values(this.proyectoService.selectProyecto.resultados);
           tmpList.forEach(element => {
             this.proyectoService.deleteFileStorage(element);
           });

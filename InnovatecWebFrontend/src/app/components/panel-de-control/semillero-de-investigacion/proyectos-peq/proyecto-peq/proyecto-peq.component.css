@@ -1,0 +1,16 @@
+.chips{
+  margin: 0 !important;
+  margin-top: -1%;
+}
+.chips-config{
+  margin: 4% 0;
+}
+
+textarea{
+  margin: 2% 0;
+  height: 80px;
+}
+
+.boton{
+  margin-bottom: 2%;
+}

@@ -1,0 +1,43 @@
+<app-panel-de-control></app-panel-de-control>
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <div class="col l6 m12 s12">
+        <div class="card col s12">
+          <div class="card-content">
+            <app-objetivos></app-objetivos>
+          </div>
+        </div>
+      </div>
+      <div class="col l6 m12 s12">
+        <div class="card col s12">
+          <div class="card-content">
+            <app-lineas-investigacion></app-lineas-investigacion>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="col l6 m12 s12">
+        <div class="card col s12">
+          <div class="card-content">
+            <app-proyectos-peq></app-proyectos-peq>
+          </div>
+        </div>
+      </div>
+      <div class="col l6 m12 s12">
+        <div class="card col s12">
+          <div class="card-content">
+            <form class="col s12 formulario" #formSemillero='ngForm'  method="POST" (ngSubmit)="updateInfo(formSemillero)" autocomplete="off">
+              <div>
+                <textarea type="text" class="form-control" name="inscripciones" #inscripciones= "ngModel"
+                [(ngModel)]="inscripcionesData" placeholder="Ingrese la información para inscripciones" required></textarea>
+              </div>
+              <button mat-raised-button color="primary" [disabled]="!enableSemillero || !formSemillero.valid" class="btn teal waves-white right" type="submit">Actualizar Inscripciones</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

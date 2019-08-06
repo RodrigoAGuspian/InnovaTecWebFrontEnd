@@ -2,7 +2,7 @@
   <button class="teal" mat-fab (click)="resetForm(proyectoForm)"><i class="white-text material-icons">replay</i></button>
   <form class="row" #proyectoForm='ngForm'  method="POST" (ngSubmit)="onSubmit(proyectoForm)" autocomplete="off" >
     <input type="hidden" name="skey" #skey="ngModel" [(ngModel)]="proyectoService.selectProyecto.skey">
-    <div class="card col l6 m12">
+    <div class="card col l6 m12 ">
       <div class="card-content row">
         <div class="form-group col s12">
           <input type="text" class="form-control" name="titulo" #titulo= "ngModel"

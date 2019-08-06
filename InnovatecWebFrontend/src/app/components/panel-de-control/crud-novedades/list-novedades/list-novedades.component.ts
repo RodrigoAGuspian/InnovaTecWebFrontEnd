@@ -10,10 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListNovedadesComponent implements OnInit {
   novedadesList: Novedad[];
-  constructor(private novedadesService: NovedadService, private snackBar: MatSnackBar) { }
+  constructor(private novedadService: NovedadService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.novedadesService.getNovedades().snapshotChanges().subscribe(
+    this.novedadService.getNovedades().snapshotChanges().subscribe(
       item => {
         this.novedadesList = [];
         item.forEach(element => {
@@ -27,12 +27,13 @@ export class ListNovedadesComponent implements OnInit {
   }
 
   onEdit(novedad: Novedad) {
-    this.novedadesService.selectNovedad = Object.assign({}, novedad);
+    this.novedadService.selectNovedad = Object.assign({}, novedad);
+    this.novedadService.aENovedad = 'Editar Novedad';
   }
 
   onDelete(novedad: Novedad) {
     if (confirm('Estas seguro de eliminar esta novedad')) {
-      this.novedadesService.deleteNovedad(novedad);
+      this.novedadService.deleteNovedad(novedad);
       this.snackBar.open('Operación exitosa.', 'Novedad eliminada', {
         duration: 2000,
         panelClass: ['green-snackbar']

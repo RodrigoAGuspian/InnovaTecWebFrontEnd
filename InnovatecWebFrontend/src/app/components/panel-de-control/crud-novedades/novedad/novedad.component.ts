@@ -41,6 +41,7 @@ export class NovedadComponent implements OnInit {
 // tslint:disable-next-line: no-unused-expression
       novedadForm.reset;
       this.novedadService.selectNovedad = new Novedad();
+      this.novedadService.aENovedad = 'Añadir Novedad';
     }
   }
 

@@ -16,6 +16,8 @@ import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { ListaDeProyectosComponent } from './components/lista-de-proyectos/lista-de-proyectos.component';
 import { AdministrarRolesComponent } from './components/panel-de-control/administrar-roles/administrar-roles.component';
 import { AdminGuard } from './shared/guard/admin.guard';
+// tslint:disable-next-line: max-line-length
+import { SemilleroDeInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/semillero-de-investigacion.component';
 
 const routes: Routes = [
   { path: '', component: InfoIndexComponent },
@@ -29,6 +31,7 @@ const routes: Routes = [
   { path: 'proyectos', component: ListaDeProyectosComponent },
   { path: 'proyectos/:id', component: ProyectosComponent },
   { path: 'panel-de-control/administar-roles', component: AdministrarRolesComponent, canActivate: [AdminGuard]},
+  { path: 'panel-de-control/registro-semillero-de-investigacion', component: SemilleroDeInvestigacionComponent, canActivate: [AdminGuard]},
 ];
 
 @NgModule({

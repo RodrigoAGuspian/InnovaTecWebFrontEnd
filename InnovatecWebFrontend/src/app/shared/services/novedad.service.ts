@@ -17,7 +17,7 @@ export class NovedadService {
   public static controlarCambios = true;
   novedadList: AngularFireList<any>;
   selectNovedad: Novedad = new Novedad();
-
+  public aENovedad = 'Añadir Novedad';
   getNovedades() {
     return this.novedadList = this.firebaseDataBase.list('novedades');
   }
