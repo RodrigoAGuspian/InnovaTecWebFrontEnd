@@ -159,7 +159,7 @@ export class AuthService {
         // this.SendVerificationMail();
         this.router.navigate(['/']);
         this.SetUserData(result.user);
-        this.userInfoService.insertUser(formSignUp.value);
+        this.userInfoService.insertUser(formSignUp.value, result.user.uid);
         this.snackBar.open('Espere que un administrador apruebe su cuenta para ingresar a la plataforma.', 'Registro completado.', {
           duration: 2000,
           panelClass: ['blue-snackbar']

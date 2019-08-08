@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Rol } from '../models/rol';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { UserRol } from '../models/user-rol';
-import { UserInfo } from '../models/user-info';
 
 
 @Injectable({

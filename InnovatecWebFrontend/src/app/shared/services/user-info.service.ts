@@ -10,9 +10,10 @@ export class UserInfoService {
   getUsers() {
     return this.userslist = this.firebase.list('users');
   }
-  insertUser(userInfo: UserInfo) {
+  insertUser(userInfo: UserInfo, userId: string) {
     this.getUsers();
     this.userslist.push({
+      uid: userId,
       email: userInfo.email,
       primerN: userInfo.primerN,
       segundoN: userInfo.segundoN,

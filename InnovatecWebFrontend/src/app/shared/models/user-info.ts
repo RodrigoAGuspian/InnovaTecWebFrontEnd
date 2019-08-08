@@ -1,4 +1,5 @@
 export class UserInfo {
+  uid: string;
   skey: string;
   email: string;
   primerN: string;
