@@ -18,6 +18,7 @@ import { AdministrarRolesComponent } from './components/panel-de-control/adminis
 import { AdminGuard } from './shared/guard/admin.guard';
 // tslint:disable-next-line: max-line-length
 import { SemilleroDeInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/semillero-de-investigacion.component';
+import { SemilleroDeInvestigacionPComponent } from './components/semillero-de-investigacion-p/semillero-de-investigacion-p.component';
 import { EnsayoCloudMesseComponent } from './components/ensayo-cloud-messe/ensayo-cloud-messe.component';
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'proyectos/:id', component: ProyectosComponent },
   { path: 'panel-de-control/administar-roles', component: AdministrarRolesComponent, canActivate: [AdminGuard]},
   { path: 'panel-de-control/registro-semillero-de-investigacion', component: SemilleroDeInvestigacionComponent, canActivate: [AdminGuard]},
+  { path: 'semillero-de-investigacion', component: SemilleroDeInvestigacionPComponent },
   { path: 'ensayo', component: EnsayoCloudMesseComponent },
 ];
 

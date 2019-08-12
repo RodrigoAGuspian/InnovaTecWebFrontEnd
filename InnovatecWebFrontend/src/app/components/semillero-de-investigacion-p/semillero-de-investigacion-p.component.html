@@ -1,0 +1,30 @@
+<app-index></app-index>
+<div class="container row">
+  <div class="card col s12">
+    <h3 class="col s12 center" id="titulo">Semillero de Investigación</h3>
+    <div class="col s12 contenido">
+      <h4>Objetivos</h4>
+      <ul class="collection" *ngFor="let objetivo of listaDeObjetivos">
+        <li class="collection-item">
+          <h6 class="light">{{ objetivo }}</h6>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col s12 contenido">
+      <h4>Líneas de investigación</h4>
+      <ul class="collection" *ngFor="let linea of listaDeLineasDeInves">
+        <li class="collection-item">
+          <h6 class="light">{{ linea }}</h6>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col s12 contenido" id="proyectos" *ngIf="proyectosPeq != null">
+        <h4>Proyectos</h4>
+
+    </div>
+
+
+  </div>
+</div>

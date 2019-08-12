@@ -7,6 +7,8 @@ import { UserRol } from 'src/app/shared/models/user-rol';
 import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EmailNotificationService } from 'src/app/shared/services/email-notification.service';
+import { EmailNotification } from 'src/app/shared/models/email-notification';
 
 
 @Component({
@@ -17,10 +19,10 @@ import { Router } from '@angular/router';
 
 export class AdministrarRolesComponent implements OnInit {
 
-  formSelectol: FormGroup;
-  constructor(public fb: FormBuilder, public rolesService: RolesService,
-              private userInfoService: UserInfoService, private snackBar: MatSnackBar, public router: Router) {
-    this.formSelectol = this.fb.group({
+  formSelector: FormGroup;
+  constructor(public fb: FormBuilder, public rolesService: RolesService, private userInfoService: UserInfoService,
+              private snackBar: MatSnackBar, public router: Router, private emailNotificationService: EmailNotificationService) {
+    this.formSelector = this.fb.group({
       rol: [],
     });
 
@@ -137,7 +139,7 @@ export class AdministrarRolesComponent implements OnInit {
   mostrarMas(row: UserRol) {
     this.rolesService.selectUserRol = Object.assign({}, row);
     this.selectUserRolTmp = Object.assign({}, row);
-    this.formSelectol.controls.rol.setValue(this.rolesService.selectUserRol.tipoDeRol, {onlySelf: true});
+    this.formSelector.controls.rol.setValue(this.rolesService.selectUserRol.tipoDeRol, {onlySelf: true});
   }
 
   cambiarRolAlTmp(rol) {
@@ -226,6 +228,12 @@ export class AdministrarRolesComponent implements OnInit {
             if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[0] && this.selectUserRolTmp.tipoDeRol === this.tipos[1]) {
               // solo pasar a invitado
               this.rolesService.insertInvitado(this.selectUserRolTmp);
+              const emailNotification = new EmailNotification();
+              emailNotification.user = this.selectUserRolTmp.email;
+              emailNotification.subject = 'Cambio de rol';
+              // tslint:disable-next-line: max-line-length
+              emailNotification.message = 'A usted se le a asignado el rol de invitado, ahora usted puede acceder a nuestra plataforma para acceder a todos los datos de nuestros proyectos';
+              this.emailNotificationService.insertNotification(emailNotification);
               this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es invitado .', 'Rol modificado', {
                 duration: 2000,
                 panelClass: ['green-snackbar']
@@ -235,6 +243,12 @@ export class AdministrarRolesComponent implements OnInit {
             if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[1] && this.selectUserRolTmp.tipoDeRol === this.tipos[0] ) {
               // solo quitar de invitado
               this.rolesService.deleteInvitado(this.selectUserRolTmp);
+              const emailNotification = new EmailNotification();
+              emailNotification.user = this.selectUserRolTmp.email;
+              emailNotification.subject = 'Cambio de rol';
+              // tslint:disable-next-line: max-line-length
+              emailNotification.message = 'A usted se le a asignado el rol de No Asignado, ahora usted no puede ingresar a nuestra plataforma';
+              this.emailNotificationService.insertNotification(emailNotification);
               this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es no definido .', 'Rol modificado', {
                 duration: 2000,
                 panelClass: ['red-snackbar']
@@ -244,6 +258,12 @@ export class AdministrarRolesComponent implements OnInit {
             if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[0] && this.selectUserRolTmp.tipoDeRol === this.tipos[2]) {
               // solo pasar a administrador
               this.rolesService.insertAdministrador(this.selectUserRolTmp);
+              const emailNotification = new EmailNotification();
+              emailNotification.user = this.selectUserRolTmp.email;
+              emailNotification.subject = 'Cambio de rol';
+              // tslint:disable-next-line: max-line-length
+              emailNotification.message = 'A usted se le a asignado el rol de Administrador, ahora puede ingresar a nuestra plataforma para acceder a todos los datos de nuestros proyectos además de poder asignar roles a los usuarios';
+              this.emailNotificationService.insertNotification(emailNotification);
               this.snackBar.open('Se ha cambiado el rol a ' +
               this.selectUserRolTmp.email + ', ahora es administrador .', 'Rol modificado', {
                 duration: 2000,
@@ -254,6 +274,12 @@ export class AdministrarRolesComponent implements OnInit {
             if (this.rolesService.selectUserRol.tipoDeRol === this.tipos[2] && this.selectUserRolTmp.tipoDeRol === this.tipos[0] ) {
               // solo quitar de administrador
               this.rolesService.deleteAdministrador(this.selectUserRolTmp);
+              const emailNotification = new EmailNotification();
+              emailNotification.user = this.selectUserRolTmp.email;
+              emailNotification.subject = 'Cambio de rol';
+              // tslint:disable-next-line: max-line-length
+              emailNotification.message = 'A usted se le a asignado el rol de No Asignado, ahora usted no puede ingresar a nuestra plataforma';
+              this.emailNotificationService.insertNotification(emailNotification);
               this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es no definido .', 'Rol modificado', {
                 duration: 2000,
                 panelClass: ['red-snackbar']
@@ -263,6 +289,12 @@ export class AdministrarRolesComponent implements OnInit {
               // pasar de invitado a administrador
               this.rolesService.deleteInvitado(this.selectUserRolTmp);
               this.rolesService.insertAdministrador(this.selectUserRolTmp);
+              const emailNotification = new EmailNotification();
+              emailNotification.user = this.selectUserRolTmp.email;
+              emailNotification.subject = 'Cambio de rol';
+              // tslint:disable-next-line: max-line-length
+              emailNotification.message = 'A usted se le a asignado el rol de Administrador, por lo cual se le a subido de rango, ahora usted puede ingresar a nuestra plataforma para acceder a todos los datos de nuestros proyectos además de poder asignar roles a los usuarios';
+              this.emailNotificationService.insertNotification(emailNotification);
               this.snackBar.open('Se ha cambiado el rol a ' +
                 this.selectUserRolTmp.email + ', ahora es administrador .', 'Rol modificado', {
                 duration: 2000,
@@ -274,30 +306,30 @@ export class AdministrarRolesComponent implements OnInit {
               // pasar de administrador a invitado
               this.rolesService.deleteAdministrador(this.selectUserRolTmp);
               this.rolesService.insertInvitado(this.selectUserRolTmp);
+              const emailNotification = new EmailNotification();
+              emailNotification.user = this.selectUserRolTmp.email;
+              emailNotification.subject = 'Cambio de rol';
+              // tslint:disable-next-line: max-line-length
+              emailNotification.message = 'A usted se le a asignado el rol de Administrador, por lo cual se le a bajado de rango, ahora usted puede ingresar a nuestra plataforma solo para acceder a todos los datos de nuestros proyectos';
+              this.emailNotificationService.insertNotification(emailNotification);
               this.snackBar.open('Se ha cambiado el rol a ' + this.selectUserRolTmp.email + ', ahora es invitado .', 'Rol modificado', {
                 duration: 2000,
                 panelClass: ['yellow-snackbar']
               });
             }
-
           }
-
         }
-
       }
-
-
     }
 
     this.resetForm();
 
   }
 
-
   resetForm() {
     this.rolesService.selectUserRol = new UserRol();
     this.selectUserRolTmp = new UserRol();
-    this.formSelectol.controls.rol.setValue('', {onlySelf: true});
+    this.formSelector.controls.rol.setValue('', {onlySelf: true});
   }
 
 }

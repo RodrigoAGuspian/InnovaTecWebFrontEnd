@@ -8,3 +8,10 @@
 .cursor{
   cursor: pointer;
 }
+.tamano{
+  width: auto !important;
+  height: 250px !important;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}

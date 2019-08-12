@@ -24,7 +24,7 @@ export class IndexComponent implements OnInit {
         break;
 
       case 2:
-        this.router.navigate(['']);
+        this.router.navigate(['semillero-de-investigacion']);
         break;
 
       case 3:

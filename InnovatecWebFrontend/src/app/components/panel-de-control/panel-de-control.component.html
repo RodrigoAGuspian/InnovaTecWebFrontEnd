@@ -1,21 +1,20 @@
-<nav>
-  <div class="nav-wrapper teal lighten-2">
+<nav class="nav-extended">
+  <div class="nav-background ">
+      <div class="pattern active backgroud-img-nav"></div>
+  </div>
+  <div class="nav-wrapper">
     <ul class="left">
         <li data-target="slide-out" class="sidenav-trigger"><a><i class="material-icons">menu</i></a></li>
     </ul>
-    <a class="brand-logo center">Innovatec</a>
+    <a class="brand-logo center">SEINEREE</a>
   </div>
 </nav>
 
 <ul id="slide-out" class="sidenav row">
   <li>
       <div class="user-view">
-      <div class="background">
-          <a><i class="material-icons circle">home</i></a>
-      </div>
-      <a><i class="material-icons circle">person</i></a>
-      <a><span class="black-text name">Innovatec</span></a>
-      <a><span class="black-text email"></span></a>
+        <a><span class="black-text name">{{ userInfo.primerN }} {{ userInfo.segundoN }} <br> {{ userInfo.primerA }} {{ userInfo.segundoA }} </span></a>
+        <a><span class="black-text email">{{ userInfo.email }}</span></a>
     </div>
   </li>
   <li><a class="black-text col s12" (click)="viewChangeIndex()"><i class="black-text material-icons">home</i>Inicio</a></li>

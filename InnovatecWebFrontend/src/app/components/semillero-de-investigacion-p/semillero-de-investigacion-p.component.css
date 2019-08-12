@@ -1,0 +1,9 @@
+.pasaPalabra{
+  word-wrap: break-word;
+}
+.a-un-lado{
+  float:left;
+}
+.por-abajo{
+  clear:both;
+}

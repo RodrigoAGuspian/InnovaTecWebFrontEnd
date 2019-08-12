@@ -1,37 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { MessagingService } from 'src/app/shared/services/messaging.service';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 
 @Component({
   selector: 'app-ensayo-cloud-messe',
   templateUrl: './ensayo-cloud-messe.component.html',
-  styleUrls: ['./ensayo-cloud-messe.component.css']
+  styleUrls: ['./ensayo-cloud-messe.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EnsayoCloudMesseComponent implements OnInit {
-  message;
+
+  public config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: false,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: true,
+    pagination: false,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    speed: 1000,
+  };
   constructor(private afMessaging: AngularFireMessaging, private messagingService: MessagingService) {
 
   }
 
-  requestPermission() {
-    this.afMessaging.requestToken
-      .subscribe(
-        (token) => { console.log('Permission granted! Save to the server!', token); },
-        (error) => { console.error(error); },
-      );
-  }
-
-  listen() {
-    this.afMessaging.messages
-      .subscribe((message) => { console.log(message); });
-  }
-
   ngOnInit() {
-    const userId = 'V2ZI52y9Q6SstD6tMDJu1pThDvj2';
-    this.messagingService.requestPermission(userId);
-    this.messagingService.receiveMessage();
-    this.message = this.messagingService.currentMessage;
+
   }
+
 
 }

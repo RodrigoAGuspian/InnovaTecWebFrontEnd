@@ -61,6 +61,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatRippleModule} from '@angular/material/core';
 
+// Módulos para el carrusel
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
 // tslint:disable-next-line: max-line-length
 import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
 import { CrudNovedadesComponent } from './components/panel-de-control/crud-novedades/crud-novedades.component';
@@ -98,7 +103,12 @@ import { LineasInvestigacionComponent } from './components/panel-de-control/semi
 import { ListLineaInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/lineas-investigacion/list-linea-investigacion/list-linea-investigacion.component';
 // tslint:disable-next-line: max-line-length
 import { LineaInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/lineas-investigacion/linea-investigacion/linea-investigacion.component';
+import { SemilleroDeInvestigacionPComponent } from './components/semillero-de-investigacion-p/semillero-de-investigacion-p.component';
 
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
 
 @NgModule({
   declarations: [
@@ -146,6 +156,7 @@ import { LineaInvestigacionComponent } from './components/panel-de-control/semil
     LineasInvestigacionComponent,
     ListLineaInvestigacionComponent,
     LineaInvestigacionComponent,
+    SemilleroDeInvestigacionPComponent,
 
   ],
   imports: [
@@ -184,8 +195,13 @@ import { LineaInvestigacionComponent } from './components/panel-de-control/semil
     MatTabsModule,
     MatTableModule,
     MatRippleModule,
+    SwiperModule,
   ],
   providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
   ],
   bootstrap: [AppComponent]
 })

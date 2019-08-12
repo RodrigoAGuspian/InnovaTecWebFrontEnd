@@ -117,15 +117,16 @@ export class ProyectosComponent implements OnInit, OnDestroy {
     }
 
     let autoplay = true;
-
+    let contador = 0;
     if (ProyectoService.controlarCambios) {
       setInterval(() =>  {
-        if (autoplay) { $('.carousel.carousel-slider').carousel('next'); }
-      }, 5000);
+        if (autoplay && contador === 5) {  $('.carousel.carousel-slider').carousel('next'); contador = 0; }
+        contador++;
+      }, 1000);
       ProyectoService.controlarCambios = false;
     }
 
-    $('.carousel.carousel-slider').hover(() =>  { autoplay = false; }, () =>  { autoplay = true; });
+    $('.carousel.carousel-slider').hover(() =>  { autoplay = false; contador = 0; }, () =>  { autoplay = true; contador = 0; });
     $('.carousel.carousel-slider').carousel({
       fullWidth: true,
       indicators: true,

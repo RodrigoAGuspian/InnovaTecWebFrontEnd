@@ -1,6 +1,6 @@
 <app-panel-de-control></app-panel-de-control>
-<div class="container">
-  <button class="teal" mat-fab (click)="resetForm()"><i class="white-text material-icons">replay</i></button>
+<div class="container btn-floating1">
+  <button color="primary" mat-fab (click)="resetForm()"><i class="white-text material-icons">replay</i></button>
 </div>
 <form class="container formulario" #userRolForm='ngForm'  method="POST" (ngSubmit)="comprobarRol()" autocomplete="off">
   <input type="hidden" name="skeyRol" #skeyRol="ngModel" [(ngModel)]="rolesService.selectUserRol.skeyRol">
@@ -47,7 +47,7 @@
     </div>
 
     <div class="inputs col s12">
-      <mat-form-field class="input-select" [formGroup]="formSelectol">
+      <mat-form-field class="input-select" [formGroup]="formSelector" *ngIf="rolesService.selectUserRol.tipoDeRol != null">
         <mat-label class="input-select">Rol</mat-label>
         <mat-select class="input-select" [disabled]="selectUserRolTmp == null" color="primary" formControlName="rol">
           <mat-option class="input-select" *ngFor="let c of tipos" [value]="c" (click)="cambiarRolAlTmp(c)">{{ c }}</mat-option>

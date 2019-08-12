@@ -3,6 +3,8 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatMenuTrigger } from '@angular/material';
 import { RolesService } from 'src/app/shared/services/roles.service';
+import { UserInfo } from 'src/app/shared/models/user-info';
+import { UserInfoService } from 'src/app/shared/services/user-info.service';
 declare let $: any;
 
 
@@ -13,9 +15,11 @@ declare let $: any;
 })
 export class PanelDeControlComponent implements OnInit  {
 
-  constructor(public authservice: AuthService, public router: Router, private rolesService: RolesService) { }
+  constructor(public authservice: AuthService, public router: Router, private rolesService: RolesService,
+              private userInfoService: UserInfoService) { }
 
   public admin = false;
+  public userInfo = new UserInfo();
 
   private urlProSolar = [
     'panel-de-control/pro-solar-tiempo-real',
@@ -89,10 +93,31 @@ export class PanelDeControlComponent implements OnInit  {
         }
       }
     );
+
+    this.getUser();
   }
 
   public viewChangeIndex() {
     this.router.navigate(['panel-de-control']);
+  }
+
+  public getUser() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.userInfoService.getUsers().snapshotChanges().subscribe(
+      item => {
+
+        item.forEach(element => {
+          const x = element.payload.toJSON();
+          // tslint:disable-next-line: no-string-literal
+          if (x['email'] === user.email ) {
+            // tslint:disable-next-line: no-string-literal
+            this.userInfo = x as UserInfo;
+          }
+        });
+      }
+    );
+
+
   }
 
   public viewChageRoles() {
