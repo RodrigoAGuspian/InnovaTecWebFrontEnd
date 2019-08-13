@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Novedad } from 'src/app/shared/models/novedad';
 import { NovedadService } from 'src/app/shared/services/novedad.service';
 import { Router } from '@angular/router';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 declare const $: any;
 
@@ -14,6 +15,24 @@ declare const $: any;
 export class InfoIndexComponent implements OnInit {
 
   novedadesList: Novedad[];
+
+  public config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: false,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: true,
+    pagination: false,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    speed: 1000,
+  };
+
   constructor(private novedadesService: NovedadService, public router: Router) { }
   ngOnInit() {
 

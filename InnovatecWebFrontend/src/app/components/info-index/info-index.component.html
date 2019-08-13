@@ -1,6 +1,12 @@
 <app-index></app-index>
-<div class="slider container">
-  <ul class="slides">
+<div class="swiper-container contenedor z-depth-1" [swiper]="config">
+  <div class="swiper-wrapper" id="slider-swiper-a">
+    <div class="swiper-slide">
+      <div class="sliderA" style="background-image:url('https://lorempixel.com/580/250/nature/4');">
+      </div>
+    </div>
+  </div>
 
-  </ul>
+  <div class="circle z-depth-1 swiper-button-prev"></div>
+  <div class="circle z-depth-1 swiper-button-next"></div>
 </div>
