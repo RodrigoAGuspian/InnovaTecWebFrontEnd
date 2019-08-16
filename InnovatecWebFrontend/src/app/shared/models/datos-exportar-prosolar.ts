@@ -1,4 +1,5 @@
 export class DatosExportarProsolar {
+  dia: string;
   corrientePanel: string;
   hora: string;
   humedad: string;

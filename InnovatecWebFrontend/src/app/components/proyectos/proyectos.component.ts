@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Proyecto } from 'src/app/shared/models/proyecto';
 import { ProyectoService } from 'src/app/shared/services/proyecto.service';
 import { Resultado } from 'src/app/shared/models/resultado';
 import { Grafica } from 'src/app/shared/models/grafica';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { MatDialog } from '@angular/material';
+import { DialogForImgsComponent } from '../dialogs/dialog-for-imgs/dialog-for-imgs.component';
 declare const $: any;
 
 @Component({
@@ -23,11 +26,37 @@ export class ProyectosComponent implements OnInit, OnDestroy {
   public graficas: Grafica[] = [];
   public listNombreGrafica: Grafica[] = [];
   public graficasOrdenadas: string [][] = [];
-  constructor(activateRoute: ActivatedRoute, private proyectoService: ProyectoService) {
+  public imgsProyecto: string [] = [];
+  public solo1Vez = false;
+  constructor(activateRoute: ActivatedRoute, private proyectoService: ProyectoService, public dialog: MatDialog) {
     this.proyectoId = activateRoute.snapshot.params.id;
    }
 
+
+   public config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 3,
+    keyboard: false,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: true,
+    pagination: false,
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    speed: 1000,
+  };
+
+
+  public masGrande(img: string) {
+    ProyectoService.imgParaResultado = img;
+    this.dialog.open(DialogForImgsComponent);
+  }
   ngOnInit() {
+    this.solo1Vez = false;
     this.proyectoService.getProyectos().snapshotChanges().subscribe(
       item => {
         this.proyectosList = [];
@@ -49,7 +78,7 @@ export class ProyectosComponent implements OnInit, OnDestroy {
       if (id != null || !isNaN(id)) {
         this.proyecto = this.proyectosList[id];
         this.inputInfoInList();
-        this.createCarouselToHand();
+        // this.createCarouselToHand();
       } else {
         console.log('Error en el id');
       }
@@ -87,6 +116,15 @@ export class ProyectosComponent implements OnInit, OnDestroy {
 
     }
 
+    try {
+      this.imgsProyecto = Object.values(this.proyecto.imgsProyecto);
+      this.solo1Vez = true;
+
+    } catch (error) {
+
+    }
+
+
   }
 
   removeDuplicates(originalArray) {
@@ -98,48 +136,6 @@ export class ProyectosComponent implements OnInit, OnDestroy {
       return exists;
     });
     return newArray;
-}
-
-  createCarouselToHand() {
-    const aCarouselItem = '<a class="carousel-item" >';
-    const tmpList: string[] = Object.values(this.proyecto.imgsProyecto);
-    tmpList.forEach(element => {
-      // tslint:disable-next-line: max-line-length
-      const responsiveConfig = 'width: 100%; height: 350px; background-position: center center; background-repeat: no-repeat; background-size: cover;';
-      const vistaImg = '<div class="imgs-slider card " style="' + responsiveConfig + 'background-image: url(' + element + ');">';
-      const appendValue = aCarouselItem + vistaImg + '</div> </a>';
-      $('.carousel.carousel-slider')
-        .append(appendValue);
-    });
-
-    if ($('.carousel.carousel-slider').hasClass('initialized')) {
-      $('.carousel.carousel-slider').removeClass('initialized');
-    }
-
-    let autoplay = true;
-    let contador = 0;
-    if (ProyectoService.controlarCambios) {
-      setInterval(() =>  {
-        if (autoplay && contador === 5) {  $('.carousel.carousel-slider').carousel('next'); contador = 0; }
-        contador++;
-      }, 1000);
-      ProyectoService.controlarCambios = false;
-    }
-
-    $('.carousel.carousel-slider').hover(() =>  { autoplay = false; contador = 0; }, () =>  { autoplay = true; contador = 0; });
-    $('.carousel.carousel-slider').carousel({
-      fullWidth: true,
-      indicators: true,
-    });
-
-    $(document).ready(() => {
-      $('.carousel.carousel-slider').carousel({
-        fullWidth: true,
-        indicators: true,
-        duration: 200,
-      });
-    });
-
   }
 
   ngOnDestroy() {

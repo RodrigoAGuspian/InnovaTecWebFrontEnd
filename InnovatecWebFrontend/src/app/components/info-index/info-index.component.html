@@ -1,12 +1,47 @@
 <app-index></app-index>
-<div class="swiper-container contenedor z-depth-1" [swiper]="config">
+<div class="swiper-container contenedor z-depth-1" [swiper]="config" *ngIf="!solo1Vez">
   <div class="swiper-wrapper" id="slider-swiper-a">
-    <div class="swiper-slide">
-      <div class="sliderA" style="background-image:url('https://lorempixel.com/580/250/nature/4');">
+    <div class="swiper-slide black-text white left-align sliderP"  *ngFor="let novedad of novedadesList, let i = index" (click)="enviarA(i)">
+      <div class="imagenes a-un-lado">
+        <img class="sliderA a-un-lado" src="{{novedad.imgsNovedad[0]}}">
+        <img class="sliderA a-un-lado" src="{{novedad.imgsNovedad[1]}}">
+        <img class="sliderA a-un-lado" src="{{novedad.imgsNovedad[2]}}">
+      </div>
+      <div class="a-un-lado contenedor1 texto right">
+        <h4>{{ novedad.titulo }}</h4>
       </div>
     </div>
   </div>
 
   <div class="circle z-depth-1 swiper-button-prev"></div>
   <div class="circle z-depth-1 swiper-button-next"></div>
+</div>
+
+<div class="row center">
+  <div class="col s8 chart push-s2 pull-s2">
+    <h4>Gráfica en tiempo real de Irradiancia Solar</h4>
+    <div style="display: block;"  >
+      <canvas baseChart
+        height="320"
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="contenedor row">
+  <div class="card col s12">
+    <p>
+      Línea de investigación energías renovables y eficiencia energética del centro de teleinformática y producción industrial (CTPI) del SENA regional Cauca y semillero de investigación SEINEREE; que busca integrar los conocimientos en energías renovables, electricidad, automatización, desarrollo de sistemas de información, aplicados a la optimización de procesos, diseño y solución de aplicaciones para edificaciones, empresas, zonas rurales, gobierno y la sociedad en general.
+      Adicionalmente como parte de los procesos de formación del CTPI, todos sus desarrollos y productos, se integran en las formaciones técnicas y complementarias en energía solar fotovoltaica, eficiencia energética y demás formaciones asociadas.
+      Para tener acceso a datos de los proyectos, gráficas en tiempo real, descarga de datos históricos, contactos y demás, accede al área de PROYECTOS, adicionalmente contamos con aplicaciones móviles que te permiten acceder a datos y gráficas de nuestros proyectos, puestas a disposición de la comunidad en general.
+      Como parte de uno de los proyectos de investigación aplicada en energía solar, se cuenta con el monitoreo en tiempo real de variables asociadas con la producción de energía solar en el laboratorio de investigación aplicada del CTPI del SENA regional Cauca, como irradiancia solar, corriente y voltaje en panel solar, humedad y temperatura (Proyecto Prosolar CTPI).
+    </p>
+  </div>
 </div>

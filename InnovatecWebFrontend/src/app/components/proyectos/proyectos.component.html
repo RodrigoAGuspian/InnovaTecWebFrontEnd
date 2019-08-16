@@ -1,7 +1,15 @@
 <app-index></app-index>
-<div class="container">
-  <div class="carousel carousel-slider col m6 s12">
+<div class="swiper-container contenedor z-depth-1" [swiper]="config" *ngIf="solo1Vez">
+  <div class="swiper-wrapper" id="slider-swiper-a">
+    <div class="swiper-slide black-text white left-align"  *ngFor="let img of imgsProyecto let l = last">
+      <div class="center">
+        <img class="sliderA center" src="{{img}}" (click)="masGrande(img)">
+      </div>
+    </div>
   </div>
+
+  <div class="circle z-depth-1 swiper-button-prev"></div>
+  <div class="circle z-depth-1 swiper-button-next"></div>
 </div>
 <div class="container row">
   <div class="card col s12">

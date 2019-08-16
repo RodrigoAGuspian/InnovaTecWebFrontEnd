@@ -60,6 +60,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatRippleModule} from '@angular/material/core';
+import {MatDialogModule} from '@angular/material/dialog';
 
 // Módulos para el carrusel
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -104,6 +105,7 @@ import { ListLineaInvestigacionComponent } from './components/panel-de-control/s
 // tslint:disable-next-line: max-line-length
 import { LineaInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/lineas-investigacion/linea-investigacion/linea-investigacion.component';
 import { SemilleroDeInvestigacionPComponent } from './components/semillero-de-investigacion-p/semillero-de-investigacion-p.component';
+import { DialogForImgsComponent } from './components/dialogs/dialog-for-imgs/dialog-for-imgs.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -157,6 +159,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ListLineaInvestigacionComponent,
     LineaInvestigacionComponent,
     SemilleroDeInvestigacionPComponent,
+    DialogForImgsComponent,
 
   ],
   imports: [
@@ -196,6 +199,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatTableModule,
     MatRippleModule,
     SwiperModule,
+    MatDialogModule,
   ],
   providers: [
     {
@@ -203,6 +207,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
       useValue: DEFAULT_SWIPER_CONFIG
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogForImgsComponent],
 })
 export class AppModule { }

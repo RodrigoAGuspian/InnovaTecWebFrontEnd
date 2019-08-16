@@ -12,7 +12,8 @@ export class ExportExcelService {
 
   constructor() { }
 
-  public exportAsExcelFile(json: any[], excelFileName: string, otherData1?: any[], otherData2?: any[], desdeCelda1?: string, desdeCelda2?: string): void {
+  public exportAsExcelFile(json: any[], excelFileName: string,
+                           otherData1?: any[], otherData2?: any[], desdeCelda1?: string, desdeCelda2?: string): void {
     const wu = XLSX.utils;
     const worksheet: XLSX.WorkSheet = wu.json_to_sheet(json);
     try {

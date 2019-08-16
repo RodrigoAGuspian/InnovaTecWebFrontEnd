@@ -1,8 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { Novedad } from 'src/app/shared/models/novedad';
 import { NovedadService } from 'src/app/shared/services/novedad.service';
 import { Router } from '@angular/router';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label, Color, BaseChartDirective } from 'ng2-charts';
+import { DatosProSolarService } from 'src/app/shared/services/datos-pro-solar.service';
+import { RealTimeProSolar } from 'src/app/shared/models/real-time-pro-solar';
 
 declare const $: any;
 
@@ -12,9 +16,36 @@ declare const $: any;
   styleUrls: ['./info-index.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class InfoIndexComponent implements OnInit {
+export class InfoIndexComponent implements OnInit, AfterViewInit {
 
   novedadesList: Novedad[];
+  public realTimeList: RealTimeProSolar[] = [];
+  public dataValuesRT: number[] = [];
+  colorLine = 'rgba(229,57,53,1)';
+  colorBorder = 'rgba(227,73,59,1)';
+  valueLabel = 'Irradiancia';
+  public deteccion = true;
+  public charDataSets: ChartDataSets = { data: this.dataValuesRT, label: this.valueLabel };
+  public lineChartData = [this.charDataSets] ;
+  public lineChartLabels: Label[] = [];
+  public solo1Vez = true;
+  public lineChartColors: Color[] = [
+    {
+      borderColor: this.colorLine,
+      backgroundColor: 'rgba(0,0,0,0)',
+      pointBorderColor: this.colorBorder,
+      pointBackgroundColor: this.colorBorder,
+    },
+  ];
+
+  public lineChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false
+  };
+
+  public lineChartLegend = true;
+  public lineChartType: ChartType = 'line';
+  public lineChartPlugins = [];
 
   public config: SwiperConfigInterface = {
     a11y: true,
@@ -33,9 +64,26 @@ export class InfoIndexComponent implements OnInit {
     speed: 1000,
   };
 
-  constructor(private novedadesService: NovedadService, public router: Router) { }
-  ngOnInit() {
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
+  constructor(private novedadesService: NovedadService, public router: Router, public infoList: DatosProSolarService) { }
+  ngOnInit() {
+    this.infoList.getRealTimeData().snapshotChanges().subscribe(item => {
+      this.realTimeList = [];
+      // tslint:disable-next-line: no-shadowed-variable
+      item.forEach(element => {
+        const x = element.payload.toJSON();
+        // tslint:disable-next-line: no-string-literal
+        x['skey'] = element.key;
+        this.realTimeList.push(x as RealTimeProSolar);
+      });
+      this.InputValuesChart();
+
+
+    });
+  }
+
+  ngAfterViewInit() {
     this.novedadesService.getNovedades().snapshotChanges().subscribe(
       item => {
         this.novedadesList = [];
@@ -45,39 +93,66 @@ export class InfoIndexComponent implements OnInit {
           x['skey'] = element.key;
           this.novedadesList.push(x as Novedad);
         });
-        this.createCarouselToHand();
+        if (this.solo1Vez) {
+          this.solo1Vez = false;
+          // this.createCarouselToHand();
+
+        }
       }
     );
   }
 
 
-  createCarouselToHand() {
-    const divCaption = '<div style="cursor: pointer" class="caption right-align"> <h3>';
+  enviarA(i: number) {
+    this.router.navigate(['novedades/' + i]);
+  }
 
-    for (let index = 0; index < this.novedadesList.length; index++) {
+  private getTime(date?: Date) {
+    return date != null ? new Date(date).getTime() : 0;
+  }
 
-      const element = this.novedadesList[index];
-      const vistaImagen = '<img class="imagen-slider" src="' + element.imgsNovedad[0] + '">';
-      const vistaTitutlo = divCaption + element.titulo + '</h3>';
-      // const vistaContenido = '<h4 class="light white-text" maxlength=20>' + element.contenido + '</h4>';
-      const appendValue = '<li> <a id="item-' + index + '">' + vistaImagen + vistaTitutlo + '</div> </a> </li>';
-      $('.slides').append(appendValue);
-      $( '#item-' + index ).click(() => {
-        this.router.navigate(['novedades/' + index]);
-      });
-
-
-    }
-
-    if ($('.slider').hasClass('initialized')) {
-      $('.slider').removeClass('initialized');
-    }
-    $(document).ready(() => {
-      $('.slider').slider();
+  public sortByStartDate(array: RealTimeProSolar[]): RealTimeProSolar[] {
+    return array.sort((a: RealTimeProSolar, b: RealTimeProSolar) => {
+      return this.getTime(this.parseStringToDate(a.fechaActual1)) - this.getTime(this.parseStringToDate(b.fechaActual1));
     });
+  }
 
+  public parseStringToDate(dateString: string) {
+    const dateParts = dateString.split(' ');
+    const dateParts1 = dateParts[0].split('-');
+    const dateParts2 = dateParts[1].split(':');
+    const day = Number(dateParts1[0]);
+    const month = Number(dateParts1[1]) - 1;
+    const year = Number(dateParts1[2]);
+    const hour = Number(dateParts2[0]);
+    const min = Number(dateParts2[1]);
+    const sec = Number(dateParts2[2]);
+    return new Date(year, month, day, hour, min, sec);
   }
 
 
+  InputValuesChart() {
+    const listSort = this.sortByStartDate(this.realTimeList);
+
+    for (let index = 0; index < listSort.length; index++) {
+      const element = listSort[index];
+      if (this.deteccion) {
+        this.dataValuesRT.push(Number(element.irradiancia));
+        this.valueLabel = 'Irradiancia';
+
+        this.lineChartLabels.push(element.hora);
+        this.deteccion = false;
+      } else {
+        this.dataValuesRT[index] = (Number(element.irradiancia));
+        this.valueLabel = 'Irradiancia';
+        this.lineChartLabels[index] = (element.hora);
+
+      }
+
+    }
+    this.charDataSets = { data: this.dataValuesRT, label: this.valueLabel };
+    try {this.chart.chart.update(); } catch (error) {}
+
+  }
 
 }

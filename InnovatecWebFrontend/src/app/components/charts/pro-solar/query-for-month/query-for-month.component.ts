@@ -191,6 +191,7 @@ export class QueryForMonthComponent implements OnInit {
           const datos = element.payload.val();
           const keySplit = element.key.split('d');
           const tmpValues: DatosProSolar[] = [];
+          const tmpDay = Number(keySplit[1]);
           datos.forEach(ele1 => {
             ele1.skey = keySplit[1];
 
@@ -207,11 +208,12 @@ export class QueryForMonthComponent implements OnInit {
             tmpExportData.voltajePanel = ele1['voltajePanel'];
             // tslint:disable-next-line: no-string-literal
             tmpExportData.temperatura = ele1['temperatura'];
+            tmpExportData.dia = String(tmpDay);
             this.exportList.push(tmpExportData);
 
             tmpValues.push(ele1 as DatosProSolar);
           });
-          const tmpDay = Number(keySplit[1]);
+
           this.fullDataList[tmpDay] = tmpValues;
         });
         this.graficar();

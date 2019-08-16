@@ -13,6 +13,7 @@ import { PreResultado } from '../models/pre-resultado';
 export class ProyectoService {
   constructor(private firebaseDataBase: AngularFireDatabase, private storage: AngularFireStorage) { }
   public static controlarCambios = true;
+  public static imgParaResultado = '';
   proyectoList: AngularFireList<any>;
   selectProyecto: Proyecto = new Proyecto();
   public infoGraficas: Grafica[] = [];
