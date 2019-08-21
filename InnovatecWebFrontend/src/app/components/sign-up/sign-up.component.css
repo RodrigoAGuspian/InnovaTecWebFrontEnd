@@ -26,3 +26,10 @@
 .limpiar > *{
   border: none;
 }
+.contenido{
+  margin: 2% 0;
+}
+
+.btn-control{
+  width: 120px !important;
+}

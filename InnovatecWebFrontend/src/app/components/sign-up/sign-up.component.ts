@@ -13,7 +13,7 @@ export class SignUpComponent implements OnInit {
 
   formSignUp: FormGroup;
   userInfo: UserInfo;
-
+  esLineal = false;
   tipos: string[] = ['Académico', 'Empresarial', 'Comercial', 'Otro'];
   default = 'Académico';
 

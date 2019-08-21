@@ -37,6 +37,7 @@
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.24.0",
     "ng2-charts": "^2.2.3",
+    "ngx-lightbox": "^1.2.0",
     "ngx-material-file-input": "^1.1.1",
     "ngx-owl-carousel": "^2.0.7",
     "ngx-owl-carousel-o": "^1.1.6",

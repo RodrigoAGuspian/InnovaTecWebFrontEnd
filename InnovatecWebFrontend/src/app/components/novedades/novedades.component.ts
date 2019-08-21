@@ -1,23 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NovedadService } from 'src/app/shared/services/novedad.service';
 import { Novedad } from 'src/app/shared/models/novedad';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { MatDialog } from '@angular/material';
+import { DialogForImgsComponent } from '../dialogs/dialog-for-imgs/dialog-for-imgs.component';
+import { Lightbox, IAlbum } from 'ngx-lightbox';
 declare const $: any;
 
 @Component({
   selector: 'app-novedades',
   templateUrl: './novedades.component.html',
   styleUrls: ['./novedades.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovedadesComponent implements OnInit {
   public novedadId = '';
   private novedadesList = [];
   public novedad = new Novedad();
-  constructor(activateRoute: ActivatedRoute, private novedadesService: NovedadService) {
+  public solo1Vez = false;
+  public solo1Vez1 = true;
+  public imgsNovedad: string[] = [];
+  public config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 3,
+    keyboard: false,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: true,
+    pagination: false,
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    speed: 1000,
+  };
+  constructor(activateRoute: ActivatedRoute, private novedadesService: NovedadService,
+              public dialog: MatDialog, private lightbox: Lightbox) {
     this.novedadId = activateRoute.snapshot.params.id;
-   }
-
+  }
   ngOnInit() {
+    this.solo1Vez = false;
     try {
       $('.carousel.carousel-slider').destroy();
     } catch (error) {
@@ -38,20 +63,58 @@ export class NovedadesComponent implements OnInit {
     );
   }
 
+
+
   inputId() {
     if (this.novedadId != null) {
       const id = Number(this.novedadId);
 
       if (id != null || !isNaN(id)) {
         this.novedad = this.novedadesList[id];
-        this.createCarouselToHand();
+        // this.createCarouselToHand();
       } else {
         console.log('Error en el id');
       }
 
     }
 
+    try {
+      this.imgsNovedad = Object.values(this.novedad.imgsNovedad);
+      this.solo1Vez = true;
+
+    } catch (error) {
+
+    }
+
   }
+
+  public masGrande(img: string) {
+    NovedadService.imgParaResultado = img;
+    DialogForImgsComponent.identificador = 1;
+    this.dialog.open(DialogForImgsComponent);
+
+    console.log('Abre');
+  }
+
+  agregarJQuery() {
+    if (this.solo1Vez1){
+      this.solo1Vez1 = false;
+      const pro = new Promise((resolve, reject) => {
+        for (let i = 0; i < this.imgsNovedad.length; i++) {
+          $('#a' + i).click(() => {
+            this.masGrande(this.imgsNovedad[i]);
+          });
+          console.log(this.imgsNovedad.length);
+          if(this.imgsNovedad.length - 1 === i) {
+            resolve(true);
+          }
+        }
+      });
+    }
+
+
+  }
+
 
   createCarouselToHand() {
     const aCarouselItem = '<a class="carousel-item" >';

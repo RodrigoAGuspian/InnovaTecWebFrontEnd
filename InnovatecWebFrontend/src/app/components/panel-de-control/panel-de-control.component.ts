@@ -5,7 +5,8 @@ import { MatMenuTrigger } from '@angular/material';
 import { RolesService } from 'src/app/shared/services/roles.service';
 import { UserInfo } from 'src/app/shared/models/user-info';
 import { UserInfoService } from 'src/app/shared/services/user-info.service';
-declare let $: any;
+declare const $: any;
+declare const M;
 
 
 @Component({
@@ -20,7 +21,7 @@ export class PanelDeControlComponent implements OnInit  {
 
   public admin = false;
   public userInfo = new UserInfo();
-
+  private instanceSideNav;
   private urlProSolar = [
     'panel-de-control/pro-solar-tiempo-real',
     'panel-de-control/prosolar-consultar-por-dia',
@@ -45,6 +46,7 @@ export class PanelDeControlComponent implements OnInit  {
 
   ngOnInit() {
     $('.sidenav').sidenav();
+    this.instanceSideNav = M.Sidenav.getInstance($('.sidenav'));
     $('.dropdown-trigger').dropdown({
       belowOrigin: true,
       alignment: 'left',
@@ -98,7 +100,9 @@ export class PanelDeControlComponent implements OnInit  {
   }
 
   public viewChangeIndex() {
-    this.router.navigate(['panel-de-control']);
+    this.instanceSideNav.close();
+    this.router.navigate(['']);
+
   }
 
   public getUser() {

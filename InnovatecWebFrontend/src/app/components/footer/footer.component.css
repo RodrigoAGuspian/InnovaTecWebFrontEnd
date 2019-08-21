@@ -1,0 +1,7 @@
+.item{
+  display: table-cell;
+  vertical-align: middle;
+}
+.no-cursor{
+  cursor:  auto !important;
+}

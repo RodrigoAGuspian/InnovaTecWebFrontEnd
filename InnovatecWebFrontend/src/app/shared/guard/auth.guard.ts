@@ -16,10 +16,6 @@ export class AuthGuard implements CanActivate {
   ) { }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isLoggedIn !== true) {
-      this.snackBar.open('Se ha cerrado sesión correctamente.', 'Adiós.', {
-        duration: 2000,
-        panelClass: ['blue-snackbar']
-      });
       this.router.navigate(['iniciar-sesion']);
     }
     return true;

@@ -8,7 +8,15 @@
       <li><a class="nav-item" (click)="enviarA(0)">Inicio</a></li>
       <li><a class="nav-item" (click)="enviarA(1)">Proyectos de investigación</a></li>
       <li><a class="nav-item" (click)="enviarA(2)">Semillero de investigación</a></li>
-      <li><a class="nav-item" (click)="enviarA(3)"><i class="material-icons large">account_circle</i></a></li>
+      <li *ngIf="autenticado === 0"><a class="nav-item" (click)="enviarA(3)"><i class="material-icons large">account_circle</i></a></li>
+      <li *ngIf="autenticado === 1"><a class="nav-item" [matMenuTriggerFor]="appSesion">
+        <i class="material-icons large">account_circle</i>
+        <mat-menu #appSesion="matMenu" xPosition="before" class="menu-a z-depth-5">
+          <a mat-menu-item class="white-text menu-sesion" (click)="enviarA(4)">Panel de control</a>
+          <a mat-menu-item class="white-text menu-sesion" (click)="enviarA(5)">Cerrar sesión</a>
+        </mat-menu>
+        </a>
+      </li>
     </ul>
   </div>
   <div class="nav-header center">

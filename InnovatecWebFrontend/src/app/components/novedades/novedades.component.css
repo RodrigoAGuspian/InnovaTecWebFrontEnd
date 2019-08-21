@@ -1,10 +1,45 @@
-#contenedor-noveadades{
-  margin-top: 2%;
-}
 .carousel{
   z-index: 1;
 }
 #titulo{
   word-wrap: break-word;
 }
+.slider-aa{
+  width: auto ;
+  height: 400px ;
+  background-size: cover !important;
+  background-position: left !important;
+  background-repeat: no-repeat !important;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 6px 0;
+  border-left-width: 6px;
+  padding-bottom: 3px;
+  cursor: zoom-in;
+}
 
+.contenedor{
+  margin: 2% 10%;
+}
+
+.swiper-button-prev{
+  padding: 16px;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23000000'%2F%3E%3C%2Fsvg%3E");
+  left:10px;
+  right:auto;
+  height: 36px;
+  width: 36px;
+  background-color: rgba(255, 255, 255, 0.36);
+
+}
+
+.swiper-button-next{
+  padding: 16px;
+  background-image:
+  url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23000000'%2F%3E%3C%2Fsvg%3E");
+  right:10px;
+  left:auto;
+  height: 36px;
+  width: 36px;
+  background-color: rgba(255, 255, 255, 0.36);
+}

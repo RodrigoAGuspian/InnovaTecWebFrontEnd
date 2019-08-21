@@ -15,6 +15,7 @@ export class NovedadService {
   constructor(private firebaseDataBase: AngularFireDatabase, private storage: AngularFireStorage) { }
 
   public static controlarCambios = true;
+  public static imgParaResultado = '';
   novedadList: AngularFireList<any>;
   selectNovedad: Novedad = new Novedad();
   public aENovedad = 'Añadir Novedad';

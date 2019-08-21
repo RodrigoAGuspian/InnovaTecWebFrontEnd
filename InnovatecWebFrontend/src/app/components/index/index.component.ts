@@ -1,16 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class IndexComponent implements OnInit {
 
-  constructor(private router: Router) { }
-
+  constructor(private router: Router, public authService: AuthService) { }
+  public autenticado = 0;
   ngOnInit() {
+    console.log(this.authService.isLoggedIn);
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+    if (this.authService.isLoggedIn) {
+      this.autenticado = 1;
+    } else {
+      this.autenticado = 0;
+    }
   }
 
   enviarA(valor: number) {
@@ -28,7 +38,14 @@ export class IndexComponent implements OnInit {
         break;
 
       case 3:
-        this.router.navigate(['iniciar-sesion/']);
+        this.router.navigate(['iniciar-sesion']);
+        break;
+
+      case 4:
+        this.router.navigate(['panel-de-control']);
+        break;
+      case 5:
+        this.authService.SignOut();
         break;
 
     }

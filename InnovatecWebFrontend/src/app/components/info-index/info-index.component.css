@@ -83,3 +83,7 @@ h2{
 .por-abajo{
   clear:both;
 }
+
+.contenido{
+  text-align: justify;
+}

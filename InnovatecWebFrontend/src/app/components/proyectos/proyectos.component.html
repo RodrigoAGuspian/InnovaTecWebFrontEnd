@@ -1,16 +1,4 @@
 <app-index></app-index>
-<div class="swiper-container contenedor z-depth-1" [swiper]="config" *ngIf="solo1Vez">
-  <div class="swiper-wrapper" id="slider-swiper-a">
-    <div class="swiper-slide black-text white left-align"  *ngFor="let img of imgsProyecto let l = last">
-      <div class="center">
-        <img class="sliderA center" src="{{img}}" (click)="masGrande(img)">
-      </div>
-    </div>
-  </div>
-
-  <div class="circle z-depth-1 swiper-button-prev"></div>
-  <div class="circle z-depth-1 swiper-button-next"></div>
-</div>
 <div class="container row">
   <div class="card col s12">
     <h3 class="col s12 center" id="titulo">{{ proyecto.titulo }}</h3>
@@ -55,3 +43,16 @@
     </mat-tab-group>
   </div>
 </div>
+<div class="swiper-container contenedor z-depth-1" [swiper]="config" *ngIf="solo1Vez">
+  <div class="swiper-wrapper" id="slider-swiper-a">
+    <div class="swiper-slide black-text white left-align"  *ngFor="let img of imgsProyecto let l = last">
+      <div class="center">
+        <img class="sliderA center" src="{{img}}" (click)="masGrande(img)">
+      </div>
+    </div>
+  </div>
+
+  <div class="circle z-depth-1 swiper-button-prev"></div>
+  <div class="circle z-depth-1 swiper-button-next"></div>
+</div>
+<app-footer></app-footer>

@@ -37,7 +37,7 @@ nav .nav-background img, nav .nav-background .pattern {
   height: 100%;
   z-index: 2;
   transition: opacity .7s;
-  filter:brightness(0.45);
+  filter:brightness(0.42);
 }
 
 .nav-item:hover {
@@ -54,6 +54,13 @@ nav .nav-background img.active, nav .nav-background .pattern.active {
   opacity: 1;
 }
 
-.logo{
+.logo {
   margin: 0 0.5%;
+}
+.menu-sesion:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.menu-a{
+  background-color: rgba(0, 0, 0, 0.8) !important;
 }

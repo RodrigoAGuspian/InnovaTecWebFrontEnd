@@ -10,12 +10,12 @@ import { UserInfoService } from './user-info.service';
 import { UserInfo } from '../models/user-info';
 import { Rol } from '../models/rol';
 import { RolesService } from './roles.service';
+import { EmailNotificationService } from './email-notification.service';
 
 @Injectable({
   providedIn: 'root'
 
 })
-
 
 export class AuthService {
   userData: any; // Save logged in user data
@@ -30,7 +30,8 @@ export class AuthService {
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     public userInfoService: UserInfoService,
     public rolesService: RolesService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private emailNotificationService: EmailNotificationService, ) {
     this.userInfoService.getUsers().snapshotChanges().subscribe(item => {
       this.userList = []; item.forEach(element => {
         const x = element.payload.toJSON();
@@ -158,12 +159,13 @@ export class AuthService {
         up and returns promise */
         // this.SendVerificationMail();
         this.router.navigate(['/']);
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
         this.userInfoService.insertUser(formSignUp.value, result.user.uid);
         this.snackBar.open('Espere que un administrador apruebe su cuenta para ingresar a la plataforma.', 'Registro completado.', {
           duration: 2000,
           panelClass: ['blue-snackbar']
         });
+        this.emailNotificationService.insertNotificationToAdmin(formSignUp.value);
 
       }).catch((error) => {
         this.snackBar.open('El usuario ya está registrado.', 'Algo anda mal :(', {
@@ -186,7 +188,7 @@ export class AuthService {
   ForgotPassword(passwordResetEmail) {
     return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
     .then(() => {
-      window.alert('Password reset email sent, check your inbox.');
+      window.alert('Se te ha enviado un correo para que recuperes tu contraseña.');
     }).catch((error) => {
       window.alert('A ocurrido un error.');
     });
@@ -237,6 +239,10 @@ export class AuthService {
   SignOut() {
     return this.afAuth.auth.signOut().then(async () => {
       await delay(100);
+      this.snackBar.open('Se ha cerrado sesión correctamente.', 'Adiós.', {
+        duration: 2000,
+        panelClass: ['blue-snackbar']
+      });
       localStorage.removeItem('user');
       this.router.navigate(['iniciar-sesion']);
     });

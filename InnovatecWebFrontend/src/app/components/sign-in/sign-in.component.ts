@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { DialogForgotPasswordComponent } from '../dialogs/dialog-forgot-password/dialog-forgot-password.component';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit {
   public breakpoint: number;
   formSignIn: FormGroup;
-  constructor(public fb: FormBuilder, public authService: AuthService, public router: Router,
+  constructor(public fb: FormBuilder, public authService: AuthService, public router: Router, public dialog: MatDialog
   ) {
       this.formSignIn = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -28,5 +30,8 @@ export class SignInComponent implements OnInit {
 
   enviarA() {
     this.router.navigate(['registro-de-usuario']);
+  }
+  enviarAO() {
+    this.dialog.open(DialogForgotPasswordComponent);
   }
 }

@@ -61,11 +61,13 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatRippleModule} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatStepperModule} from '@angular/material/stepper';
 
 // Módulos para el carrusel
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { LightboxModule } from 'ngx-lightbox';
 
 // tslint:disable-next-line: max-line-length
 import { ResumenEenergiasTarjeta1Component } from './components/charts/eenergias/resumen-eenergias-tarjeta1/resumen-eenergias-tarjeta1.component';
@@ -106,6 +108,9 @@ import { ListLineaInvestigacionComponent } from './components/panel-de-control/s
 import { LineaInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/lineas-investigacion/linea-investigacion/linea-investigacion.component';
 import { SemilleroDeInvestigacionPComponent } from './components/semillero-de-investigacion-p/semillero-de-investigacion-p.component';
 import { DialogForImgsComponent } from './components/dialogs/dialog-for-imgs/dialog-for-imgs.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DialogForgotPasswordComponent } from './components/dialogs/dialog-forgot-password/dialog-forgot-password.component';
+
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -160,6 +165,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     LineaInvestigacionComponent,
     SemilleroDeInvestigacionPComponent,
     DialogForImgsComponent,
+    FooterComponent,
+    DialogForgotPasswordComponent,
 
   ],
   imports: [
@@ -200,6 +207,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatRippleModule,
     SwiperModule,
     MatDialogModule,
+    MatStepperModule,
+    LightboxModule,
   ],
   providers: [
     {
@@ -208,6 +217,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogForImgsComponent],
+  entryComponents: [DialogForImgsComponent, DialogForgotPasswordComponent],
 })
 export class AppModule { }
