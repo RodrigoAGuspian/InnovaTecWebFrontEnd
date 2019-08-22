@@ -252,4 +252,21 @@ export class AuthService {
     }
   }
 
+  UpdatePassword(newPassword: string) {
+    const user = this.afAuth.auth.currentUser;
+    user.updatePassword(newPassword).then(() => {
+      // Update successful.
+      this.snackBar.open('Su contraseña se ha cambiado correctamente.', 'Exíto', {
+        duration: 2000,
+        panelClass: ['green-snackbar']
+      });
+    }).catch((error) => {
+      // An error happened.
+      this.snackBar.open('Su contraseña no se a podido cambiar.', 'Error', {
+        duration: 2000,
+        panelClass: ['red-snackbar']
+      });
+    });
+  }
+
 }

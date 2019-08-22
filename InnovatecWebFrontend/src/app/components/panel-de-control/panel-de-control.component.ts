@@ -120,8 +120,6 @@ export class PanelDeControlComponent implements OnInit  {
         });
       }
     );
-
-
   }
 
   public viewChageRoles() {
@@ -304,5 +302,8 @@ export class PanelDeControlComponent implements OnInit  {
     this.router.navigate([this.urlEenergias[modo]]);
   }
 
+  public viewChangePerfil() {
+    this.router.navigate(['panel-de-control/perfil']);
+  }
 
 }

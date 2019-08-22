@@ -60,3 +60,7 @@ nav .nav-background img.active, nav .nav-background .pattern.active {
 .logo{
   margin: 0 0.5%;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}

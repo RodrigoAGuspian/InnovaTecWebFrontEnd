@@ -47,7 +47,9 @@
   <div class="swiper-wrapper" id="slider-swiper-a">
     <div class="swiper-slide black-text white left-align"  *ngFor="let img of imgsProyecto let l = last">
       <div class="center">
-        <img class="sliderA center" src="{{img}}" (click)="masGrande(img)">
+        <a href="{{ img }}" target="_blank">
+          <img class="sliderA center" src="{{img}}">
+        </a>
       </div>
     </div>
   </div>

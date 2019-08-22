@@ -26,15 +26,21 @@ export class UserInfoService {
       ciudad: userInfo.ciudad,
     });
   }
-  updateUser(userInfo: UserInfo) {
+  updateUserPrincipal(userInfo: UserInfo) {
     this.getUsers();
     this.userslist.update(userInfo.skey, {
-      email: userInfo.email,
       primerN: userInfo.primerN,
       segundoN: userInfo.segundoN,
       primerA: userInfo.primerA,
       segundoA: userInfo.segundoA,
+    });
+  }
+
+  updateUserAdicional(userInfo: UserInfo) {
+    this.getUsers();
+    this.userslist.update(userInfo.skey, {
       tipoDeUso: userInfo.tipoDeUso,
+      institucion: userInfo.institucion,
       pais: userInfo.pais,
       departamento: userInfo.departamento,
       ciudad: userInfo.ciudad,

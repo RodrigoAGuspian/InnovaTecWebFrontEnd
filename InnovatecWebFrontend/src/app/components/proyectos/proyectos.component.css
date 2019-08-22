@@ -15,7 +15,7 @@
   border-width: 6px 0;
   border-left-width: 6px;
   padding-bottom: 3px;
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 .contenedor{

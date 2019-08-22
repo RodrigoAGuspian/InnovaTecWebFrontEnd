@@ -50,13 +50,6 @@ export class ProyectosComponent implements OnInit, OnDestroy {
     speed: 1000,
   };
 
-
-  public masGrande(img: string) {
-    ProyectoService.imgParaResultado = img;
-    DialogForImgsComponent.identificador = 0;
-    this.dialog.open(DialogForImgsComponent);
-    console.log('Abre');
-  }
   ngOnInit() {
     this.solo1Vez = false;
     this.proyectoService.getProyectos().snapshotChanges().subscribe(

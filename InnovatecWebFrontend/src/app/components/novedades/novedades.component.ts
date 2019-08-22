@@ -88,32 +88,6 @@ export class NovedadesComponent implements OnInit {
 
   }
 
-  public masGrande(img: string) {
-    NovedadService.imgParaResultado = img;
-    DialogForImgsComponent.identificador = 1;
-    this.dialog.open(DialogForImgsComponent);
-
-    console.log('Abre');
-  }
-
-  agregarJQuery() {
-    if (this.solo1Vez1){
-      this.solo1Vez1 = false;
-      const pro = new Promise((resolve, reject) => {
-        for (let i = 0; i < this.imgsNovedad.length; i++) {
-          $('#a' + i).click(() => {
-            this.masGrande(this.imgsNovedad[i]);
-          });
-          console.log(this.imgsNovedad.length);
-          if(this.imgsNovedad.length - 1 === i) {
-            resolve(true);
-          }
-        }
-      });
-    }
-
-
-  }
 
 
   createCarouselToHand() {

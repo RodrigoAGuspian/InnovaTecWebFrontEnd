@@ -17,7 +17,7 @@ export class SignUpComponent implements OnInit {
   tipos: string[] = ['Académico', 'Empresarial', 'Comercial', 'Otro'];
   default = 'Académico';
 
-  constructor(public fb: FormBuilder, public authService: AuthService ) {
+  constructor(public fb: FormBuilder, public authService: AuthService) {
     this.formSignUp = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],

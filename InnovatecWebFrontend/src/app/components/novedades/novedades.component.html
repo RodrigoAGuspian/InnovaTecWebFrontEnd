@@ -1,24 +1,24 @@
 <app-index></app-index>
-<div class="swiper-container contenedor z-depth-1" [swiper]="config" *ngIf="solo1Vez">
-  <div class="swiper-wrapper" id="slider-swiper-a">
-    <div class="swiper-slide black-text white left-align"  *ngFor="let img of imgsNovedad; let l = last ; let i=index">
-        {{l ? agregarJQuery() : ''}}
-      <div class="center swiper-zoom-container">
-        <img id="a{{ i }}" class="slider-aa center" src="{{img}}" >
-      </div>
-    </div>
-  </div>
-  <div class="circle z-depth-1 swiper-button-prev"></div>
-  <div class="circle z-depth-1 swiper-button-next"></div>
-</div>
 <div class="container">
-
   <div class="row">
     <div class="col s12 card">
       <h3 id="titulo">{{ novedad.titulo }}</h3>
       <h5 id="contenido">{{ novedad.contenido }}</h5>
     </div>
   </div>
+</div>
+<div class="swiper-container contenedor z-depth-1" [swiper]="config" *ngIf="solo1Vez">
+  <div class="swiper-wrapper" id="slider-swiper-a">
+    <div class="swiper-slide black-text white left-align"  *ngFor="let img of imgsNovedad">
+      <div class="center swiper-zoom-container">
+        <a href="{{ img }}" target="_blank">
+          <img class="slider-aa center" src="{{img}}" >
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="circle z-depth-1 swiper-button-prev"></div>
+  <div class="circle z-depth-1 swiper-button-next"></div>
 </div>
 <app-footer></app-footer>
 

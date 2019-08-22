@@ -110,6 +110,8 @@ import { SemilleroDeInvestigacionPComponent } from './components/semillero-de-in
 import { DialogForImgsComponent } from './components/dialogs/dialog-for-imgs/dialog-for-imgs.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DialogForgotPasswordComponent } from './components/dialogs/dialog-forgot-password/dialog-forgot-password.component';
+import { PerfilComponent } from './components/panel-de-control/perfil/perfil.component';
+import { CambiarPasswordComponent } from './components/panel-de-control/perfil/cambiar-password/cambiar-password.component';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -167,6 +169,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DialogForImgsComponent,
     FooterComponent,
     DialogForgotPasswordComponent,
+    PerfilComponent,
+    CambiarPasswordComponent,
 
   ],
   imports: [

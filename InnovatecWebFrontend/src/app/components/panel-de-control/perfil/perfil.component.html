@@ -1,0 +1,91 @@
+<app-panel-de-control></app-panel-de-control>
+<div class="container" >
+  <mat-horizontal-stepper [linear]="esLineal" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Información principal</ng-template>
+      <form class="row" id="form1" method="POST" [formGroup]="formInfoPrincipal" (ngSubmit)="updateInfoPrincipal()" autocomplete="off" >
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="Correo electrónico"  formControlName="email" id="email" disabled type="email" #userName required>
+          </mat-form-field>
+        </div>
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="Primer Nombre" formControlName="primerN" id="primerN" type="text" required>
+          </mat-form-field>
+          <div *ngIf="formInfoPrincipal.get('primerN').errors && formInfoPrincipal.get('primerN').dirty">
+            <p class="red-text"  *ngIf="formInfoPrincipal.get('primerN').hasError('required')">Campo obligatorio</p>
+          </div>
+        </div>
+
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="Segundo Nombre(Opcional)" formControlName="segundoN"  id="segundoN" type="text" >
+          </mat-form-field>
+        </div>
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="Primer Apellido" formControlName="primerA" type="text" required>
+          </mat-form-field>
+          <div *ngIf="formInfoPrincipal.get('primerA').errors && formInfoPrincipal.get('primerA').dirty">
+            <p class="red-text"  *ngIf="formInfoPrincipal.get('primerA').hasError('required')">Campo obligatorio</p>
+          </div>
+        </div>
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="Segundo Nombre(Opcional)" formControlName="segundoA"  id="segundoA" type="text" >
+          </mat-form-field>
+        </div>
+        <div class="left">
+          <button mat-button type="button" (click)="cambiarContrasena()" class="teal btn white-text btn-control">Cambiar contraseña</button>
+        </div>
+        <div class="right">
+          <button mat-button type="submit" [disabled]="formInfoPrincipal.invalid" class="teal btn white-text btn-control">Actualizar información principal</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Información adicional</ng-template>
+      <form class="row" id="form1" method="POST" [formGroup]="formInfoAdicional" (ngSubmit)="updateInfoAdicional()" autocomplete="off" >
+        <mat-form-field class="input-select">
+            <mat-label class="input-select">Tipo de uso</mat-label>
+          <mat-select class="input-select" color="primary" formControlName="tipoDeUso">
+            <mat-option class="input-select" *ngFor="let c of tipos" [value]="c">{{ c }}</mat-option>
+          </mat-select >
+        </mat-form-field>
+
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="Institución" formControlName="institucion" id="institucion" type="text">
+          </mat-form-field>
+        </div>
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="País" formControlName="pais" id="pais" type="text" required>
+          </mat-form-field>
+          <div *ngIf="formInfoAdicional.get('pais').errors && formInfoAdicional.get('pais').dirty">
+            <p class="red-text"  *ngIf="formInfoAdicional.get('pais').hasError('required')">Campo obligatorio</p>
+          </div>
+        </div>
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="Departamento" formControlName="departamento" id="departamento" type="text" required>
+          </mat-form-field>
+          <div *ngIf="formInfoAdicional.get('departamento').errors && formInfoAdicional.get('departamento').dirty">
+            <p class="red-text" *ngIf="formInfoAdicional.get('departamento').hasError('required')">Campo obligatorio</p>
+          </div>
+        </div>
+
+        <div class="input">
+          <mat-form-field>
+            <input matInput style="border: none;" placeholder="Ciudad(*)" formControlName="ciudad" id="ciudad" type="text" required>
+          </mat-form-field>
+          <div *ngIf="formInfoAdicional.get('ciudad').errors && formInfoAdicional.get('ciudad').dirty">
+            <p class="red-text"  *ngIf="formInfoAdicional.get('ciudad').hasError('required')">Campo obligatorio</p>
+          </div>
+        </div>
+        <button  mat-raised-button color="primary" [disabled]="formInfoAdicional.invalid" class="btn teal right" type="submit" value="Log in">Actualizar información adicional</button>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
