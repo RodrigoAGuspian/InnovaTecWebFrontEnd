@@ -86,7 +86,6 @@ import { GraficaComponent } from './components/panel-de-control/crud-proyectos/g
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { ListaDeProyectosComponent } from './components/lista-de-proyectos/lista-de-proyectos.component';
 import { AdministrarRolesComponent } from './components/panel-de-control/administrar-roles/administrar-roles.component';
-import { EnsayoCloudMesseComponent } from './components/ensayo-cloud-messe/ensayo-cloud-messe.component';
 // tslint:disable-next-line: max-line-length
 import { SemilleroDeInvestigacionComponent } from './components/panel-de-control/semillero-de-investigacion/semillero-de-investigacion.component';
 import { ProyectosPeqComponent } from './components/panel-de-control/semillero-de-investigacion/proyectos-peq/proyectos-peq.component';
@@ -112,6 +111,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DialogForgotPasswordComponent } from './components/dialogs/dialog-forgot-password/dialog-forgot-password.component';
 import { PerfilComponent } from './components/panel-de-control/perfil/perfil.component';
 import { CambiarPasswordComponent } from './components/panel-de-control/perfil/cambiar-password/cambiar-password.component';
+import { ContactanosComponent } from './components/contactanos/contactanos.component';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -154,7 +154,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ProyectosComponent,
     ListaDeProyectosComponent,
     AdministrarRolesComponent,
-    EnsayoCloudMesseComponent,
     SemilleroDeInvestigacionComponent,
     ProyectosPeqComponent,
     ProyectoPeqComponent,
@@ -171,6 +170,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DialogForgotPasswordComponent,
     PerfilComponent,
     CambiarPasswordComponent,
+    ContactanosComponent,
 
   ],
   imports: [
@@ -221,6 +221,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogForImgsComponent, DialogForgotPasswordComponent],
+  entryComponents: [DialogForImgsComponent, DialogForgotPasswordComponent, CambiarPasswordComponent],
 })
 export class AppModule { }

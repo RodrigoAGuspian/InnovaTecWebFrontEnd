@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserInfoService } from 'src/app/shared/services/user-info.service';
 import { UserInfo } from 'src/app/shared/models/user-info';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { CambiarPasswordComponent } from './cambiar-password/cambiar-password.component';
 
 @Component({
   selector: 'app-perfil',
@@ -19,7 +20,7 @@ export class PerfilComponent implements OnInit {
   tipos: string[] = ['Académico', 'Empresarial', 'Comercial', 'Otro'];
   default = 'Académico';
   constructor(public fb: FormBuilder, public authService: AuthService,
-              public userInfoService: UserInfoService, private snackBar: MatSnackBar) {
+              public userInfoService: UserInfoService, private snackBar: MatSnackBar, public dialog: MatDialog) {
     this.insertDataOfUser();
     this.getUser();
    }
@@ -98,6 +99,8 @@ export class PerfilComponent implements OnInit {
   }
 
   cambiarContrasena() {
-
+    this.dialog.open(CambiarPasswordComponent);
   }
+
+
 }

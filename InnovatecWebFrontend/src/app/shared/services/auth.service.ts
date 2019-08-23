@@ -1,4 +1,4 @@
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../models/user';
 import { auth } from 'firebase/app';
@@ -11,6 +11,7 @@ import { UserInfo } from '../models/user-info';
 import { Rol } from '../models/rol';
 import { RolesService } from './roles.service';
 import { EmailNotificationService } from './email-notification.service';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,8 @@ export class AuthService {
     public userInfoService: UserInfoService,
     public rolesService: RolesService,
     private snackBar: MatSnackBar,
-    private emailNotificationService: EmailNotificationService, ) {
+    private emailNotificationService: EmailNotificationService,
+    public dialog: MatDialog ) {
     this.userInfoService.getUsers().snapshotChanges().subscribe(item => {
       this.userList = []; item.forEach(element => {
         const x = element.payload.toJSON();
@@ -252,21 +254,34 @@ export class AuthService {
     }
   }
 
-  UpdatePassword(newPassword: string) {
+  UpdatePassword(oldPassword: string, newPassword: string) {
     const user = this.afAuth.auth.currentUser;
-    user.updatePassword(newPassword).then(() => {
-      // Update successful.
-      this.snackBar.open('Su contraseña se ha cambiado correctamente.', 'Exíto', {
-        duration: 2000,
-        panelClass: ['green-snackbar']
+
+    const credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
+    user.reauthenticateWithCredential(credential).then(() => {
+      // User re-authenticated.
+      user.updatePassword(newPassword).then(() => {
+        // Update successful.
+        this.snackBar.open('Su contraseña se ha cambiado correctamente.', 'Exíto', {
+          duration: 2000,
+          panelClass: ['green-snackbar']
+        });
+        this.dialog.closeAll();
+      }).catch((error) => {
+        // An error happened.
+        this.snackBar.open('Su contraseña no se pudo cambiar.', 'Error', {
+          duration: 2000,
+          panelClass: ['red-snackbar']
+        });
       });
     }).catch((error) => {
       // An error happened.
-      this.snackBar.open('Su contraseña no se a podido cambiar.', 'Error', {
+      this.snackBar.open('Su contraseña antigua no es la correcta.', 'Error', {
         duration: 2000,
         panelClass: ['red-snackbar']
       });
     });
+
   }
 
 }
