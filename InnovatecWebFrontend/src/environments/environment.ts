@@ -32,7 +32,12 @@ export const environment = {
     storageBucket: 'eenergiasctpi.appspot.com',
     messagingSenderId: '725121675421',
     appId: '1:725121675421:web:746f97d939da55a1'
-  },
+    },
+    mapbox: {
+      accessToken: 'pk.eyJ1IjoiY2FzYXNvbGFyY3RwaSIsImEiOiJjanpzamEzdWcwMWxlM2Jtemd0eGczaDYzIn0.XUOK8xrkgLb9ixN95oMtmw'
+    },
+
+
 
 
 

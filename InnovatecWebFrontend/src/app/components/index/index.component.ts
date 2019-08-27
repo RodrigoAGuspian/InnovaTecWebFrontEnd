@@ -13,9 +13,7 @@ export class IndexComponent implements OnInit {
   constructor(private router: Router, public authService: AuthService) { }
   public autenticado = 0;
   ngOnInit() {
-    console.log(this.authService.isLoggedIn);
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     if (this.authService.isLoggedIn) {
       this.autenticado = 1;
     } else {
