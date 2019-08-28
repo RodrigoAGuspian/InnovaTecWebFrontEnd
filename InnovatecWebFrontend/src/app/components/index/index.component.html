@@ -4,11 +4,12 @@
   </div>
   <div class="nav-wrapper container">
     <a class="left logo"><div class="logo-sena"></div></a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <a data-target="nav-mobile" class="right sidenav-trigger cursor-pointer"><i class="material-icons">menu</i></a>
+    <ul id="slide-out" class="right hide-on-med-and-down">
       <li><a class="nav-item" (click)="enviarA(0)">Inicio</a></li>
       <li><a class="nav-item" (click)="enviarA(1)">Proyectos de investigación</a></li>
       <li><a class="nav-item" (click)="enviarA(2)">Semillero de investigación</a></li>
-      <li *ngIf="autenticado === 0"><a class="nav-item" (click)="enviarA(3)"><i class="material-icons large">account_circle</i></a></li>
+      <li *ngIf="autenticado === 0"><a class="nav-item" (click)="enviarA(3)"><i class="material-icons large">account_circle</i>Iniciar sesión</a></li>
       <li *ngIf="autenticado === 1"><a class="nav-item" [matMenuTriggerFor]="appSesion">
         <i class="material-icons large">account_circle</i>
         <mat-menu #appSesion="matMenu" xPosition="before" class="menu-a z-depth-5">
@@ -18,9 +19,23 @@
         </a>
       </li>
     </ul>
+
   </div>
   <div class="nav-header center">
     <h1>INNOVATEC-CTPI</h1>
     <div class="tagline">Línea de investigación en energías renovables y eficiencia energetica</div>
   </div>
+
 </nav>
+<ul id="nav-mobile" class="sidenav sidenav-index">
+  <li><a class="cursor-pointer col s12 black-text sidenav-close" (click)="enviarA(0)">Inicio</a></li>
+  <li><a class="cursor-pointer col s12 black-text sidenav-close" (click)="enviarA(1)">Proyectos de investigación</a></li>
+  <li><a class="cursor-pointer col s12 black-text sidenav-close" (click)="enviarA(2)">Semillero de investigación</a></li>
+  <li *ngIf="autenticado === 0"><a class="cursor-pointer col s12 black-text sidenav-close" (click)="enviarA(3)"><i class="material-icons">account_circle</i>Iniciar sesión</a></li>
+  <div *ngIf="autenticado === 1">
+    <li><a class="cursor-pointer col s12 black-text sidenav-close" (click)="enviarA(4)">Panel de control</a></li>
+    <li><a class="cursor-pointer col s12 black-text sidenav-close" (click)="enviarA(5)">Cerrar sesión</a></li>
+  </div>
+
+
+</ul>

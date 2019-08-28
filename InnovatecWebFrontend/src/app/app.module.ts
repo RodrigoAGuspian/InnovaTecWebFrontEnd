@@ -62,6 +62,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatRippleModule} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 // Módulos para el carrusel
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -213,6 +214,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatDialogModule,
     MatStepperModule,
     LightboxModule,
+    MatExpansionModule,
+
   ],
   providers: [
     {

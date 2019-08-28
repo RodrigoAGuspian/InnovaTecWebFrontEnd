@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import mapboxgl from 'mapbox-gl';
-import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 
 @Component({
   selector: 'app-contactanos',
@@ -79,18 +78,23 @@ export class ContactanosComponent implements OnInit {
       positionOptions: {
         enableHighAccuracy: true
       },
-      trackUserLocation: true
+      trackUserLocation: true,
+      showUserLocation: true,
     });
-    this.getPosition();
+
+    this.map.addControl(positionActual);
+    // positionActual.on('change',this.getPosition());
+
 
   }
 
   getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
 
-      navigator.geolocation.getCurrentPosition(resp => {
-          this.latUser = resp.coords.longitude;
+      navigator.geolocation.watchPosition(resp => {
+          this.lngUser = resp.coords.longitude;
           this.latUser = resp.coords.latitude;
+          console.log(this.lngUser, this.latUser);
           this.getRoute();
           resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
         },
@@ -110,6 +114,7 @@ export class ContactanosComponent implements OnInit {
     const end = [this.lngUser, this.latUser];
     // tslint:disable-next-line: max-line-length
     const url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+    console.log(url);
 
     // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
     const req = new XMLHttpRequest();
@@ -128,9 +133,54 @@ export class ContactanosComponent implements OnInit {
       };
       // if the route already exists on the map, reset it using setData
       if (this.map.getSource('route')) {
-        // this.map.getSource('route').setData(geojson);
-      } else { // otherwise, make a new request
+        this.map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: route,
+              }
+            }
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#006064',
+            'line-width': 8
+          }
+        });
 
+      } else { // otherwise, make a new request
+        this.map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: route,
+              }
+            }
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#006064',
+            'line-width': 8
+          }
+        });
       }
       // add turn instructions here at the end
     };

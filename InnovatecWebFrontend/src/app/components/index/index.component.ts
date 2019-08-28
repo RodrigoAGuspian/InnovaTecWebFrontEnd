@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
+declare const $: any;
 
 @Component({
   selector: 'app-index',
@@ -13,6 +14,10 @@ export class IndexComponent implements OnInit {
   constructor(private router: Router, public authService: AuthService) { }
   public autenticado = 0;
   ngOnInit() {
+    $(document).ready(() => {
+      $('.sidenav-index').sidenav();
+    });
+
     const user = JSON.parse(localStorage.getItem('user'));
     if (this.authService.isLoggedIn) {
       this.autenticado = 1;
