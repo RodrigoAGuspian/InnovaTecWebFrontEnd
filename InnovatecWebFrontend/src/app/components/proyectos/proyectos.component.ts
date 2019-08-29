@@ -142,5 +142,8 @@ export class ProyectosComponent implements OnInit, OnDestroy {
 
   }
 
+  enviarATiempoReal() {
+
+  }
 
 }

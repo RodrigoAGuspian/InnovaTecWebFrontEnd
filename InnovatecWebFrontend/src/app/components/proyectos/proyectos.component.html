@@ -39,7 +39,7 @@
     </div>
 
     <mat-tab-group class="col s12" mat-align-tabs="center" *ngFor="let item of listNombreGrafica">
-      <mat-tab label="{{ item.tipoDeGrafica }}" *ngFor="let content of graficas"> <div *ngIf="content.tipoDeGrafica === item.tipoDeGrafica"> <a href=""></a></div> </mat-tab>
+      <mat-tab label="{{ item.tipoDeGrafica }}" *ngFor="let content of graficas" > <div *ngIf="content.tipoDeGrafica === item.tipoDeGrafica && item.tipoDeGrafica === 'Tiempo Real' " > <a  href="http://www.sena.edu.co/es-co/formacion/Paginas/tecnologia-innovacion.aspx" target="_blank" class="black-text"> {{ item.nombreDeGrafica }} </a> </div> </mat-tab>
     </mat-tab-group>
   </div>
 </div>

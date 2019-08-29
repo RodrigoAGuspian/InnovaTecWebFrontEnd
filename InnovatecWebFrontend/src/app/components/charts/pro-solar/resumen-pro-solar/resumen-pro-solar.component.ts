@@ -47,7 +47,7 @@ export class ResumenProSolarComponent implements OnInit {
   public pieChartData1: number[] = [0, 0, 0];
   public pieChartColors1 = [
     {
-      backgroundColor: ['rgba(255,138,128,1)', 'rgba(255,23,68,1)', 'rgba(213,0,0,1)'],
+      backgroundColor: ['rgba(236,64,122,1)', 'rgba(0,131,143,1)', 'rgba(74,20,140,1)'],
     },
   ];
 
