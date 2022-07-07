@@ -37,7 +37,7 @@
     "jquery": "^2.2.4",
     "mapbox-gl": "^1.2.1",
     "materialize-css": "^1.0.0-rc.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng2-charts": "^2.2.3",
     "ngx-lightbox": "^1.2.0",
     "ngx-material-file-input": "^1.1.1",
